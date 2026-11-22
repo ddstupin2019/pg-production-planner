@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+artifacts/
+evidence/
+logs/
+.cache/
+*.log
+*.pdf
+package-lock.json
+# Existing contracts/narrative retain their authors' formatting (no unrelated rewrites).
+docs/**
