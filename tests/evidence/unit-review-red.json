@@ -1,0 +1,1101 @@
+{
+  "runner": "vitest",
+  "reason": "failed",
+  "counts": {
+    "total": 181,
+    "passed": 29,
+    "failed": 152,
+    "other": 0
+  },
+  "unhandledErrors": 0,
+  "moduleErrors": 0,
+  "truncated": false,
+  "cases": [
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > S1 has exactly 630 working minutes",
+      "state": "failed",
+      "error": "Not implemented: workSpans"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > S2 has exactly 630 working minutes",
+      "state": "failed",
+      "error": "Not implemented: workSpans"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > S3 has exactly 630 working minutes",
+      "state": "failed",
+      "error": "Not implemented: workSpans"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > S4 has exactly 630 working minutes",
+      "state": "failed",
+      "error": "Not implemented: workSpans"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [0,0) = 0",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [0,2880) = 2520",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [120,300) = 150",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [240,270) = 0",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [480,510) = 0",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [690,720) = 0",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [239.75,270.25) = 0.5",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [689.5,720.5) = 1",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > intersection [2850,2880) = 0",
+      "state": "failed",
+      "error": "Not implemented: workingMinutes"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=0 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=240 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=450 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=630 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=870 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=1260 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=1890 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > work t=2520 start/end edges",
+      "state": "failed",
+      "error": "Not implemented: toCalendarMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > all exclusion plateaus and fractional round trips",
+      "state": "failed",
+      "error": "Not implemented: toWorkMinute"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects calendar NaN",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects calendar Infinity",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects calendar -Infinity",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects calendar -1",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects calendar 2880.01",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects work NaN",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects work Infinity",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects work -1",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects work 2520.01",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/calendar.test.ts",
+      "title": "four shifts, half-open exclusions and collapsed edges > rejects reversed spans, invalid shifts and edge enums",
+      "state": "failed",
+      "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "small independent physically feasible witness > all mandatory work and real identities; parallel=false",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "small independent physically feasible witness > all mandatory work and real identities; parallel=true",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "small independent physically feasible witness > comparison evaluates both and uses right minus left without choosing a winner",
+      "state": "failed",
+      "error": "Not implemented: compare"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "small independent physically feasible witness > draft availability derives maximum suffix, fixed versus forecast remains distinct",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > complete A route without shortcuts",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > complete B route without shortcuts",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > complete C route without shortcuts",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > zero-buffer route applies .85 once, and excludes nonexistent route queues",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > fractional exhaustion transfers the scarce .25 to the lower numeric machine, then stops",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > PACK cannot consume stage stock, and midnight cannot replenish any queue",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > initial stock exhausts exactly once across all four shifts",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > queues remain product-specific: A",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > queues remain product-specific: B",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > queues remain product-specific: C",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "operation-level flow, once-only losses, numeric sharing and quota boundaries > campaign ends at its finite until, without automatically spilling quota",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > initial configuration blocks wrong-product output rather than fabricating production",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > completed setup changes the product at the half-open boundary; ordinary setup needs no validation",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > repair and planned TO remove their union once and only explicit TO is credited",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > repair cannot satisfy the only missing mandatory TO-2",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > missing code is a physical error",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > insufficient distinct machines is a physical error",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > wrong duration is a physical error",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > outside window is a physical error",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > early LASER validation is a physical error",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > maintenance during validation is a physical error",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > no campaign/positive production means no completed validation",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > physical evaluator supports another producing GRIND; interrupted validation stays incomplete",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "setups, union of stops, mandatory work and continuous validation > a late starvation fragment cannot be counted as continuous validation",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > positive validation output without its extra worker is not completed work",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > missing cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > duplicate identity cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > double-booked across tasks cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > wrong shift cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > inactive task cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > unknown task cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > cross-shift cannot be hidden by large requests",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > fixed headcount shortage stays invalid even though capacity projection has production",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > PRESS, PRINT, CHROME pool products; six WRAP need two; TEF/PACK need two each",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > four WRAP round their pooled normal count up, across different products",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "staffing is task and identity coverage, not an aggregate number > two simultaneous setups cannot share a pooled run worker; TEF/PACK setup use two each",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "PACK allocation, original commitments, promises and signed deltas > allocation by original due, priority, then ID; no double allocation",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "PACK allocation, original commitments, promises and signed deltas > output finishing at shift end counts; revised promise never rewrites original deficit",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > source quantity",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > source missing",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > source due",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > empty id",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > duplicate order",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > unknown machine",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > illegal route",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > zero quota",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > nonfinite quota",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > negative start",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > empty duration",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > outside horizon",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > overlap",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > duplicate campaign",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > fractional request",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > negative forecast",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > same product setup",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > bad custom quantity 0",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > bad custom quantity -1",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > bad custom quantity NaN",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > bad custom quantity Infinity",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"priority\":\"urgent\"}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"product\":\"D\"}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"originalDue\":0}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"originalDue\":5}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"id\":\" \"}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"promise\":{\"quantity\":1401,\"due\":2,\"reason\":\"x\"}}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"promise\":{\"quantity\":0,\"due\":2,\"reason\":\"x\"}}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"promise\":{\"quantity\":1,\"due\":2,\"reason\":\" \"}}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed custom order {\"promise\":{\"quantity\":1,\"due\":5,\"reason\":\"x\"}}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed shape 0",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed shape 1",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed shape 2",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed shape 3",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed shape 4",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > illegal event order 0",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > illegal event order 1",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > illegal event order 2",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > event requires actual GRIND production, not a setting or starving permission",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > compare propagates an invalid side rather than inventing a delta",
+      "state": "failed",
+      "error": "Not implemented: compare"
+    },
+    {
+      "file": "tests/unit/source.test.ts",
+      "title": "R3–R7 exact source transcription, not an expert plan oracle > six immutable originals and 7000 thousand blades",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/source.test.ts",
+      "title": "R3–R7 exact source transcription, not an expert plan oracle > all operation routes and per-machine nominal speeds",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/source.test.ts",
+      "title": "R3–R7 exact source transcription, not an expert plan oracle > all 43 IDs and initial settings, numeric not lexicographic order",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/source.test.ts",
+      "title": "R3–R7 exact source transcription, not an expert plan oracle > all mandatory counts, products, durations and windows",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/source.test.ts",
+      "title": "R3–R7 exact source transcription, not an expert plan oracle > nested source records are frozen, not just the outer arrays",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > all nine work codes and twelve distinct required jobs have witnessed credit",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > explicit maintenance overlapping repair is credited once, never repair alone",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > honestly interrupted validation has bounded partial credit and remains incomplete",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > parallel validation needs two distinct extras, not two references to one worker",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > missing job result",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > duplicate job result",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > wrong result code",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > wrong result machine",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > invented work minutes",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > maintenance secretly produces",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > missing maintenance annotation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > starved validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > wrong validation product",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > missing machine slice",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > missing validation extra",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > missing normal coverage",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > extra worker double booked as normal",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > false incomplete flag on valid work",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > missing code cannot masquerade as mandatory coverage",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > same machine twice cannot masquerade as mandatory coverage",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > wrong window cannot masquerade as mandatory coverage",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > wrong duration cannot masquerade as mandatory coverage",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > disconnected fragments cannot be falsely reported complete",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/work-witness.test.ts",
+      "title": "independent job witness checker rejects fabricated success without evaluate mocks > the absent highest S2 worker cannot witness cross-shift validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > starts D 11:00, with deep-copied originals and null unapproved requests",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > manager cannot edit/send planner demand; planner cannot edit production/fix/apply events",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > fixation at minute 720 respects strict noon boundary",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > fixation at minute 719.5 respects strict noon boundary",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > invalid planning clock 659",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > invalid planning clock 721",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > invalid planning clock NaN",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > invalid planning clock Infinity",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > clock is monotone and a fixed request cannot be replaced or increased",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > bad request {\"counts\":[1,40]}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > bad request {\"counts\":[40,-1]}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > bad request {\"counts\":[2.5,40]}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > bad request {\"counts\":[null,40]}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > reserve reason is required when supply exceeds actual task demand",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > warnings need reasons; missing maintenance cannot be acknowledged into feasibility",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > both distinct approvals on same unchanged revision; editing pending invalidates them",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "initialization, roles, fixed requests and revision approvals > agreed predecessor stays byte-for-byte unchanged after ordinary future editing",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "selected GRIND-1 repair followed by absence, never mocked evaluation > both real agreements, exact loss, supported operator transfer, stock carry and frozen history",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "selected GRIND-1 repair followed by absence, never mocked evaluation > event order, agreement gates and duplicates leave lineage untouched",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "selected GRIND-1 repair followed by absence, never mocked evaluation > past campaign, job, setup or assignment edits cannot rewrite the frozen prefix",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "selected GRIND-1 repair followed by absence, never mocked evaluation > splitting a campaign exactly at the frozen cut is a legal future-only edit",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "selected GRIND-1 repair followed by absence, never mocked evaluation > absence removes exactly the two highest S2 identities, never silently adds workers",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > unsupported target GRIND-2 gets no successor",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > unsupported target GRIND-4 gets no successor",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > unsupported target PRESS-1 gets no successor",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > unsupported target UNKNOWN gets no successor",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > conflicting validation draft gets actionable refs/interval before not-agreed guard",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > boundary [0,120) is not a positive epsilon overlap",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > boundary [270,450) is not a positive epsilon overlap",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > boundary [269.9999995,450) is not a positive epsilon overlap",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > positive overlap above epsilon is rejected after failure edits too",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > eligible agreement with no production at t=120 rejects EVENT_TARGET",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > target starts at repair cut lacks one side",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "D1 guards are specific, ordered and half-open > target ends at repair cut lacks one side",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "custom copies, promises, restore and exact deterministic export > promise-only edit retains mandatory originals; changing original quantity in-line is forbidden",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "custom copies, promises, restore and exact deterministic export > custom order new identity persists original submission; manager cannot replace demand",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "custom copies, promises, restore and exact deterministic export > restoration from agreed absence clears events, history, requests and promises for either role",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow.test.ts",
+      "title": "custom copies, promises, restore and exact deterministic export > UTF-8 JSON shape/order, current real report, two spaces, newline and identical bytes",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    }
+  ]
+}
