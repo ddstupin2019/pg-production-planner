@@ -1,6 +1,101 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: exact two-stage night-template target guard regression
+## Latest: approved public v1.3 / D3 registry contract supplement
+
+Read the transferred PUBLIC_SPEC/SPEC **v1.3**, especially PUBLIC_SPEC §4.4 lines 218/237–249 and D2 failure export. Only tester files were written in `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`. No implementation/source inspection, Git commands, other-worktree access, chat, delegation, installs, source/configuration edits or browser execution. Documentation itself was read/hashed, not modified. The eight prior unit regressions and their browser case remain intact; no existing assertion or quality gate was weakened.
+
+### New public registry checks — 41 unit cases
+
+`tests/unit/order-origins-contract.test.ts:13` declares only the documented local intersection `Workflow & { orderOrigins: { id: string; quantity: number; originalDue: Shift }[] }`. It is applied to real createWorkflow/transition results and explicit JSON boundaries. No new bootstrap import, any-cast, private field/helper, engine mock or silent registry default is used. The public output-presence check at `:31` fails if a successful Workflow omits the field; stubs therefore remain runnable/typecheckable without a bootstrap interface edit.
+
+- `:142`: exactly six ORD-1…ORD-6 origins from independent source transcription, deterministic calls, fresh list/records, no aliases to REQUIRED_ORDERS/input/scenario/revision orders, and unchanged source/input data.
+- `:162–239`: deterministic first-acceptance order rather than ID/current-order sorting; multiple new IDs in one accepted action; retention through rename/removal and same-original reuse without duplication; separate quantity/due conflict rejections after removal; unauthorized and whole-action-invalid submissions append nothing; a later valid first acceptance uses its actual values, not rejected/transient values; committed ID normalization without duplicate origins; restore resets to precisely the six origins while preserving the old lineage/scenario, then permits new originals for the old custom ID in the new lineage.
+- `:243`: export includes the ordered full registry, even after two very large custom demands are removed. Compare its real current evaluation and complete independently checked execution/outputs with the original current-order-only Plan. Hidden origins cannot create phantom order rows, deficits, allocations, output or stock. No expert numerical checksum or universal deadline-feasibility oracle is introduced.
+- `:282`: through real submit, both-role approvals, successor creation, supported failure, independently constructed future A transfer, absence and renewed approvals, assert registry retention after every action and complete input/old-state immutability. No manually invented agreement or arbitrary version-count assertion is added.
+- `:335`, `:441`: **28 finite-JSON malformed states**, each checking both immutable transition rejection and deterministic D2 export of the original supplied workflow with INVALID_INPUT. Cases cover missing/null/nonarray ledgers; duplicate/empty/blank IDs; zero/negative/null/text quantities; out-of-range/fractional/noninteger-type due shifts; missing or changed baseline origins even after visible removal; missing custom origins; current/scenario/historical quantity/due disagreement; missing historical-only origins; null/nonobject records and missing fields. Valid states/history are obtained through public actions before corruption; historical rows are real retained revisions, not fabricated state. No missing custom origin is invented during validation.
+- `:452`: **three raw nonfinite quantities** (NaN/+Infinity/−Infinity) must be rejected immutably as INVALID_INPUT. D2 is expressly limited to finite JSON-compatible data, so export is checked on the actual JSON-boundary representation (quantity=null), requiring that original null-bearing workflow and INVALID_INPUT diagnostics remain unchanged, not that raw Infinity be serialized faithfully.
+
+Count composition is **10 lifecycle/output/behavior cases + 28 malformed-state cases + 3 nonfinite-boundary cases = 41**. Each malformed-state case exercises both transition and export; grouping does not skip either check. New tests use no hard-coded private state IDs, registry implementation logic, branch knowledge or new UI requirement.
+
+### Necessary legacy fixture-data alignment, no assertion changes
+
+`tests/unit/workflow-boundaries.test.ts:33/:58` and `tests/unit/recorded-history.test.ts:26/:54` now seed independent six-origin records in their existing external-JSON draft fixture builders, using the same documented local intersection. Without that fixture-only addition, their earlier valid-draft control and unrelated malformed-plan/event checks would be invalid merely because v1.3 now forbids a missing ledger. Existing tests/actions/expected outcomes, including all previously requested regressions, remain unchanged. No production interface was declared/edited and no registry was fabricated as an output of a public API: only owned external-input fixtures received the required documented field.
+
+### Current actual-byte SHA-256 evidence
+
+Computed with `Get-FileHash -Algorithm SHA256 -LiteralPath` on the six named existing files, from the tester CWD. These are individual current-byte identities, **not** a Git/source-candidate manifest or an inherited approval claim.
+
+| Path | SHA-256 |
+| --- | --- |
+| `docs/PUBLIC_SPEC.md` | `dba0fb0f17977da2b2b2a485d9fc58fbaf978dbd30bef7bb92f195df73916df9` |
+| `docs/SPEC.md` | `f6cf0837c70260b9a1c25f4420ee95001025a23f7deeae86c5dc33cf0ab77fff` |
+| `docs/SOURCE_REQUIREMENTS.md` | `5d9f9ef37bd619b72b5015f11f90f4a302604fe22f520e7044e653c6a279171f` |
+| `tests/unit/order-origins-contract.test.ts` | `06c0f94826ad30f031f5bbe2d6a63ccf617df3fc493f6b0546a2b82deeea3336` |
+| `tests/unit/workflow-boundaries.test.ts` | `f4a422277c1a03e11156dac92e787344477be8aba4df26e32bdafd45497c7194` |
+| `tests/unit/recorded-history.test.ts` | `5ce4f261c465130586a710c41523299a7a034f5ff83108e3547d74c32c68d936` |
+
+### Checks actually executed
+
+All commands used the sole tester CWD above and existing local dependencies.
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0; local intersection compiles without changing the old bootstrap Workflow declaration |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; typed lint, zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **490 total / 81 passed / 409 failed / 0 other**; zero unhandled/module errors |
+| Read-only SHA-256 command on the six paths above | Exit 0; current byte hashes recorded above |
+| Scoped code/fixture/report reread and new-case discovery inspection | New 41 cases present; unit report header and representative initialization/malformed/history/nonfinite records reread |
+
+Discovery is **449 + 41 = 490**, within the unchanged **512-record** reporter bound. `unit-review-red.json` was regenerated and retains all 490 records, `truncated:false`; the 41 additions reach the preserved public `Not implemented: createWorkflow` throw rather than failing at an import or accepting a synthesized registry. Output absence would likewise fail explicitly if an older successful implementation omitted orderOrigins. Current execution proves meaningful stub RED and tooling validity, not successful v1.3 behavior against implementation. The previous 81 source/witness passes remain unchanged.
+
+**Browser was not rerun for this unit-only supplement.** `browser-review-red.json` and browser files/artifacts remain the prior 449-unit-stage evidence: 30 browser runs, 9 helper passes, 21 placeholder product failures (18 prior product runs plus the three repetitions of the new order-origin UI case), zero skips/interruption/global errors. That historical run is not a new browser check or a real-product GREEN. Existing repeat=3/retry=0/90-second browser bounds and all UI requirements remain unchanged.
+
+Tool history: initial typecheck/lint passed. Formatting checks initially identified the new registry file and one fixture file; formatting was applied only via apply_patch, then final full unit/type/lint/format checks passed with the expected unit RED status above. Hashes refer to the final checked code bytes. Existing ignored-evidence policy remains unchanged; retain this handoff and desired reports explicitly during orchestration.
+
+The public v1.3 artifact is now present, so **there is no documentation/interface wait** for these tests. **Both review gates remain pending before code fixes/freeze.** No coder handoff, real-implementation registry result, coverage pass, production fix or release acceptance is claimed. The new registry behavior and D3-aligned external fixtures still require the independent foreground implementation run after review.
+
+## Previous: order-origin lineage and independent template D1 regressions
+
+Added only three focused test files plus this handoff and generated baseline evidence. All preexisting 441 unit cases and browser expectations remain untouched. Sole worktree/CWD: `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`. Baseline `734cb60` is the orchestrator-supplied identity, not a new Git verification; **no Git commands** were run. No implementation/source inspection, other-worktree access, chat, delegation, installs or source/configuration edits were performed. The unchanged browser webServer made its normal generated build/preview outputs. No private testcase was sent to the coder and no production correction was authored.
+
+### Order-origin behavior (four unit cases and one browser case)
+
+- `tests/unit/order-origin-regression.test.ts:19`, `:59`: through real createWorkflow/transition calls, the planner adds ORIGIN-X with quantity 10/originalDue 1, then replaces it with ORIGIN-Y in the same draft. The test establishes that **no retained revision contains X** and only one draft version exists; reintroducing X with quantity 1/originalDue 4 must be explained, immutable rejection with no partial value. Thus scanning only current drafts/versions cannot satisfy the oracle. No particular origin-error code is prescribed; all returned issues must be explanatory errors with nonempty codes/messages and issue refs.
+- `order-origin-regression.test.ts:64`: remove one independently transcribed source-original ID, retain its unchanged scenarioPlan original, then attempt changed quantity/due on reintroduction. This must also reject without mutating state/action.
+- `order-origin-regression.test.ts:80`, `:91`: a genuinely unused ID remains accepted, and restore begins a fresh lineage in which the removed custom X may be submitted with new originals. These positives distinguish lineage immutability from blanket rejection or permanent global ID blacklisting.
+- `tests/e2e/order-origin.test.ts:17`: create X=10/due1, edit its exact primary-table row to Y, then attempt X=1/due4 through the actual named form. A changed semantic alert snapshot and visible nonempty alert are required without hard-coding localized error text; invalid inputs remain entered. Normal modal cancellation permits a subsequent JSON download, whose complete bytes/workflow must equal the pre-attempt export. All table/form/field/button names are semantic and exact where applicable; no forced click, app-state read or background modal bypass.
+
+### Independent applyTemplate D1 behavior (four unit cases)
+
+- `tests/unit/template-d1-regression.test.ts:72`: both repair and night templates receive a GRIND-1/B target with a valid A→B setup [0,20), REWIND-2/B fed from its 100-unit initial buffer, and positive B production spanning t=120. Independently derived rates are 2.125 REWIND and .68 GRIND; the hand roster covers baseline setup/production through quota completion. A real baseline report and full independent ledger establish actual B production, then real physical evaluation with the supplied failure/absence events must remain structurally accepted with no malformed/event-target/event-order errors. This is a legal general physical target but **not** the supported D1 A target; each standalone template API must return explained immutable failure, no partial Plan/report.
+- `template-d1-regression.test.ts:93`: both templates receive a public factory Plan whose GRIND-4 VAL-2 Job is relocated, retaining its public-derived ID, onto GRIND-1 during [90,270). The engine may honestly report validation/staff/work infeasibility. The tests independently establish actual GRIND-1/A production around 120 and positive intersection with repair, use the full ledger only on consistently configured inputs, and then require template rejection rather than an accepted engine report. No exact arbitrary rejection code or universal feasibility requirement is imposed.
+- The shared local refusal helper snapshots plan/events/source constants, invokes only the public evaluate/applyTemplate APIs, and requires nonempty error issues, no partial value and unchanged input/source data. There are no mocks, evaluator substitutions or private imports. Existing common-lineage/idempotence positives are unchanged.
+
+### Documentation/interface status
+
+PUBLIC_SPEC was reread and still identified **v1.2** at final inspection; the D3 artifact was not yet present. These regressions use the user-authorized existing lineage/D1 behavior through existing public signatures and **never reference or construct `orderOrigins`**. Therefore no new interface/stub extension is needed for these tests, and execution is **not waiting on a D3 interface update**. The documentation owner still owns the later additive registry specification; its publication/alignment and both independent reviews remain coordination gates. No D3 documentation or source types were edited here.
+
+### Checks actually executed against the preserved stubs
+
+All commands used the sole tester CWD and installed local dependencies.
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Exit **1**; **449 total / 81 passed / 368 failed / 0 other**; zero unhandled/module errors |
+| `npm.cmd run test:e2e -- --reporter=./tests/reporters/browser.ts --output=tests/evidence/browser-origin-d1-results` | Exit **1**; **30 total / 9 helper passes / 21 product failures / 0 skipped / 0 interrupted**; zero global errors; repeat=3, retry=0 |
+| Scoped new-file reread and bounded report/header/new-record inspection | Eight new unit records retained; new browser title/repeat failure recorded; no existing assertions edited |
+
+Delta: **441 + 8 = 449 unit cases** and **one additional browser case × three repetitions: 27→30 runs**. New unit failures explicitly reach `Not implemented: createWorkflow` (four lineage cases), `Not implemented: evaluate` (two B-target cases) or `Not implemented: createScenarioPlan` (two validation cases). The new UI repetitions fail at the placeholder's missing planner role control, before form behavior. These are observed **stub RED**, not proof that the real-candidate bugs were reproduced or fixed. The foreground prefixed-QA run remains necessary for meaningful implementation-bug RED.
+
+Reporters/caps were unchanged. Refreshed `unit-review-red.json` and `browser-review-red.json` retain **all 449/30 records**, `truncated:false`, within the existing 512/64 limits. Baseline failure screenshots/context/traces are under `browser-origin-d1-results/`; prior evidence remains. Timeout 90s, three repeats, zero retries, source/runtime guards, all earlier physical assertions and quality thresholds are unchanged. Initial typecheck/typed lint passed; formatting was applied only through apply_patch using local formatter output, then the final type/lint/format and full suites ran. Existing ignored-evidence policy is unchanged; retain the new files/artifacts explicitly during orchestration.
+
+**Both new bug regressions require primary and secondary review before the production fixes/freeze.** No new real-implementation execution, coverage result, D3 registry-shape check, downstream UI success or production acceptance is claimed. No blocker prevents reviewing these behavior-only tests; the pending D3 artifact must still be coordinated by its owner.
+
+## Previous: exact two-stage night-template target guard regression
 
 Added only `tests/unit/night-event-chain.test.ts`, this handoff update and generated unit evidence in the preserved tester tree. Existing 440 cases, including the positive GRIND-1 full lineage, remain untouched. No Git, chat, delegation, implementation/source inspection or production/configuration edit was performed. No testcase was sent to the coder and no production patch was made.
 

@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 441,
+    "total": 490,
     "passed": 81,
-    "failed": 360,
+    "failed": 409,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -1110,6 +1110,276 @@
       "error": "Not implemented: createScenarioPlan"
     },
     {
+      "file": "tests/unit/order-origin-regression.test.ts",
+      "title": "draft replacement X to Y cannot forget X originals when X is reused with changed quantity/due",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origin-regression.test.ts",
+      "title": "removing a source order cannot permit changed originals when its ID is reintroduced",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origin-regression.test.ts",
+      "title": "a genuinely unused custom ID remains admissible after another ID is removed by rename",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origin-regression.test.ts",
+      "title": "restore starts a new lineage in which the old custom ID may have new submitted originals",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "v1.3 initializes exactly six deterministic independent public origin records",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "origin order follows first accepted arrays, never current order sorting or draft reconstruction",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "rename/removal retain origins and same-original reuse adds no duplicate entry",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "removed ID cannot change its registered quantity",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "removed ID cannot change its registered originalDue",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "unauthorized and partially invalid edits append nothing before a later real first acceptance",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "only committed normalized order IDs enter the registry, once",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "restore reinitializes only six origins and leaves the previous lineage/scenario unchanged",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "export retains ordered audit origins without phantom demand, allocation or stock",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "origins survive real successors, event drafts and both approvals without changing old states",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: missing ledger reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: null ledger reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: nonarray ledger reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: duplicate ID reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: empty ID reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: blank ID reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: zero quantity reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: negative quantity reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: null quantity reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: text quantity reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: zero due reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: due beyond four reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: fractional due reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: text due reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: missing source origin reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: source quantity changed after removal reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: source due changed after removal reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: missing current custom origin reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: current quantity disagrees reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: current due disagrees reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: scenario originals disagree reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: historical quantity disagrees reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: historical due disagrees reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: missing historical-only origin reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: null origin record reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: nonobject origin record reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: missing quantity field reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "invalid origins: missing due field reject immutable transition and preserve D2 JSON diagnostics",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "nonfinite origin quantity NaN is invalid; its finite JSON boundary data is preserved",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "nonfinite origin quantity Infinity is invalid; its finite JSON boundary data is preserved",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/order-origins-contract.test.ts",
+      "title": "nonfinite origin quantity -Infinity is invalid; its finite JSON boundary data is preserved",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
       "file": "tests/unit/recorded-history.test.ts",
       "title": "apply-failure rejects null current campaigns without mutating the intact scenario or creating a successor",
       "state": "failed",
@@ -1826,6 +2096,30 @@
     {
       "file": "tests/unit/template-boundaries.test.ts",
       "title": "VAL2_PARALLEL preserves unrelated later setup/validation assignments, not pooled run allocation",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "REPAIR_G1_TO_G3 rejects physically supported GRIND-1/B at 120 rather than treating it as A",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "NIGHT_WRAP_STAGGERED rejects physically supported GRIND-1/B at 120 rather than treating it as A",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "REPAIR_G1_TO_G3 rejects GRIND-1/A when a validation job intersects its repair interval",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "NIGHT_WRAP_STAGGERED rejects GRIND-1/A when a validation job intersects its repair interval",
       "state": "failed",
       "error": "Not implemented: createScenarioPlan"
     },

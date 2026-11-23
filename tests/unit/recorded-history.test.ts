@@ -1,10 +1,10 @@
 import { expect, test } from 'vitest';
 import { evaluate } from '../../src/domain/engine';
-import type { Event, Plan, Result } from '../../src/domain/model';
+import type { Event, Plan, Result, Shift } from '../../src/domain/model';
 import { applyTemplate, createScenarioPlan } from '../../src/domain/scenario';
 import { transition } from '../../src/domain/workflow';
 import type { Action, Workflow } from '../../src/domain/workflow';
-import { deepFreeze, emptyPlan, feasiblePlan, unwrap } from '../support/fixture';
+import { deepFreeze, emptyPlan, feasiblePlan, originalOrders, unwrap } from '../support/fixture';
 import { finiteTree, sameExecution, uniqueSchedule } from '../support/execution';
 import { checkLedger } from '../support/ledger';
 
@@ -23,7 +23,12 @@ function refused<T>(result: Result<T>, codes: string[]): void {
 }
 
 // Plain external JSON draft data, never a fabricated agreed revision or reachable-UI claim.
-function managerDraft(plan: Plan, events: Event[] = []): Workflow {
+function managerDraft(
+  plan: Plan,
+  events: Event[] = [],
+): Workflow & {
+  orderOrigins: { id: string; quantity: number; originalDue: Shift }[];
+} {
   const original = structuredClone(plan);
   original.requests = null;
   return {
@@ -46,6 +51,11 @@ function managerDraft(plan: Plan, events: Event[] = []): Workflow {
     ],
     currentId: 1,
     scenarioPlan: structuredClone(original),
+    orderOrigins: originalOrders().map(({ id, quantity, originalDue }) => ({
+      id,
+      quantity,
+      originalDue,
+    })),
   };
 }
 

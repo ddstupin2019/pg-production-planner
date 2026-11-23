@@ -2,9 +2,9 @@
   "runner": "playwright",
   "status": "failed",
   "counts": {
-    "total": 27,
+    "total": 30,
     "passed": 9,
-    "failed": 18,
+    "failed": 21,
     "skipped": 0,
     "interrupted": 0
   },
@@ -14,6 +14,14 @@
   "truncated": false,
   "cases": [
     {
+      "file": "tests/e2e/order-origin.test.ts",
+      "title": "renaming a draft custom order cannot permit changed originals through ID reuse in the form",
+      "repeat": 0,
+      "retry": 0,
+      "status": "failed",
+      "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Планировщик', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Планировщик', exact: true }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Планировщик', exact: true })\n"
+    },
+    {
       "file": "tests/e2e/order-table.test.ts",
       "title": "exact order-table and row scoping tolerate duplicated literal user text in the passport",
       "repeat": 0,
@@ -86,6 +94,14 @@
       "error": ""
     },
     {
+      "file": "tests/e2e/order-origin.test.ts",
+      "title": "renaming a draft custom order cannot permit changed originals through ID reuse in the form",
+      "repeat": 1,
+      "retry": 0,
+      "status": "failed",
+      "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Планировщик', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Планировщик', exact: true }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Планировщик', exact: true })\n"
+    },
+    {
       "file": "tests/e2e/order-table.test.ts",
       "title": "exact order-table and row scoping tolerate duplicated literal user text in the passport",
       "repeat": 1,
@@ -156,6 +172,14 @@
       "retry": 0,
       "status": "passed",
       "error": ""
+    },
+    {
+      "file": "tests/e2e/order-origin.test.ts",
+      "title": "renaming a draft custom order cannot permit changed originals through ID reuse in the form",
+      "repeat": 2,
+      "retry": 0,
+      "status": "failed",
+      "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Планировщик', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Планировщик', exact: true }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Планировщик', exact: true })\n"
     },
     {
       "file": "tests/e2e/order-table.test.ts",

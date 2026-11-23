@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { evaluate } from '../../src/domain/engine';
 import type { Report } from '../../src/domain/engine';
-import type { Plan, Result } from '../../src/domain/model';
+import type { Plan, Result, Shift } from '../../src/domain/model';
 import { createWorkflow, exportWorkflow, transition } from '../../src/domain/workflow';
 import type { Action, Workflow } from '../../src/domain/workflow';
 import { deepFreeze, emptyPlan, feasiblePlan, originalOrders, unwrap } from '../support/fixture';
@@ -30,7 +30,9 @@ function denied(state: Workflow, action: Action, codes?: string[]): void {
 
 // Independently constructed external JSON draft, not an invented agreement or evaluator mock.
 // Empty physical schedules are permitted at initialization; they cannot be submitted as feasible.
-function externalDraft(): Workflow {
+function externalDraft(): Workflow & {
+  orderOrigins: { id: string; quantity: number; originalDue: Shift }[];
+} {
   const plan = emptyPlan();
   plan.requests = null;
   return {
@@ -53,6 +55,11 @@ function externalDraft(): Workflow {
     ],
     currentId: 1,
     scenarioPlan: structuredClone(plan),
+    orderOrigins: originalOrders().map(({ id, quantity, originalDue }) => ({
+      id,
+      quantity,
+      originalDue,
+    })),
   };
 }
 
