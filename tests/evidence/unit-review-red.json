@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 322,
-    "passed": 54,
-    "failed": 268,
+    "total": 350,
+    "passed": 81,
+    "failed": 269,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -217,7 +217,13 @@
     },
     {
       "file": "tests/unit/contract-edges.test.ts",
-      "title": "public setup ordering, conflicts and fractional integration > setups inside repair exclude a union, not another twenty minutes",
+      "title": "public setup ordering, conflicts and fractional integration > a setup inside repair leaves the original configuration and blocks its target product",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > already configured production resumes after maintenance and the repair/maintenance union",
       "state": "failed",
       "error": "Not implemented: evaluate"
     },
@@ -1568,6 +1574,168 @@
     {
       "file": "tests/unit/source.test.ts",
       "title": "R3–R7 exact source transcription, not an expert plan oracle > nested source records are frozen, not just the outer arrays",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "rendered snapshot validates all field types at the public display precision",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "hidden table fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "missing headings fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "duplicate heading fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "hidden heading fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "blank heading fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "missing required column fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "missing key column fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "missing row fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "extra row fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "unexpected key fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "key in wrong column fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "missing cell fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "extra cell fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "hidden cell fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "blank number fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "nonfinite number fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "beyond three-decimal tolerance fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "rounded integer fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "null as zero fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "blank null disclosure fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "wrong boolean fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "numeric boolean fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "stale phase fails snapshot validation",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "duplicate actual/expected row keys cannot hide a missing row at equal row count",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "comparison tokens match only in the variant column, never substrings or another column",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/table-snapshot.test.ts",
+      "title": "current revision, plan and values must match the supplied current export",
       "state": "passed",
       "error": ""
     },

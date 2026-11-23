@@ -2,8 +2,8 @@
   "runner": "playwright",
   "status": "failed",
   "counts": {
-    "total": 18,
-    "passed": 0,
+    "total": 24,
+    "passed": 6,
     "failed": 18,
     "skipped": 0,
     "interrupted": 0
@@ -62,6 +62,22 @@
       "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Планировщик', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Планировщик', exact: true }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Планировщик', exact: true })\n"
     },
     {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader scopes native rows/headers to one named table and keeps clipped cells visible",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
       "file": "tests/e2e/simulation.test.ts",
       "title": "built offline complete lineage; 390px light",
       "repeat": 1,
@@ -110,6 +126,22 @@
       "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Планировщик', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Планировщик', exact: true }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Планировщик', exact: true })\n"
     },
     {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader scopes native rows/headers to one named table and keeps clipped cells visible",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
       "file": "tests/e2e/simulation.test.ts",
       "title": "built offline complete lineage; 390px light",
       "repeat": 2,
@@ -156,6 +188,22 @@
       "retry": 0,
       "status": "failed",
       "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Планировщик', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('button', { name: 'Планировщик', exact: true }) with timeout 5000ms\n  - waiting for getByRole('button', { name: 'Планировщик', exact: true })\n"
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader scopes native rows/headers to one named table and keeps clipped cells visible",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
     }
   ]
 }

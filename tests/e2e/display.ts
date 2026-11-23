@@ -2,119 +2,66 @@ import type { Locator, Page } from '@playwright/test';
 import { current, expect } from './browser';
 import type { exported } from './browser';
 import { checkJobs } from '../support/work-witness';
+import { readRenderedTable, validateTable } from '../support/table-snapshot';
+import type { TableExpectation } from '../support/table-snapshot';
 
 type Snapshot = Awaited<ReturnType<typeof exported>>;
-type Fields = Record<string, number | string | null>;
 
-function numeric(text: string): number {
-  return Number(text.replace(/[\s\u00a0\u202f]/g, '').replace(',', '.'));
+export async function tableValues(table: Locator, expected: TableExpectation): Promise<void> {
+  await expect(table).toHaveCount(1);
+  await expect(async () => {
+    validateTable(await table.evaluate(readRenderedTable), expected);
+  }).toPass({ timeout: 5_000 });
 }
 
-async function cell(
-  page: Page,
-  table: Locator,
-  key: string,
-  heading: string,
-  comparisonKey = false,
-): Promise<Locator> {
-  const headings = (await table.getByRole('columnheader').allTextContents()).map((s) => s.trim());
-  expect(headings.filter((s) => s === heading)).toHaveLength(1);
-  const keyCell = page
-    .getByRole('cell', { name: key, exact: true })
-    .or(page.getByRole('rowheader', { name: key, exact: true }));
-  let row = table.getByRole('row').filter({ has: keyCell });
-  if (comparisonKey) {
-    const index = headings.indexOf('Вариант');
-    expect(index).toBeGreaterThanOrEqual(0);
-    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const token = new RegExp(`(?:^|[^\\p{L}\\p{N}_-])${escaped}(?=$|[^\\p{L}\\p{N}_-])`, 'u');
-    const variant = page
-      .getByRole('cell')
-      .or(page.getByRole('rowheader'))
-      .nth(index)
-      .filter({ hasText: token });
-    row = table.getByRole('row').filter({ has: variant });
-  }
-  await expect(row).toHaveCount(1);
-  return row.getByRole('cell').or(row.getByRole('rowheader')).nth(headings.indexOf(heading));
-}
-
-async function values(
-  page: Page,
-  table: Locator,
-  key: string,
-  expected: Fields,
-  comparisonKey = false,
-): Promise<void> {
-  for (const [heading, value] of Object.entries(expected)) {
-    const target = await cell(page, table, key, heading, comparisonKey);
-    await expect(target).toBeVisible();
-    const text = (await target.innerText()).trim();
-    if (typeof value === 'number') {
-      expect(text.length, `${key}/${heading}: missing number`).toBeGreaterThan(0);
-      const actual = numeric(text);
-      expect(Number.isFinite(actual), `${key}/${heading}: ${text}`).toBe(true);
-      const tolerance = Number.isInteger(value) ? 1e-6 : 0.000501;
-      expect(Math.abs(actual - value), `${key}/${heading}`).toBeLessThanOrEqual(tolerance);
-    } else if (value === null) {
-      expect(text.length, `${key}/${heading}: missing null disclosure`).toBeGreaterThan(0);
-      expect(Number.isFinite(numeric(text)), `${key}/${heading}: null is not zero`).toBe(false);
-    } else await expect(target).toHaveText(value);
-  }
-}
-
-async function rowCount(page: Page, table: Locator, count: number): Promise<void> {
-  const cells = page.getByRole('cell').or(page.getByRole('rowheader'));
-  await expect(table.getByRole('row').filter({ has: cells })).toHaveCount(count);
-}
-
-async function booleanCell(
-  page: Page,
-  table: Locator,
-  key: string,
-  heading: string,
-  value: boolean,
-  comparisonKey = false,
-): Promise<void> {
-  await expect(await cell(page, table, key, heading, comparisonKey)).toHaveText(
-    value
-      ? /^(?:Да|Допустим|Выполнена|Завершена)$/i
-      : /^(?:Нет|Недопустим|Не выполнена|Не завершена)$/i,
-  );
+export async function visibleNumbers(page: Page, report: Snapshot['report']): Promise<void> {
+  expect(report.shifts).toHaveLength(4);
+  await tableValues(page.getByRole('table', { name: 'Смены', exact: true }), {
+    keyHeading: 'Смена',
+    rows: report.shifts.map((shift) => ({
+      key: `S${String(shift.shift)}`,
+      fields: {
+        'Выпуск A': shift.packed.A,
+        'Выпуск B': shift.packed.B,
+        'Выпуск C': shift.packed.C,
+        Пик: shift.peak,
+        'Труд, мин': shift.laborMinutes,
+        'Резерв, мин': shift.reserveMinutes,
+      },
+    })),
+  });
 }
 
 export async function comparisonValues(
   page: Page,
   alternatives: { choice: string; snapshot: Snapshot }[],
 ): Promise<void> {
-  const table = page.getByRole('table', { name: 'Сравнение вариантов', exact: true });
-  await expect(table).toBeVisible();
-  await rowCount(page, table, alternatives.length);
-  for (const { choice, snapshot } of alternatives) {
-    const { report, data } = snapshot;
-    const revision = current(data.workflow);
-    const coverage = checkJobs(report, revision.plan, revision.events);
-    await booleanCell(page, table, choice, 'Физически допустим', report.feasible, true);
-    await values(
-      page,
-      table,
-      choice,
-      {
-        'Выпуск A': report.shifts.reduce((n, s) => n + s.packed.A, 0),
-        'Выпуск B': report.shifts.reduce((n, s) => n + s.packed.B, 0),
-        'Выпуск C': report.shifts.reduce((n, s) => n + s.packed.C, 0),
-        'Исходный дефицит': report.orders.reduce((n, order) => n + order.originalDeficit, 0),
-        'Пик S1': report.shifts[0]!.peak,
-        'Пик S2': report.shifts[1]!.peak,
-        'Пик S3': report.shifts[2]!.peak,
-        'Пик S4': report.shifts[3]!.peak,
-        'Труд, мин': report.shifts.reduce((n, shift) => n + shift.laborMinutes, 0),
-        'Работы выполнено': coverage.reduce((n, row) => n + row.complete, 0),
-        'Работы требуется': coverage.reduce((n, row) => n + row.required, 0),
-      },
-      true,
-    );
-  }
+  await tableValues(page.getByRole('table', { name: 'Сравнение вариантов', exact: true }), {
+    keyHeading: 'Вариант',
+    tokenKeys: true,
+    rows: alternatives.map(({ choice, snapshot }) => {
+      const { report, data } = snapshot;
+      const revision = current(data.workflow);
+      const coverage = checkJobs(report, revision.plan, revision.events);
+      return {
+        key: choice,
+        fields: {
+          'Физически допустим': report.feasible,
+          'Выпуск A': report.shifts.reduce((n, s) => n + s.packed.A, 0),
+          'Выпуск B': report.shifts.reduce((n, s) => n + s.packed.B, 0),
+          'Выпуск C': report.shifts.reduce((n, s) => n + s.packed.C, 0),
+          'Исходный дефицит': report.orders.reduce((n, order) => n + order.originalDeficit, 0),
+          'Пик S1': report.shifts[0]!.peak,
+          'Пик S2': report.shifts[1]!.peak,
+          'Пик S3': report.shifts[2]!.peak,
+          'Пик S4': report.shifts[3]!.peak,
+          'Труд, мин': report.shifts.reduce((n, shift) => n + shift.laborMinutes, 0),
+          'Работы выполнено': coverage.reduce((n, row) => n + row.complete, 0),
+          'Работы требуется': coverage.reduce((n, row) => n + row.required, 0),
+        },
+      };
+    }),
+  });
 }
 
 export async function selectionRationale(page: Page, choice: string): Promise<void> {
@@ -131,65 +78,83 @@ export async function passportValues(page: Page, snapshot: Snapshot): Promise<vo
   await expect(region).toBeVisible();
   const { report, data } = snapshot;
   const revision = current(data.workflow);
+  expect(report.shifts).toHaveLength(4);
   checkJobs(report, revision.plan, revision.events);
-  const version = region.getByRole('table', { name: 'Паспорт: версия', exact: true });
-  await rowCount(page, version, 1);
-  await values(page, version, revision.plan.id, { Версия: revision.id, План: revision.plan.id });
   const phases = { baseline: /базов|исходн/i, failure: /отказ|сбой|полом/i, absence: /отсутств/i };
-  await expect(await cell(page, version, revision.plan.id, 'Фаза')).toHaveText(
-    phases[data.workflow.phase],
-  );
-  const shifts = region.getByRole('table', { name: 'Паспорт: смены', exact: true });
-  const staff = region.getByRole('table', { name: 'Паспорт: персонал', exact: true });
-  await rowCount(page, shifts, 4);
-  await rowCount(page, staff, 4);
-  for (const shift of report.shifts) {
-    const key = `S${String(shift.shift)}`;
-    await values(page, shifts, key, {
-      'Выпуск A': shift.packed.A,
-      'Выпуск B': shift.packed.B,
-      'Выпуск C': shift.packed.C,
-      Выполнено: shift.fulfilled,
-      'Дефицит в срок': shift.dueDeficit,
-    });
-    await values(page, staff, key, {
-      Заявка: shift.requested,
-      Доступно: shift.available,
-      Пик: shift.peak,
-      'Труд, мин': shift.laborMinutes,
-      'Резерв, мин': shift.reserveMinutes,
-    });
-  }
-  const orders = region.getByRole('table', { name: 'Паспорт: заказы', exact: true });
-  await rowCount(page, orders, report.orders.length);
-  for (const result of report.orders) {
-    const order = revision.plan.orders.find((order) => order.id === result.orderId)!;
-    await values(page, orders, result.orderId, {
-      'Исходный объём': order.quantity,
-      'Исходная смена': order.originalDue,
-      'К исходному сроку': result.atOriginalDue,
-      'Исходный дефицит': result.originalDeficit,
-      'Обещанный объём': order.promise?.quantity ?? null,
-      'Обещанная смена': order.promise?.due ?? null,
-      'К обещанному сроку': result.atPromiseDue,
-      'Дефицит обещания': result.promiseDeficit,
-      'Выполнено S1': result.allocatedByShift[0],
-      'Выполнено S2': result.allocatedByShift[1],
-      'Выполнено S3': result.allocatedByShift[2],
-      'Выполнено S4': result.allocatedByShift[3],
-    });
-  }
-  const jobs = region.getByRole('table', { name: 'Паспорт: работы', exact: true });
-  await rowCount(page, jobs, revision.plan.jobs.length);
-  for (const result of report.jobs) {
-    const job = revision.plan.jobs.find((job) => job.id === result.jobId)!;
-    await values(page, jobs, job.id, {
-      Код: job.code,
-      Станок: job.machineId,
-      Начало: job.start,
-      Конец: job.end,
-      'Зачтено, мин': result.creditedMinutes,
-    });
-    await booleanCell(page, jobs, job.id, 'Выполнена', result.complete);
-  }
+  await tableValues(region.getByRole('table', { name: 'Паспорт: версия', exact: true }), {
+    keyHeading: 'План',
+    rows: [
+      {
+        key: revision.plan.id,
+        fields: { Версия: revision.id, План: revision.plan.id, Фаза: phases[data.workflow.phase] },
+      },
+    ],
+  });
+  await tableValues(region.getByRole('table', { name: 'Паспорт: смены', exact: true }), {
+    keyHeading: 'Смена',
+    rows: report.shifts.map((shift) => ({
+      key: `S${String(shift.shift)}`,
+      fields: {
+        'Выпуск A': shift.packed.A,
+        'Выпуск B': shift.packed.B,
+        'Выпуск C': shift.packed.C,
+        Выполнено: shift.fulfilled,
+        'Дефицит в срок': shift.dueDeficit,
+      },
+    })),
+  });
+  await tableValues(region.getByRole('table', { name: 'Паспорт: персонал', exact: true }), {
+    keyHeading: 'Смена',
+    rows: report.shifts.map((shift) => ({
+      key: `S${String(shift.shift)}`,
+      fields: {
+        Заявка: shift.requested,
+        Доступно: shift.available,
+        Пик: shift.peak,
+        'Труд, мин': shift.laborMinutes,
+        'Резерв, мин': shift.reserveMinutes,
+      },
+    })),
+  });
+  await tableValues(region.getByRole('table', { name: 'Паспорт: заказы', exact: true }), {
+    keyHeading: 'Заказ',
+    rows: report.orders.map((result) => {
+      const order = revision.plan.orders.find((order) => order.id === result.orderId)!;
+      return {
+        key: result.orderId,
+        fields: {
+          'Исходный объём': order.quantity,
+          'Исходная смена': order.originalDue,
+          'К исходному сроку': result.atOriginalDue,
+          'Исходный дефицит': result.originalDeficit,
+          'Обещанный объём': order.promise?.quantity ?? null,
+          'Обещанная смена': order.promise?.due ?? null,
+          'К обещанному сроку': result.atPromiseDue,
+          'Дефицит обещания': result.promiseDeficit,
+          'Выполнено S1': result.allocatedByShift[0],
+          'Выполнено S2': result.allocatedByShift[1],
+          'Выполнено S3': result.allocatedByShift[2],
+          'Выполнено S4': result.allocatedByShift[3],
+        },
+      };
+    }),
+  });
+  expect(report.jobs).toHaveLength(revision.plan.jobs.length);
+  await tableValues(region.getByRole('table', { name: 'Паспорт: работы', exact: true }), {
+    keyHeading: 'Работа',
+    rows: report.jobs.map((result) => {
+      const job = revision.plan.jobs.find((job) => job.id === result.jobId)!;
+      return {
+        key: job.id,
+        fields: {
+          Код: job.code,
+          Станок: job.machineId,
+          Начало: job.start,
+          Конец: job.end,
+          'Зачтено, мин': result.creditedMinutes,
+          Выполнена: result.complete,
+        },
+      };
+    }),
+  });
 }

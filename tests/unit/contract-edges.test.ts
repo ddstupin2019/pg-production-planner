@@ -104,34 +104,94 @@ describe('public setup ordering, conflicts and fractional integration', () => {
     p.jobs = [{ id: 'to', code: 'TO-1', machineId: 'PRESS-1', start: 0, end: 180 }];
     p.setups = [{ id: 'ab', machineId: 'PRESS-1', from: 'A', to: 'B', start: 100, end: 120 }];
     run(p, 'PRESS-1', 'B', 120, 200);
-    const result = evaluate({ plan: deepFreeze(p), events: [] });
-    if (!result.ok) rejected(result, ['INVALID_INPUT', 'MACHINE_CONFLICT', 'SETUP_REQUIRED']);
+    const input: { plan: Plan; events: Event[] } = { plan: p, events: [] };
+    const before = structuredClone(input);
+    const result = evaluate(deepFreeze(input));
+    expect(input).toEqual(before);
+    if (!result.ok) rejected(result, ['INVALID_INPUT', 'SETUP_REQUIRED', 'MACHINE_CONFLICT']);
     else {
       expect(result.value.feasible).toBe(false);
       expect(
         result.value.issues.some((i) => i.code === 'MACHINE_CONFLICT' && i.severity === 'error'),
       ).toBe(true);
       near(quantity(result.value, 'PRESS-1', 0, 180), 0);
-      near(quantity(result.value, 'PRESS-1', 180, 200), 0.765 * 20);
+      near(quantity(result.value, 'PRESS-1', 180, 200), 0);
+      const machine = result.value.machineIntervals.filter((r) => r.machineId === 'PRESS-1');
+      expect(machine.length).toBeGreaterThan(0);
+      expect(machine.every((r) => r.product === 'A')).toBe(true);
+      expect(machine.some((r) => r.kind === 'produce' && r.product === 'B')).toBe(false);
+      expect(machine.every((r) => r.quantity === 0 && r.rate === 0)).toBe(true);
+      expect(machine.find((r) => r.start === 100)).toMatchObject({
+        kind: 'maintenance',
+        jobIds: ['to'],
+        setupId: 'ab',
+        rate: 0,
+        quantity: 0,
+      });
     }
   });
-  test('setups inside repair exclude a union, not another twenty minutes', () => {
+  test('a setup inside repair leaves the original configuration and blocks its target product', () => {
     const p = emptyPlan();
     run(p, 'REWIND-1', 'A', 0, 120);
     run(p, 'REWIND-2', 'B', 0, 300);
     run(p, 'GRIND-1', 'A', 0, 200);
     run(p, 'GRIND-1', 'B', 220, 300);
     p.setups = [{ id: 'ab', machineId: 'GRIND-1', from: 'A', to: 'B', start: 200, end: 220 }];
+    const input: { plan: Plan; events: Event[] } = {
+      plan: p,
+      events: [{ kind: 'failure', machineId: 'GRIND-1' }],
+    };
+    const before = structuredClone(input);
+    const result = evaluate(deepFreeze(input));
+    expect(input).toEqual(before);
+    if (!result.ok) rejected(result, ['INVALID_INPUT', 'SETUP_REQUIRED', 'MACHINE_CONFLICT']);
+    else {
+      const report = result.value;
+      finiteTree(report);
+      expect(report.feasible).toBe(false);
+      expect(
+        report.issues.some((i) => i.code === 'MACHINE_CONFLICT' && i.severity === 'error'),
+      ).toBe(true);
+      near(quantity(report, 'GRIND-1', 120, 270), 0);
+      near(quantity(report, 'GRIND-1', 270, 300), 0);
+      near(quantity(report, 'GRIND-1'), 0.68 * 120);
+      const machine = report.machineIntervals.filter((r) => r.machineId === 'GRIND-1');
+      expect(machine.every((r) => r.product === 'A')).toBe(true);
+      expect(machine.some((r) => r.kind === 'produce' && r.product === 'B')).toBe(false);
+      expect(
+        machine.filter((r) => r.start >= 120).every((r) => r.quantity === 0 && r.rate === 0),
+      ).toBe(true);
+      expect(
+        report.machineIntervals.find((r) => r.machineId === 'GRIND-1' && r.start === 200),
+      ).toMatchObject({ kind: 'repair', setupId: 'ab', rate: 0 });
+      expect(report.jobs.some((job) => job.code === 'TO-2')).toBe(false);
+    }
+  });
+  test('already configured production resumes after maintenance and the repair/maintenance union', () => {
+    const p = emptyPlan();
+    run(p, 'PRESS-1', 'A', 0, 200);
+    run(p, 'REWIND-1', 'A', 0, 470);
+    run(p, 'GRIND-1', 'A', 0, 470);
+    p.jobs = [
+      { id: 'press-to', code: 'TO-1', machineId: 'PRESS-1', start: 0, end: 180 },
+      { id: 'grind-to', code: 'TO-2', machineId: 'GRIND-1', start: 200, end: 440 },
+    ];
     const report = unwrap(
       evaluate({ plan: deepFreeze(p), events: [{ kind: 'failure', machineId: 'GRIND-1' }] }),
     );
     finiteTree(report);
-    near(quantity(report, 'GRIND-1', 120, 270), 0);
+    near(quantity(report, 'PRESS-1', 0, 180), 0);
+    near(quantity(report, 'PRESS-1'), 0.765 * 20);
+    near(quantity(report, 'GRIND-1', 120, 440), 0);
     near(quantity(report, 'GRIND-1'), 0.68 * (120 + 30));
+    expect(report.issues.some((i) => i.code === 'MACHINE_CONFLICT')).toBe(false);
+    expect(report.jobs.find((j) => j.jobId === 'grind-to')).toMatchObject({
+      creditedMinutes: 240,
+      complete: true,
+    });
     expect(
       report.machineIntervals.find((r) => r.machineId === 'GRIND-1' && r.start === 200),
-    ).toMatchObject({ kind: 'repair', setupId: 'ab', rate: 0 });
-    expect(report.jobs.some((job) => job.code === 'TO-2')).toBe(false);
+    ).toMatchObject({ kind: 'repair', product: 'A', jobIds: ['grind-to'], rate: 0, quantity: 0 });
   });
   test('validation cannot be completed across two setup interruptions', () => {
     const p = feasiblePlan();

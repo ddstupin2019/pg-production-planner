@@ -11,7 +11,7 @@ import {
 } from './browser';
 import type { Page } from '@playwright/test';
 import { checkLedger, near, prefix, quantity } from '../support/ledger';
-import { comparisonValues, passportValues, selectionRationale } from './display';
+import { comparisonValues, passportValues, selectionRationale, visibleNumbers } from './display';
 
 test.setTimeout(90_000);
 async function verifiedExport(page: Page) {
@@ -44,33 +44,6 @@ async function fixed(page: Page) {
     .getByRole('textbox', { name: 'Резерв S2', exact: true })
     .fill('Резерв на ночное отсутствие');
   await page.getByRole('button', { name: 'Зафиксировать заявки', exact: true }).click();
-}
-async function visibleNumbers(page: Page, report: Awaited<ReturnType<typeof exported>>['report']) {
-  const table = page.getByRole('table', { name: 'Смены', exact: true });
-  const headers = await table.getByRole('columnheader').allTextContents();
-  for (const shift of report.shifts) {
-    const key = `S${String(shift.shift)}`;
-    const identifier = page
-      .getByRole('cell', { name: key, exact: true })
-      .or(page.getByRole('rowheader', { name: key, exact: true }));
-    const row = table.getByRole('row').filter({ has: identifier });
-    await expect(row).toHaveCount(1);
-    const cells = await row.getByRole('cell').or(row.getByRole('rowheader')).allTextContents();
-    for (const [heading, value] of [
-      ['Выпуск A', shift.packed.A],
-      ['Выпуск B', shift.packed.B],
-      ['Выпуск C', shift.packed.C],
-      ['Пик', shift.peak],
-      ['Труд, мин', shift.laborMinutes],
-      ['Резерв, мин', shift.reserveMinutes],
-    ] as const) {
-      const index = headers.findIndex((h) => h.trim() === heading);
-      expect(index).toBeGreaterThanOrEqual(0);
-      const numeric = Number(cells[index]!.replace(/[\s\u00a0\u202f]/g, '').replace(',', '.'));
-      expect(Number.isFinite(numeric)).toBe(true);
-      expect(Math.abs(numeric - value)).toBeLessThanOrEqual(0.000501);
-    }
-  }
 }
 
 for (const width of [390, 1440])
