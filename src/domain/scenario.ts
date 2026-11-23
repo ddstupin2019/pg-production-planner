@@ -68,10 +68,20 @@ export function applyTemplate(plan: Plan, events: Event[], template: Template): 
       });
     }
   } else if (template === 'NIGHT_WRAP_STAGGERED') {
-    if (events.length !== 2)
+    const [failure, absence] = validEvents.value;
+    if (
+      failure?.kind !== 'failure' ||
+      failure.machineId !== 'GRIND-1' ||
+      absence?.kind !== 'absence'
+    )
       return {
         ok: false,
-        errors: [issue('WORKFLOW_GUARD', 'Night staggering requires sequential absence')],
+        errors: [
+          issue(
+            'WORKFLOW_GUARD',
+            'Night staggering requires the prescribed GRIND-1 failure followed by absence',
+          ),
+        ],
       };
     for (const id of [14, 15]) {
       const setup = next.setups.find(
