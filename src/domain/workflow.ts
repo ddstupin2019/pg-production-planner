@@ -1,5 +1,5 @@
-import type { Event, Order, Plan, Result, Role } from './model';
-import { EPSILON } from './model';
+import type { Event, Order, Plan, Result, Role, Shift } from './model';
+import { EPSILON, REQUIRED_ORDERS } from './model';
 import { evaluate, prepareEvaluation } from './engine';
 import type { Report } from './engine';
 import { preservesPrefix } from './prefix';
@@ -34,6 +34,7 @@ export interface Workflow {
   versions: Revision[];
   currentId: number;
   scenarioPlan: Plan;
+  orderOrigins: { id: string; quantity: number; originalDue: Shift }[];
 }
 export type Action =
   | { type: 'switch-role'; role: Role }
@@ -73,6 +74,45 @@ function counts(value: unknown): value is [number, number] {
   return (
     Array.isArray(value) && value.length === 2 && value.every((item) => count(item) && item >= 2)
   );
+}
+
+function readOrigins(value: unknown): Workflow['orderOrigins'] | null {
+  if (!Array.isArray(value)) return null;
+  const origins: Workflow['orderOrigins'] = [];
+  const ids = new Set<string>();
+  for (const row of value) {
+    if (
+      !record(row) ||
+      !text(row['id']) ||
+      row['id'] !== row['id'].trim() ||
+      ids.has(row['id']) ||
+      !finite(row['quantity']) ||
+      row['quantity'] <= 0 ||
+      !count(row['originalDue']) ||
+      row['originalDue'] < 1 ||
+      row['originalDue'] > 4
+    )
+      return null;
+    ids.add(row['id']);
+    origins.push({
+      id: row['id'],
+      quantity: row['quantity'],
+      originalDue: row['originalDue'] as Shift,
+    });
+  }
+  if (
+    !REQUIRED_ORDERS.every((source, index) => {
+      const origin = origins[index];
+      return (
+        origin &&
+        origin.id === source.id &&
+        origin.quantity === source.quantity &&
+        origin.originalDue === source.originalDue
+      );
+    })
+  )
+    return null;
+  return origins;
 }
 
 function validationGuard(plan: Plan): Result<never> | null {
@@ -117,6 +157,8 @@ function readState(
     return null;
   const scenarioPlan = validatePlan(value['scenarioPlan']);
   if (!scenarioPlan.ok) return null;
+  const orderOrigins = readOrigins(value['orderOrigins']);
+  if (!orderOrigins) return null;
   const ids = new Set<number>();
   const versions: Revision[] = [];
   let baseline: Report | null = null;
@@ -167,6 +209,18 @@ function readState(
     ids.add(revision['id']);
   }
   if (!ids.has(value['currentId'])) return null;
+  const origins = new Map(orderOrigins.map((origin) => [origin.id, origin]));
+  if (
+    [scenarioPlan.value, ...versions.map((revision) => revision.plan)].some((plan) =>
+      plan.orders.some((order) => {
+        const origin = origins.get(order.id);
+        return (
+          !origin || origin.quantity !== order.quantity || origin.originalDue !== order.originalDue
+        );
+      }),
+    )
+  )
+    return null;
   return {
     state: {
       schemaVersion: 1,
@@ -178,6 +232,7 @@ function readState(
       versions,
       currentId: value['currentId'],
       scenarioPlan: scenarioPlan.value,
+      orderOrigins,
     },
     baseline,
   };
@@ -239,6 +294,11 @@ export function createWorkflow(plan: Plan): Result<Workflow> {
       ],
       currentId: 1,
       scenarioPlan,
+      orderOrigins: REQUIRED_ORDERS.map(({ id, quantity, originalDue }) => ({
+        id,
+        quantity,
+        originalDue,
+      })),
     },
   };
 }
@@ -247,7 +307,11 @@ export function transition(state: Workflow, action: Action): Result<Workflow> {
   if (!record(action) || !text(action.type))
     return guard('Malformed workflow or action', 'INVALID_INPUT');
   const checked = readState(state, action.type === 'apply-failure');
-  if (!checked) return guard('Malformed workflow or action', 'INVALID_INPUT');
+  if (!checked)
+    return guard(
+      'Malformed workflow: check state, order origins and stored order originals',
+      'INVALID_INPUT',
+    );
   // Work on a fresh complete tree: no rejected action or successor can alter its predecessor.
   const next = checked.state;
   const revision = current(next);
@@ -269,9 +333,7 @@ export function transition(state: Workflow, action: Action): Result<Workflow> {
       const validated = validateOrders(action.orders);
       if (!validated.ok) return validated;
       for (const order of validated.value) {
-        const previous = next.versions
-          .flatMap((row) => row.plan.orders)
-          .find((row) => row.id === order.id);
+        const previous = next.orderOrigins.find((origin) => origin.id === order.id);
         if (
           previous &&
           (previous.quantity !== order.quantity || previous.originalDue !== order.originalDue)
@@ -286,6 +348,12 @@ export function transition(state: Workflow, action: Action): Result<Workflow> {
       edited.plan.orders = validated.value;
       if (edited.plan.mode === 'custom' || !originalDemand(edited.plan.orders))
         edited.plan.mode = 'custom';
+      const known = new Set(next.orderOrigins.map((origin) => origin.id));
+      next.orderOrigins.push(
+        ...validated.value
+          .filter((order) => !known.has(order.id))
+          .map(({ id, quantity, originalDue }) => ({ id, quantity, originalDue })),
+      );
       next.demandSent = false;
       break;
     }
@@ -463,7 +531,10 @@ export function exportWorkflow(state: Workflow): string {
         {
           schemaVersion: 1,
           workflow: state,
-          evaluation: guard('Malformed workflow', 'INVALID_INPUT'),
+          evaluation: guard(
+            'Malformed workflow: check state, order origins and stored order originals',
+            'INVALID_INPUT',
+          ),
         },
         null,
         2,

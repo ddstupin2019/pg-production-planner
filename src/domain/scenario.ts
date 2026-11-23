@@ -22,6 +22,48 @@ export function applyTemplate(plan: Plan, events: Event[], template: Template): 
   if (!valid.ok) return valid;
   if (!validEvents.ok) return validEvents;
   const next = valid.value.plan;
+  const conflicting = next.jobs.filter(
+    (job) =>
+      job.machineId === 'GRIND-1' &&
+      job.code.startsWith('VAL-') &&
+      Math.min(job.end, 270) - Math.max(job.start, 120) > EPSILON,
+  );
+  if (conflicting.length)
+    return {
+      ok: false,
+      errors: [
+        issue(
+          'UNSUPPORTED_FAILURE_VALIDATION',
+          'Interrupted validation recovery is outside this replay. Review GRIND-1 work or restore the scenario.',
+          ['GRIND-1', ...conflicting.map((job) => job.id)],
+          120,
+          270,
+        ),
+      ],
+    };
+  // Before the event, both sides must produce; after it, only the frozen left side exists.
+  const produces = (side: 'before' | 'at') =>
+    valid.value.report.machineIntervals.some(
+      (row) =>
+        row.machineId === 'GRIND-1' &&
+        row.kind === 'produce' &&
+        row.product === 'A' &&
+        row.rate > 0 &&
+        (side === 'before' ? row.start < 120 && row.end >= 120 : row.start <= 120 && row.end > 120),
+    );
+  if (!produces('before') || (!events.length && !produces('at')))
+    return {
+      ok: false,
+      errors: [
+        issue(
+          'EVENT_TARGET',
+          'GRIND-1 must actually produce A at the pre-event boundary. Review work or restore the scenario.',
+          ['GRIND-1'],
+          120,
+          270,
+        ),
+      ],
+    };
   const cut = events.length === 2 ? 630 : events.length ? 120 : 0;
   if (template === 'VAL2_STAGGERED' || template === 'VAL2_PARALLEL') {
     if (events.length)
