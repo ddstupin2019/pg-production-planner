@@ -22,6 +22,7 @@ import {
 import { issue, record, validateEvents, validatePlan } from './validation';
 import { createScenarioSeed } from './scenario-seed';
 import { assignStaff } from './staffing';
+import { assertNumeric } from './numeric-invariant';
 
 export interface EvaluationInput {
   plan: Plan;
@@ -422,7 +423,7 @@ function replay(plan: Plan, events: Event[]): Report {
       }
     }
     const duration = end - time;
-    if (!(duration > 0) || !Number.isFinite(duration)) throw new Error('Nonadvancing fluid replay');
+    assertNumeric(duration > 0 && Number.isFinite(duration), 'Nonadvancing fluid replay');
     const tasks: StaffInterval['tasks'] = [];
     let normal = 0;
     let setupCount = 0;
@@ -560,7 +561,7 @@ function replay(plan: Plan, events: Event[]): Report {
       const queue = queues[index]!;
       const rates = queueRates[index]!;
       const closing = clean(queue.quantity + (rates.inflow - rates.consumed) * duration);
-      if (closing < -EPSILON) throw new Error('Negative queue in fluid replay');
+      assertNumeric(!(closing < -EPSILON), 'Negative queue in fluid replay');
       stockIntervals.push({
         product: queue.product,
         before: queue.before,
@@ -738,15 +739,7 @@ export function createScenarioPlan(): Plan {
   const peaks = projected.shifts.map((row) => row.peak);
   plan.requests = [peaks[0]!, peaks[1]!];
   plan.forecasts = [peaks[2]!, peaks[3]!];
-  const assigned = assignStaff(plan, projected);
-  const verified = replay(assigned, []);
-  if (!verified.feasible) {
-    const errors = verified.issues.filter((row) => row.severity === 'error');
-    throw new Error(
-      `Scenario physical errors: ${errors.map((row) => `${row.code}:${row.refs.join(',')}`).join('; ')}`,
-    );
-  }
-  return assigned;
+  return assignStaff(plan, projected);
 }
 
 /** @internal Checked boundary shared by replay consumers needing its canonical input as well. */

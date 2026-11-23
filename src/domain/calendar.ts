@@ -1,4 +1,5 @@
 import type { Shift } from './model';
+import { assertNumeric } from './numeric-invariant';
 
 export interface Span {
   start: number;
@@ -6,15 +7,17 @@ export interface Span {
 }
 
 function bounded(value: number, maximum: number): void {
-  if (!Number.isFinite(value) || value < 0 || value > maximum) {
-    throw new RangeError('Minute outside calendar domain');
-  }
+  assertNumeric(
+    Number.isFinite(value) && value >= 0 && value <= maximum,
+    'Minute outside calendar domain',
+    RangeError,
+  );
 }
 
 export function workingMinutes(start: number, end: number): number {
   bounded(start, 2880);
   bounded(end, 2880);
-  if (end < start) throw new RangeError('Reversed interval');
+  assertNumeric(end >= start, 'Reversed interval', RangeError);
   return ([1, 2, 3, 4] as const)
     .flatMap(workSpans)
     .reduce(
@@ -41,7 +44,7 @@ export function toCalendarMinute(workMinute: number, edge: 'start' | 'end'): num
 }
 
 export function workSpans(shift: Shift): Span[] {
-  if (!Number.isInteger(shift) || shift < 1 || shift > 4) throw new RangeError('Unknown shift');
+  assertNumeric(Number.isInteger(shift) && shift >= 1 && shift <= 4, 'Unknown shift', RangeError);
   const offset = (shift - 1) * 720;
   return [
     { start: offset, end: offset + 240 },
