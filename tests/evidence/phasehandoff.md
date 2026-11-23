@@ -1,6 +1,33 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: optional editable-ID copy may retain the original visible order
+## Latest: one protective post-event repair left-boundary case
+
+Added only `tests/unit/repair-left-boundary.test.ts`, this note and regenerated unit evidence in the preserved tester worktree. No existing test/guard/branch was changed; no Git, implementation/source inspection, other worktrees, chat, delegation, source/configuration edit or browser rerun. No code fix or coder testcase handoff was made.
+
+The single case starts with the public factory and identifies an actual GRIND-1/A left-boundary production interval from real evaluate evidence, not a private campaign ID. On a separate external Plan copy, it ends that permission **exactly at t=120** and removes any other GRIND-1/A permission intersecting [120,270). No transfer template has previously been applied. The input event is `[failure GRIND-1]`; the initial workflow apply-failure action is intentionally **not** used, because its unmodified-baseline guard additionally requires production containing t=120 on the right.
+
+Before invoking the repair template, require a legal `ok:true` physical evaluation, no malformed/target/sequence error, the independent full ledger, actual positive A immediately on the left, no positive production containing the cut on the right, zero GRIND-1 repair-window output and complete unchanged pre-cut execution versus the factory. Input data are cloned before construction and deep-frozen/snapshotted before evaluation/template calls.
+
+The direct repair-template result may be either:
+
+- Explained error rejection with no partial value and unchanged Plan/events; **no particular refusal code is required** for the absent future permission.
+- A structurally valid evaluated Plan preserving orders/mode/requests and the complete pre-cut execution, with finite positive quotas/unique records, no recreated G1/A permission in the repair window, zero G1 repair-window output and **no increase in G3 repair-window output**. Compare with the input's actual G3 quantity rather than assuming the factory leaves G3 idle. Staffing/partition changes are not arbitrarily forbidden, and no feasible=true requirement or exact Plan ID is added.
+
+**Protective real-RED exception:** this is coverage, not a newly asserted implementation bug. An existing implementation may already pass by honestly refusing or returning a valid non-inventing result; no production patch is mandated to make this case RED. Actual implementation was not run here. The observed stub failure remains explicit and is not caught or relabeled as success.
+
+Checks from `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`:
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **495 total / 81 passed / 414 failed / 0 other**; zero unhandled/module errors |
+| Read-only SHA-256 of the new test | Exit 0; `8f39d958e6fd9a520ee184d77b96ea355bfce182dafc148d6863bb2618235474` |
+
+Delta is **+1 unit case: 494→495**. Refreshed bounded `unit-review-red.json` retains all **495** records, `truncated:false`, within the unchanged 512 bound. Header and the new record were reread: the new case reaches **`Not implemented: createScenarioPlan`**, not a missing import. Final unit/type/lint/format were rerun after apply_patch-only formatting. All earlier registry/D1/domain/UI regressions remain mandatory and unchanged. Browser files/report/artifacts were not rerun or edited and remain historical evidence only. Review/foreground execution remains with the orchestrator before freeze; no implementation branch result, coverage pass or production acceptance is claimed.
+
+## Previous: optional editable-ID copy may retain the original visible order
 
 Changed only the accepted editable branch in `tests/e2e/order-origin.test.ts:52–58` and this note. Y must still be accepted with original quantity 10/due 1. X may be absent (replacement) or remain (copy); if present, its quantity/due must still be 10/1. The shared later attempt to create X with changed originals still must reject with an alert and unchanged complete export/state. Readonly/disabled handling and every unconditional domain deletion/rename/reuse case are unchanged. No new UI feature or mutable-original allowance was introduced.
 

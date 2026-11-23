@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 494,
+    "total": 495,
     "passed": 81,
-    "failed": 413,
+    "failed": 414,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -1394,6 +1394,12 @@
     {
       "file": "tests/unit/recorded-history.test.ts",
       "title": "night template preserves an already recorded whitespace-bearing historical campaign identity or explains refusal",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/repair-left-boundary.test.ts",
+      "title": "post-event repair preserves an ended A permission boundary or explains refusal without inventing transfer",
       "state": "failed",
       "error": "Not implemented: createScenarioPlan"
     },
