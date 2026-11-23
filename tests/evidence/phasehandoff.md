@@ -1,6 +1,52 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: approved public v1.3 / D3 registry contract supplement
+## Latest: primary D3 test-review corrections — mutable corruption copies and all-four-template preflight
+
+Narrow corrections only in the preserved tester worktree: `tests/unit/order-origins-contract.test.ts`, `tests/unit/template-d1-regression.test.ts`, this handoff and regenerated unit evidence. No implementation/source inspection, Git commands, other worktrees, chat, delegation, source/configuration edits or browser run. Existing positive baseline alternatives, common lineages, earlier regression cases and all quality thresholds remain unchanged.
+
+### 1. Malformed inputs are cloned before deliberate corruption
+
+`order-origins-contract.test.ts:444` now uses `structuredClone((build ?? withCustom)())`; `:455` uses `structuredClone(withCustom())` before nonfinite-field corruption. This allows legitimate immutable historical/registry-node sharing in public transition outputs. No transition result is required to expose mutable shared subnodes. Only the owned external-input copy is deliberately corrupted, then the existing denied/export helpers still deep-freeze it and assert exact input immutability, rejection/no value and original-data INVALID_INPUT export. The 41 registry cases and all their assertions remain; this corrects fixture construction, not the contract oracle.
+
+### 2. Added four baseline D1 negatives without removing GRIND-4/5 work
+
+`template-d1-regression.test.ts:42` now supplies the documented phase-specific event inputs for all four names: [] for baseline VAL-2 variants, failure for repair, failure→absence for night. Existing repair/night inputs remain equivalent.
+
+- `:120` verifies the two original GRIND-4/5 VAL-2 Job placements at the exact selected variant's intervals and B production permissions covering those intervals. Neither new negative case removes or relocates that expected work.
+- `:148`: two new baseline cases change only the independently constructed GRIND-1 production to B, with a completed A→B setup [0,20), a separately assigned setup worker, and quota 80 ensuring positive production across t=120 (.68×100=68<80). The existing B feed supports the two original validations; their Jobs/permissions remain at the correct staggered/parallel positions. Real evaluation, independent configuration/material/work/staff ledger checks and actual positive B intervals must succeed before template refusal is asserted.
+- `:180`: two new baseline cases retain the original two GRIND-4/5 Jobs/permissions and add a distinct GRIND-1 validation on [90,270), with its own extra worker. GRIND-1/A still actually produces around t=120; the general physical report may honestly disclose the impossible/conflicting validation. Both baseline template APIs must reject the D1 overlap rather than treating missing expected work as the negative input.
+
+The refusal checks preserve Plan/events/source constants, require explained error issues and no partial value, and never demand feasible=true for these arbitrary negative inputs. All four templates now have explicit wrong-product and overlapping-validation negatives. No mock, private import, skipped test or replacement evaluator was added.
+
+### Executed checks and bounded results
+
+All commands ran from `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests` with installed local dependencies.
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **494 total / 81 passed / 413 failed / 0 other**; zero unhandled/module errors |
+| Read-only SHA-256 command on the four paths below | Exit 0; final current-byte identities recorded |
+| Scoped correction/report reread | Both pre-corruption clones and all four new case records confirmed; new records reach `Not implemented: evaluate` |
+
+Delta is **+4 unit cases: 490→494**, below the unchanged **512-record** bound. Refreshed `unit-review-red.json` retains all **494** records with `truncated:false`. Source/witness passes remain 81. The expected stub throws are meaningful RED, not proof that implementation accepts immutable sharing or enforces the new baseline guards; those paths still need the independent implementation run. Final unit/type/lint/format were rerun after apply_patch-only formatting.
+
+**Browser was not rerun** and all browser files/reports/artifacts are unchanged; the prior 30-run evidence remains historical only. Neither timeouts/repeats/retries nor any existing positive acceptance assertion was relaxed.
+
+### Current actual-byte SHA-256
+
+| Path | SHA-256 |
+| --- | --- |
+| `docs/PUBLIC_SPEC.md` (v1.3, unchanged) | `dba0fb0f17977da2b2b2a485d9fc58fbaf978dbd30bef7bb92f195df73916df9` |
+| `docs/SPEC.md` (v1.3, unchanged) | `f6cf0837c70260b9a1c25f4420ee95001025a23f7deeae86c5dc33cf0ab77fff` |
+| `tests/unit/order-origins-contract.test.ts` | `85f3829ec4817efae88fd2f057d8ce61e9552225c4207ada69629bed370e5a3e` |
+| `tests/unit/template-d1-regression.test.ts` | `fa2c07c25c14319a9082ee6d5ea976e9f1a133349f03609e62f97cfff8027d09` |
+
+These are file-byte hashes, not a candidate/Git identity. **Primary rereview and the second gate are pending before code fixes/freeze.** No coder handoff, production patch, implementation GREEN or coverage pass is claimed.
+
+## Previous: approved public v1.3 / D3 registry contract supplement
 
 Read the transferred PUBLIC_SPEC/SPEC **v1.3**, especially PUBLIC_SPEC §4.4 lines 218/237–249 and D2 failure export. Only tester files were written in `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`. No implementation/source inspection, Git commands, other-worktree access, chat, delegation, installs, source/configuration edits or browser execution. Documentation itself was read/hashed, not modified. The eight prior unit regressions and their browser case remain intact; no existing assertion or quality gate was weakened.
 

@@ -13,7 +13,7 @@ import {
 } from '../../src/domain/model';
 import type { Event, Plan } from '../../src/domain/model';
 import { applyTemplate, createScenarioPlan } from '../../src/domain/scenario';
-import { deepFreeze, emptyPlan, roster, run, unwrap } from '../support/fixture';
+import { deepFreeze, emptyPlan, feasiblePlan, roster, run, unwrap } from '../support/fixture';
 import { finiteTree } from '../support/execution';
 import { checkLedger } from '../support/ledger';
 
@@ -38,8 +38,10 @@ function actualTarget(report: Report, product: 'A' | 'B'): void {
   expect(rows.some((row) => row.start < 120 && row.end >= 120)).toBe(true);
   expect(rows.some((row) => row.start <= 120 && row.end > 120)).toBe(true);
 }
-function refuses(plan: Plan, template: 'REPAIR_G1_TO_G3' | 'NIGHT_WRAP_STAGGERED'): void {
-  const events: Event[] = [{ kind: 'failure', machineId: 'GRIND-1' }];
+type Template = Parameters<typeof applyTemplate>[2];
+function refuses(plan: Plan, template: Template): void {
+  const events: Event[] = [];
+  if (!template.startsWith('VAL2_')) events.push({ kind: 'failure', machineId: 'GRIND-1' });
   if (template === 'NIGHT_WRAP_STAGGERED') events.push({ kind: 'absence' });
   const before = structuredClone({ plan, events });
   const sourceBefore = structuredClone(sources());
@@ -110,6 +112,88 @@ test.each(['REPAIR_G1_TO_G3', 'NIGHT_WRAP_STAGGERED'] as const)(
           job.end > 120,
       ),
     ).toBe(true);
+    refuses(plan, template);
+  },
+  60_000,
+);
+
+function baselinePlacement(plan: Plan, template: 'VAL2_STAGGERED' | 'VAL2_PARALLEL'): void {
+  const jobs = plan.jobs
+    .filter((job) => job.code === 'VAL-2' && ['GRIND-4', 'GRIND-5'].includes(job.machineId))
+    .sort((a, b) => a.machineId.localeCompare(b.machineId));
+  expect(jobs.map((job) => [job.machineId, job.start, job.end])).toEqual(
+    template === 'VAL2_PARALLEL'
+      ? [
+          ['GRIND-4', 240, 420],
+          ['GRIND-5', 240, 420],
+        ]
+      : [
+          ['GRIND-4', 0, 180],
+          ['GRIND-5', 240, 420],
+        ],
+  );
+  for (const job of jobs) {
+    expect(
+      plan.campaigns.some(
+        (campaign) =>
+          campaign.machineId === job.machineId &&
+          campaign.product === 'B' &&
+          campaign.start <= job.start &&
+          campaign.until >= job.end,
+      ),
+    ).toBe(true);
+  }
+}
+
+test.each(['VAL2_STAGGERED', 'VAL2_PARALLEL'] as const)(
+  '%s rejects actual GRIND-1/B despite having its expected GRIND-4/5 work',
+  (template) => {
+    const plan = feasiblePlan(template === 'VAL2_PARALLEL');
+    plan.campaigns = plan.campaigns.filter((campaign) => campaign.machineId !== 'GRIND-1');
+    plan.setups.push({
+      id: 'baseline-g1-ab',
+      machineId: 'GRIND-1',
+      from: 'A',
+      to: 'B',
+      start: 0,
+      end: 20,
+    });
+    // 80 / .68 > 100 minutes: B is still actually producing at 120, without exhausting
+    // the shared B feed needed by the two original named validations.
+    run(plan, 'GRIND-1', 'B', 20, 280, 80);
+    plan.assignments.push({
+      taskId: 'setup:baseline-g1-ab',
+      start: 0,
+      end: 20,
+      workerIds: ['S1-40'],
+    });
+    baselinePlacement(plan, template);
+    const baseline = unwrap(evaluate({ plan: deepFreeze(plan), events: [] }));
+    finiteTree(baseline);
+    checkLedger(baseline, plan);
+    actualTarget(baseline, 'B');
+    refuses(plan, template);
+  },
+  60_000,
+);
+
+test.each(['VAL2_STAGGERED', 'VAL2_PARALLEL'] as const)(
+  '%s rejects overlapping GRIND-1 validation while retaining its expected GRIND-4/5 work',
+  (template) => {
+    const plan = feasiblePlan(template === 'VAL2_PARALLEL');
+    const id = 'baseline-g1-validation';
+    plan.jobs.push({ id, code: 'VAL-2', machineId: 'GRIND-1', start: 90, end: 270 });
+    plan.assignments.push({ taskId: `validate:${id}`, start: 90, end: 270, workerIds: ['S1-40'] });
+    baselinePlacement(plan, template);
+    const baseline = unwrap(evaluate({ plan: deepFreeze(plan), events: [] }));
+    finiteTree(baseline);
+    checkLedger(baseline, plan);
+    actualTarget(baseline, 'A');
+    expect(plan.jobs.find((job) => job.id === id)).toMatchObject({
+      machineId: 'GRIND-1',
+      start: 90,
+      end: 270,
+    });
     refuses(plan, template);
   },
   60_000,

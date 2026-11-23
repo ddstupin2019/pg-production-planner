@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 490,
+    "total": 494,
     "passed": 81,
-    "failed": 409,
+    "failed": 413,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -2122,6 +2122,30 @@
       "title": "NIGHT_WRAP_STAGGERED rejects GRIND-1/A when a validation job intersects its repair interval",
       "state": "failed",
       "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "VAL2_STAGGERED rejects actual GRIND-1/B despite having its expected GRIND-4/5 work",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "VAL2_PARALLEL rejects actual GRIND-1/B despite having its expected GRIND-4/5 work",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "VAL2_STAGGERED rejects overlapping GRIND-1 validation while retaining its expected GRIND-4/5 work",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-d1-regression.test.ts",
+      "title": "VAL2_PARALLEL rejects overlapping GRIND-1 validation while retaining its expected GRIND-4/5 work",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
     },
     {
       "file": "tests/unit/work-witness.test.ts",

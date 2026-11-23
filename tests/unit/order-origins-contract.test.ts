@@ -441,7 +441,7 @@ const invalidLedgers: InvalidLedger[] = [
 test.each(invalidLedgers)(
   'invalid origins: $name reject immutable transition and preserve D2 JSON diagnostics',
   ({ build, corrupt }) => {
-    const state = (build ?? withCustom)();
+    const state = structuredClone((build ?? withCustom)());
     corrupt(state);
     denied(state, { type: 'switch-role', role: 'manager' }, 'INVALID_INPUT');
     invalidExport(state);
@@ -452,7 +452,7 @@ test.each(invalidLedgers)(
 test.each([NaN, Infinity, -Infinity])(
   'nonfinite origin quantity %s is invalid; its finite JSON boundary data is preserved',
   (quantity) => {
-    const state = withCustom();
+    const state = structuredClone(withCustom());
     state.orderOrigins[6]!.quantity = quantity;
     denied(state, { type: 'switch-role', role: 'manager' }, 'INVALID_INPUT');
     // Nonfinite values themselves are outside D2's finite-JSON contract. Actual JSON transport
