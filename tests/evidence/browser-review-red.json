@@ -2,8 +2,8 @@
   "runner": "playwright",
   "status": "passed",
   "counts": {
-    "total": 30,
-    "passed": 30,
+    "total": 63,
+    "passed": 63,
     "failed": 0,
     "skipped": 0,
     "interrupted": 0
@@ -94,6 +94,94 @@
       "error": ""
     },
     {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "fresh light theme ignores OS dark; explicit choices persist and apply before app code",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "storage access denial keeps rendering, keyboard toggle and rerenders usable",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "storage write denial keeps rendering, keyboard toggle and rerenders usable",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "direct hash, link clicks, history and changed hashes synchronize section and focus",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "scroll in both directions tracks actual section without creating history entries",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "rerendered shell keeps one current link and one navigation action",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 1440x900",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 1440x480",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 390x844",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "default copy is materially shorter without concealing public tables; print retains limits",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "slides stay neutral light under OS dark, have local navigation and ten print-sized pages",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
       "file": "tests/e2e/order-origin.test.ts",
       "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
       "repeat": 1,
@@ -174,6 +262,94 @@
       "error": ""
     },
     {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "fresh light theme ignores OS dark; explicit choices persist and apply before app code",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "storage access denial keeps rendering, keyboard toggle and rerenders usable",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "storage write denial keeps rendering, keyboard toggle and rerenders usable",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "direct hash, link clicks, history and changed hashes synchronize section and focus",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "scroll in both directions tracks actual section without creating history entries",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "rerendered shell keeps one current link and one navigation action",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 1440x900",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 1440x480",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 390x844",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "default copy is materially shorter without concealing public tables; print retains limits",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "slides stay neutral light under OS dark, have local navigation and ten print-sized pages",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
       "file": "tests/e2e/order-origin.test.ts",
       "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
       "repeat": 2,
@@ -248,6 +424,94 @@
     {
       "file": "tests/e2e/table-snapshot.test.ts",
       "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "fresh light theme ignores OS dark; explicit choices persist and apply before app code",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "storage access denial keeps rendering, keyboard toggle and rerenders usable",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "storage write denial keeps rendering, keyboard toggle and rerenders usable",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "direct hash, link clicks, history and changed hashes synchronize section and focus",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "scroll in both directions tracks actual section without creating history entries",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "rerendered shell keeps one current link and one navigation action",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 1440x900",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 1440x480",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "all six links are keyboard reachable in both themes at 390x844",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "default copy is materially shorter without concealing public tables; print retains limits",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/ui-shell.test.ts",
+      "title": "slides stay neutral light under OS dark, have local navigation and ten print-sized pages",
       "repeat": 2,
       "retry": 0,
       "status": "passed",

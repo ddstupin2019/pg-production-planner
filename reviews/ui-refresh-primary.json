@@ -1,0 +1,30 @@
+{
+  "verdict": "APPROVE",
+  "findings": [
+    {
+      "severity": "minor",
+      "screenshot": "",
+      "issue": "accessibility_audit wrapper SKIPPED at http://127.0.0.1:4173/ (1440x900): dependency detail 'axe-core unavailable: no readable axe.min.js/axe.js' in global catalogs — this is missing wrapper coverage, not a pass. Equivalent evidence is present and partially machine-corroborated: evidence/UI_REFRESH.md documents foreground local axe-core 4.14.1 (app 1440/390 both themes 0 violations/47 passing rules; slides 1440/390 0 violations/39/40 passing rules; zero horizontal overflow), tests/e2e/browser.ts injects node_modules axe-core and attaches results in 6 E2E states, and evidence/export-checks.json records 0 serious/critical and 0 lower axe findings across all 8 captured states.",
+      "suggestion": "Keep the disclosed wrapper-skip wording in evidence/UI_REFRESH.md; optionally persist the foreground axe JSON as a raw artifact so the 47/39/40 pass counts are machine-checkable."
+    },
+    {
+      "severity": "minor",
+      "screenshot": "",
+      "issue": "Candidate/build/evidence SHA-256 identities (62c76213…, 7412cd00…, 5e2e3069…) were not independently recomputed in this review: the execution environment restricts shell use to git inspection commands, so 'node tools/manifest.mjs' could not be run. Corroboration is indirect: evidence/export-checks.json records sourceCandidateId exactly equal to the claimed candidate 62c762135fbceec418bc459c9f73ab28a4c42b86042833e7cae1919d36f7b0e1, and dist/slides.html contains the post-fix captions (aria-label \"Слайд 1\"…\"Слайд 9\" with visible 1…9), confirming the build includes the caption delta.",
+      "suggestion": "No product change needed; record in the review ledger that hash recomputation was environment-blocked, and recompute the three manifest IDs in a permitted foreground run before publication."
+    },
+    {
+      "severity": "minor",
+      "screenshot": "",
+      "issue": "No full-suite rerun is claimed after the slides-only caption/spec-version text fix in public/slides.html; only the slides E2E case was repeated 3x with retries=0 (evidence/ui-refresh-slides.json: 3 expected passes, runtime-guard clean), plus axe, build and export. The delta is text-only in a file not exercised by other E2E/unit cases, and the limitation is explicitly disclosed in evidence/UI_REFRESH.md, so risk is low — but the 63/63 figure strictly applies to the pre-fix candidate.",
+      "suggestion": "Acceptable as disclosed; if any further slides.html edit occurs, rerun the full E2E suite once before delivery."
+    },
+    {
+      "severity": "minor",
+      "screenshot": "",
+      "issue": "The 1701→1435 visible-word reduction was not independently recounted in this review (counting requires executing page JavaScript, which is prohibited for this read-only role). It is evidenced by the unchanged ≤1445 assertion in tests/e2e/ui-shell.test.ts (passed 3x in the full run), the recorded annotation and evidence/ui-refresh-initial-check.json (1554 failure at unchanged threshold, then 1435), and the AX snapshot of the live page shows visibly condensed copy with all public tables (Смены, Заказы, Работы, Оборудование, Материалы, Персонал, Версии, Паспорт:*) still present.",
+      "suggestion": "None; evidence chain is sufficient."
+    }
+  ],
+  "summary": "Independent DOM/AX/interaction-evidence review of the standalone UI refresh against docs/UI_REFRESH_SPEC.md v1 (baseline c7dba63, working tree = candidate). Verified: (1) scope — git diff shows changes only in src/main.ts, src/styles.css, index.html, public/slides.html, public/favicon.svg plus regenerated dist/artifacts/evidence; src/domain/** untouched (no domain changes); tests/** unchanged except the evidence report JSON, with tests/e2e/ui-shell.test.ts added untracked (11 cases: theme persistence + pre-app application via route interception, storage access/write denial, hash/click/scroll/history/aria-current sync, rerender cleanup, keyboard reachability at 1440x900/1440x480/390x844 in both themes, copy ≤1445 with tables and print limits, slides neutral-under-OS-dark/10 print pages). (2) Machine evidence corroborated from artifacts: unit 495/495 (evidence/ui-refresh-unit.json success=true), domain coverage 100% lines/statements/functions, 99.64% branches (coverage/coverage-summary.json), full Chromium E2E 63/63 across 3 repeats with retry=0 (tests/evidence/browser-review-red.json; baseline HEAD file shows the prior 30/30), slides targeted 3/3, export 8 captures / 0 runtime errors / 0 blocked / 33 passport + 10 presentation pages (evidence/export-checks.json). (3) Live http://127.0.0.1:4173/ and /slides.html both return 200; AX snapshot of the live app shows the new shell: navigation 'Разделы плана' with exactly six links, 'Тёмная тема' toggle with aria-pressed, role group, skip link, status/alert live regions, all six sections with named tables. (4) index.html applies only an explicit stored preference before first paint with a storage-denial fallback; styles.css uses neutral charcoal/slate surfaces (#171b22/#1c2431/#202630) with restrained blue accents (#245da8/#a3c7fa) and green reserved for semantic success. (5) Visual review performed with verified pixels: evidence/ui-refresh-light.png (1440 light), ui-refresh-dark.png (1440 dark) and ui-refresh-mobile-dark.png (390 dark) were delivered and inspected — dark mode shows no large green surfaces, the 390px layout exposes all six sidebar links without any hamburger, and current-section highlighting is visible. Limitations: accessibility_audit wrapper skipped (missing global axe-core) with equivalent local axe 4.14.1 evidence as detailed in findings; hash IDs not independently recomputed (environment-restricted); no full-suite rerun after the disclosed slides-only caption fix; copy count taken from the test/evidence chain rather than recounted. No blocker or major defect observed; historical reviews were not read, and no approval from prior releases is carried forward."
+}

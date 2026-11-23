@@ -3,15 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#163f3c" />
+    <meta name="theme-color" content="#f3f4f0" />
+    <style>:root{--lightningcss-light:initial;--lightningcss-dark: ;color-scheme:light;color:#293442;background:#f3f4f0}:root[data-theme=dark]{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark;color:#e7ecf3;background:#171b22}</style>
+    <script>
+      // Apply only an explicit preference before the app stylesheet or first paint.
+      let theme = 'light';
+      try {
+        if (localStorage.getItem('kontur-theme') === 'dark') theme = 'dark';
+      } catch {
+        // Storage may be unavailable; the workspace must still open in light mode.
+      }
+      document.documentElement.dataset.theme = theme;
+      document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute('content', theme === 'dark' ? '#171b22' : '#f3f4f0');
+    </script>
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta
       name="description"
       content="Учебная симуляция: спрос, ресурсы и совместное согласование производственного плана."
     />
     <title>Контур · Производственный план</title>
-    <script type="module" crossorigin src="./assets/index-CGjDlAu1.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B65mo4Lu.css">
+    <script type="module" crossorigin src="./assets/index-BwW3awPK.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-wwkeQatk.css">
   </head>
   <body>
     <div id="app"><p role="status">Подготавливаем учебный сценарий…</p></div>

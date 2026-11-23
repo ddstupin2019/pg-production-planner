@@ -1,0 +1,237 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\ddstu\\.opencode\\tools\\nodejs\\node.exe",
+      "C:\\Users\\ddstu\\Desktop\\hacatons\\p&g\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=chromium",
+      "--workers=1",
+      "--retries=0",
+      "--repeat-each=3",
+      "--grep",
+      "slides stay neutral",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Users\\ddstu\\Desktop\\hacatons\\p&g\\playwright.config.ts",
+    "rootDir": "C:/Users/ddstu/Desktop/hacatons/p&g/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ddstu/Desktop/hacatons/p&g/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ddstu/Desktop/hacatons/p&g/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.test.ts",
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ddstu\\Desktop\\hacatons\\p&g\\test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "C:\\Users\\ddstu\\Desktop\\hacatons\\p&g\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\ddstu\\Desktop\\hacatons\\p&g\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.test.ts",
+          "**/*.spec.ts"
+        ],
+        "timeout": 30000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "serviceWorkers": "block",
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/159.0.8154.6 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.65.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node tools/preview.mjs",
+      "url": "http://127.0.0.1:4173",
+      "reuseExistingServer": false,
+      "timeout": 60000,
+      "stdout": "pipe",
+      "stderr": "pipe"
+    }
+  },
+  "suites": [
+    {
+      "title": "ui-shell.test.ts",
+      "file": "ui-shell.test.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "slides stay neutral light under OS dark, have local navigation and ten print-sized pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2410,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-23T16:52:45.211Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-guard",
+                      "contentType": "application/json",
+                      "body": "ewogICJyZW1vdGUiOiBbXSwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            },
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-23T16:52:49.489Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-guard",
+                      "contentType": "application/json",
+                      "body": "ewogICJyZW1vdGUiOiBbXSwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            },
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1254,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-23T16:52:52.738Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "runtime-guard",
+                      "contentType": "application/json",
+                      "body": "ewogICJyZW1vdGUiOiBbXSwKICAiZXJyb3JzIjogW10KfQ=="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ddcc8bf9e49f1ecdd9e4-5898180e695962f8ef8f",
+          "file": "ui-shell.test.ts",
+          "line": 246,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-23T16:52:42.390Z",
+    "duration": 13325.643,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

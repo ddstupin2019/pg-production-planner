@@ -54,8 +54,7 @@ const issueLabels: Record<string, string> = {
     'Требуемый персонал превышает доступный. Перераспределите работы; заявки уже нельзя увеличить.',
   STAFF_ASSIGNMENT:
     'Проверьте назначения: нужен доступный отдельный работник на каждую одновременную задачу.',
-  ORDER_SHORTFALL:
-    'Часть заказа не обеспечена к обязательному сроку. Дефицит не скрывается новым обещанием.',
+  ORDER_SHORTFALL: 'Дефицит к исходному сроку; новое обещание его не отменяет.',
   QUOTA_SHORTFALL: 'Кампания не выбрала квоту: проверьте подачу материала, окно и простои.',
   WORKFLOW_GUARD:
     'Действие недоступно в текущей роли или стадии. Проверьте спрос, заявки и согласование.',
@@ -65,14 +64,16 @@ const issueLabels: Record<string, string> = {
 };
 
 let state: Workflow;
-let dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = document.documentElement.dataset['theme'] === 'dark';
+let cleanupNavigation = (): void => {};
+let navigationInitialized = false;
 let busy = false;
 let preview: Candidate | null = null;
 let alternatives: Candidate[] = [];
 let selectedTemplate: Template = 'VAL2_STAGGERED';
 let choiceReason = '';
 let staffDirty = false;
-let notice = 'Начните с проверки заказов и передачи спроса руководителю.';
+let notice = 'Проверьте заказы, передайте спрос.';
 let noticeError = false;
 const reports = new Map<string, Result<Report>>();
 const candidateCache = new Map<string, Candidate>();
@@ -131,14 +132,14 @@ function badge(label: string, tone = ''): HTMLElement {
   return node('span', `badge ${tone}`, label);
 }
 
-function section(id: string, number: string, title: string, description: string): HTMLElement {
+function section(id: string, number: string, title: string, description = ''): HTMLElement {
   const area = node('section', 'section');
   area.id = id;
   area.tabIndex = -1;
   area.setAttribute('aria-labelledby', `${id}-title`);
   const heading = node('h2', '', node('span', 'section-number', number), title);
   heading.id = `${id}-title`;
-  area.append(node('div', 'section-heading', heading, text(description)));
+  area.append(node('div', 'section-heading', heading, description ? text(description) : null));
   return area;
 }
 
@@ -421,7 +422,7 @@ function showFieldErrors(
 }
 
 function shell(report: Report | null): HTMLElement {
-  document.documentElement.dataset['theme'] = dark ? 'dark' : 'light';
+  applyTheme();
   const frame = node('div', 'app-shell');
   const skip = link('К основному содержимому', '#overview', 'skip-link');
   const side = node('aside', 'sidebar');
@@ -450,7 +451,7 @@ function shell(report: Report | null): HTMLElement {
       'div',
       'sidebar-footer',
       badge('Локальный сценарий', 'cool'),
-      text('4 смены · 2 роли\nОдин прозрачный план'),
+      text('4 смены · 2 роли'),
       link('Презентация ↗', '/slides.html'),
     ),
   );
@@ -475,8 +476,12 @@ function shell(report: Report | null): HTMLElement {
     'Тёмная тема',
     () => {
       dark = !dark;
-      document.documentElement.dataset['theme'] = dark ? 'dark' : 'light';
-      document.getElementById('theme')?.setAttribute('aria-pressed', String(dark));
+      applyTheme();
+      try {
+        window.localStorage.setItem('kontur-theme', dark ? 'dark' : 'light');
+      } catch {
+        // Keep the in-memory choice even when storage access or writes are denied.
+      }
     },
     'button subtle theme-button',
     false,
@@ -498,7 +503,7 @@ function shell(report: Report | null): HTMLElement {
     'div',
     'simulation',
     node('strong', '', 'Учебная симуляция'),
-    node('span', '', 'Не MES и не оптимизатор. Без сервера. Переключение ролей — не авторизация.'),
+    node('span', '', 'Не MES/оптимизатор. Без сервера. Роли — не авторизация.'),
   );
   const intro = node(
     'div',
@@ -508,7 +513,6 @@ function shell(report: Report | null): HTMLElement {
       '',
       text('ОПЕРАЦИОННЫЙ ГОРИЗОНТ / 48 ЧАСОВ', 'eyebrow'),
       node('h1', '', 'Производственный план'),
-      text('Сначала спрос. Затем ресурсы. Решение — вместе.'),
     ),
     badge(
       current().plan.mode === 'custom' ? 'Пользовательский сценарий' : 'Исходный сценарий',
@@ -546,7 +550,7 @@ function shell(report: Report | null): HTMLElement {
       'footer',
       'page-footer',
       node('span', '', 'КОНТУР / Детерминированный учебный сценарий'),
-      node('span', '', 'Все количества — тыс. лезвий · A = А, B = Б, C = В'),
+      node('span', '', 'тыс. лезвий · A=А, B=Б, C=В'),
     ),
   );
   body.append(header, main);
@@ -554,13 +558,89 @@ function shell(report: Report | null): HTMLElement {
   return frame;
 }
 
-function overview(report: Report | null): HTMLElement {
-  const area = section(
-    'overview',
-    '01',
-    'План в цифрах',
-    'Фактический расчёт текущей версии, а не сумма паспортных мощностей.',
+function applyTheme(): void {
+  document.documentElement.dataset['theme'] = dark ? 'dark' : 'light';
+  document.getElementById('theme')?.setAttribute('aria-pressed', String(dark));
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', dark ? '#171b22' : '#f3f4f0');
+}
+
+function mountNavigation(): void {
+  const controller = new AbortController();
+  const { signal } = controller;
+  const links = Array.from(root.querySelectorAll<HTMLAnchorElement>('.sidebar nav a'));
+  const sections = links.map((anchor) => document.getElementById(anchor.hash.slice(1))!);
+  let frame = 0;
+  let offset = 0;
+  function setCurrent(id: string): void {
+    for (const anchor of links) {
+      if (anchor.hash === `#${id}`) anchor.setAttribute('aria-current', 'location');
+      else anchor.removeAttribute('aria-current');
+    }
+  }
+  function update(): void {
+    window.cancelAnimationFrame(frame);
+    frame = 0;
+    offset = (root.querySelector('.topbar')?.getBoundingClientRect().height ?? 83) + 16;
+    document.documentElement.style.setProperty('--section-offset', `${offset}px`);
+    let active = sections[0]!;
+    for (const area of sections) {
+      if (area.getBoundingClientRect().top <= offset + 2) active = area;
+    }
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2)
+      active = sections.at(-1)!;
+    setCurrent(active.id);
+  }
+  function schedule(): void {
+    if (!frame) frame = window.requestAnimationFrame(update);
+  }
+  function navigate(id: string, focus = true): void {
+    const target = sections.find((area) => area.id === id);
+    if (!target) {
+      schedule();
+      return;
+    }
+    update();
+    target.scrollIntoView({ block: 'start', behavior: 'instant' });
+    if (focus) target.focus({ preventScroll: true });
+    setCurrent(id);
+  }
+  function fromHash(): void {
+    navigate(window.location.hash.slice(1) || sections[0]!.id);
+  }
+  root.addEventListener(
+    'click',
+    (event) => {
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+        return;
+      const anchor = event.target instanceof Element ? event.target.closest('a') : null;
+      if (!anchor || !sections.some((area) => anchor.getAttribute('href') === `#${area.id}`))
+        return;
+      event.preventDefault();
+      if (window.location.hash !== anchor.hash) window.history.pushState(null, '', anchor.hash);
+      navigate(anchor.hash.slice(1));
+    },
+    { signal },
   );
+  window.addEventListener('scroll', schedule, { passive: true, signal });
+  window.addEventListener('resize', schedule, { signal });
+  window.addEventListener('hashchange', fromHash, { signal });
+  window.addEventListener('popstate', fromHash, { signal });
+  const observer = new ResizeObserver(schedule);
+  observer.observe(root);
+  update();
+  if (!navigationInitialized && window.location.hash) fromHash();
+  navigationInitialized = true;
+  cleanupNavigation = () => {
+    controller.abort();
+    observer.disconnect();
+    window.cancelAnimationFrame(frame);
+  };
+}
+
+function overview(report: Report | null): HTMLElement {
+  const area = section('overview', '01', 'План в цифрах');
   if (!report) return area;
   const sum = totals(report);
   const demand = current().plan.orders.reduce((total, order) => total + order.quantity, 0);
@@ -605,15 +685,11 @@ function overview(report: Report | null): HTMLElement {
     );
   area.append(cards);
   const next = !state.demandSent
-    ? [
-        'Спрос ещё не передан',
-        'Планировщик проверяет заказы и передаёт спрос. После этого руководитель выбирает кампании и персонал.',
-        '#orders',
-      ]
+    ? ['Спрос ещё не передан', 'Проверьте заказы.', '#orders']
     : !state.lockedRequests
       ? [
           'Решение до D 12:00',
-          'Сравните варианты, проверьте пик и зафиксируйте отдельные заявки S1/S2. S3/S4 останутся прогнозом.',
+          'Сравните варианты и зафиксируйте S1/S2. S3/S4 — прогноз.',
           '#planning',
         ]
       : current().status === 'draft'
@@ -625,7 +701,7 @@ function overview(report: Report | null): HTMLElement {
         : current().status === 'pending'
           ? [
               'Нужны два разных подтверждения',
-              'Обе роли подтверждают одну неизменённую версию. Переключение роли само по себе не является подписью.',
+              'Каждая роль подтверждает одну неизменённую версию.',
               '#history',
             ]
           : [
@@ -646,7 +722,7 @@ function overview(report: Report | null): HTMLElement {
   if (!report.feasible)
     area.append(
       text(
-        'Физически недопустимо. Выпуск ниже — контрфактическая проекция мощности и материалов, не физически достигнутый результат. Не используйте её как согласованный производственный факт.',
+        'Физически недопустимо. Выпуск — контрфактическая проекция, не достигнутый производственный результат.',
         'invalid-banner',
       ),
     );
@@ -667,32 +743,21 @@ function overview(report: Report | null): HTMLElement {
   );
   area.append(
     text(
-      'A = продукт А, B = продукт Б, C = продукт В. Выпуск — после PACK. Время в таблицах — рабочие минуты t, без перерывов; интервалы [начало, конец). Округление только на экране, до 3 знаков.',
+      't: рабочие минуты без перерывов, [начало, конец). Экран: до 3 знаков; JSON: без округления.',
     ),
   );
   const hard = report.issues.filter((issue) => issue.severity === 'error');
   const warnings = report.issues.filter((issue) => issue.severity === 'warning');
   if (hard.length) area.append(errorsView(hard, 'Жёсткие конфликты · блокируют согласование'));
-  else
-    area.append(
-      text(
-        '✓ Жёстких конфликтов нет. Это не означает отсутствия рисков по обязательствам.',
-        'success-note',
-      ),
-    );
+  else area.append(text('✓ Без жёстких конфликтов.', 'success-note'));
   if (warnings.length)
     area.append(errorsView(warnings, 'Предупреждения · требуют осознанного решения'));
-  else area.append(text('Предупреждений по текущему расчёту нет.'));
+  else area.append(text('Предупреждений нет.'));
   return area;
 }
 
 function ordersSection(report: Report | null): HTMLElement {
-  const area = section(
-    'orders',
-    '02',
-    'Заказы и спрос',
-    'Владелец — планировщик. Исходные объём и срок сохраняются; новое обещание учитывается отдельно.',
-  );
+  const area = section('orders', '02', 'Заказы и спрос');
   const isPlanner = state.role === 'planner';
   area.append(
     node(
@@ -778,15 +843,10 @@ function ordersSection(report: Report | null): HTMLElement {
 }
 
 function planningSection(report: Report | null): HTMLElement {
-  const area = section(
-    'planning',
-    '03',
-    'Выбор производственного решения',
-    'Ограниченные, явно заданные кампании. Каждый вариант заново проверяется на текущем спросе и текущих событиях.',
-  );
+  const area = section('planning', '03', 'Выбор производственного решения');
   area.append(
     text(
-      'Поддерживается только сбой GRIND-1 при выпуске A, без пересечения валидации с ремонтом [120,270). VAL-2 остаётся на GRIND-4/5 для B. Произвольные сбои, автоматическая оптимизация и восстановление прерванной валидации не моделируются.',
+      'Только GRIND-1/A, ремонт [120,270) без валидации; VAL-2 — GRIND-4/5/B. Без произвольных сбоев, оптимизации, восстановления прерванной валидации. Пользовательский спрос может остаться необеспеченным.',
       'scope-note',
     ),
   );
@@ -878,8 +938,8 @@ function planningSection(report: Report | null): HTMLElement {
       ),
       text(
         manager
-          ? 'Сначала сохраните изменения прогноза. Предпросмотр не меняет план; применение создаёт реальные записи и назначения. Переключение роли сбросит несохранённые поля формы.'
-          : 'Передайте спрос и выберите роль «Руководитель».',
+          ? 'Предпросмотр не меняет план. Сохраните прогноз перед расчётом; переключение роли сбросит несохранённые поля.'
+          : 'Нужны спрос и роль «Руководитель».',
       ),
     ),
   );
@@ -887,12 +947,7 @@ function planningSection(report: Report | null): HTMLElement {
   previewArea.id = 'preview-content';
   previewArea.append(node('h3', '', 'Изменения плана'));
   if (preview) renderPreview(previewArea, preview);
-  else
-    previewArea.append(
-      text(
-        'Выберите вариант и откройте предпросмотр: здесь появятся изменения кампаний, работ и назначений.',
-      ),
-    );
+  else previewArea.append(text('Нет предпросмотра.'));
   area.append(previewArea);
   if (alternatives.length) {
     const evaluated = alternatives.map((option): Cell[] => {
@@ -978,7 +1033,7 @@ function planningSection(report: Report | null): HTMLElement {
   explanation.append(
     text(
       choiceReason ||
-        `${selectedTemplate}: ${templates[selectedTemplate]}. Текущий план: ${current().plan.id}. Откройте предпросмотр выбранного варианта. Оцените полный выпуск, исходный дефицит, пики всех смен, труд и выполнение работ. Одинаковый общий пик не означает одинаковых интервалов валидации.`,
+        `${selectedTemplate}: ${templates[selectedTemplate]}. Сравните выпуск/дефицит, пики, труд, работы: пик ≠ расписание валидации.`,
     ),
   );
   if (preview?.report) {
@@ -1107,8 +1162,8 @@ function staffForm(report: Report): HTMLElement {
     node('h3', '', 'Заявка на персонал'),
     text(
       state.lockedRequests
-        ? 'S1/S2 зафиксированы. После отсутствия доступно на 2 человека меньше в S2; увеличение заявки запрещено. S3/S4 — редактируемый прогноз.'
-        : 'D 11:00 → до D 12:00. Значения ниже — предложение по текущим пикам, а не автоматически принятая заявка. Решение принимает руководитель.',
+        ? 'S1/S2 зафиксированы без увеличения. Отсутствие уменьшает доступность S2 на 2. S3/S4 — прогноз.'
+        : 'D 11:00–D 12:00: S1/S2 фиксирует руководитель; пока черновик по пикам.',
     ),
   );
   const plan = current().plan;
@@ -1135,7 +1190,7 @@ function staffForm(report: Report): HTMLElement {
       field(
         `S${index + 1}`,
         control,
-        `Расчётный пик: ${report.shifts[index]!.peak}. ${locked ? 'Заявка закреплена.' : 'До фиксации — черновое значение.'}`,
+        `Пик: ${report.shifts[index]!.peak}; ${locked ? 'зафиксировано' : 'черновик'}`,
       ),
     );
   });
@@ -1144,23 +1199,13 @@ function staffForm(report: Report): HTMLElement {
     control.step = '1';
     control.disabled = !allowed;
     fields.append(
-      field(
-        `Прогноз S${index + 3}`,
-        control,
-        `Расчётный пик: ${report.shifts[index + 2]!.peak}. Не фиксированная заявка.`,
-      ),
+      field(`Прогноз S${index + 3}`, control, `Пик: ${report.shifts[index + 2]!.peak}`),
     );
   });
   const reserves = node('div', 'form-grid');
   reasons.forEach((control, index) => {
     control.disabled = !allowed;
-    reserves.append(
-      field(
-        `Резерв S${index + 1}`,
-        control,
-        'Объясните запас сверх пика; не создаёт дополнительных работников.',
-      ),
-    );
+    reserves.append(field(`Резерв S${index + 1}`, control, 'Запас сверх пика.'));
   });
   const errorBox = node('div', 'form-errors');
   errorBox.setAttribute('role', 'alert');
@@ -1246,7 +1291,7 @@ function staffForm(report: Report): HTMLElement {
   );
   form.append(
     text(
-      'Пик — одновременная потребность, не численность заявки. Труд — интеграл потребности; резерв — интеграл max(доступно − потребность, 0). Ремонтная служба в заявку не входит.',
+      'Пик: одновременная потребность. Труд: ∫ потребности. Резерв: ∫ max(доступно − потребность, 0). Ремонтники отдельно; обоснование людей не добавляет.',
     ),
   );
   form.append(
@@ -1272,12 +1317,7 @@ function staffForm(report: Report): HTMLElement {
 }
 
 function resourcesSection(report: Report | null): HTMLElement {
-  const area = section(
-    'resources',
-    '04',
-    'Ресурсы и физический журнал',
-    'От агрегатов — к конкретному станку, работнику и очереди материала. Большие журналы разбиты на страницы.',
-  );
+  const area = section('resources', '04', 'Ресурсы и физический журнал');
   if (!report) return area;
   const plan = current().plan;
   area.append(
@@ -1302,7 +1342,7 @@ function resourcesSection(report: Report | null): HTMLElement {
   );
   area.append(
     text(
-      'ТО останавливает выпуск. Валидация засчитывается только при непрерывном положительном выпуске нужного продукта и отдельном работнике. Ремонт не заменяет ТО.',
+      'ТО останавливает выпуск; ремонт его не заменяет. Валидация: непрерывный выпуск нужного продукта + отдельный работник.',
     ),
   );
   area.append(
@@ -1582,7 +1622,7 @@ function historySection(report: Report | null): HTMLElement {
     'history',
     '05',
     'Совместное согласование',
-    'Два разных подтверждения одной версии. Любая правка аннулирует подтверждения изменяемого плана, но не историю.',
+    'Правка отменяет подтверждения, не историю.',
   );
   const revision = current();
   const warnings = [
@@ -1602,8 +1642,8 @@ function historySection(report: Report | null): HTMLElement {
     node('h3', '', 'Решение по текущей версии'),
     text(
       warnings.length
-        ? `Требуют принятия все коды предупреждений: ${warnings.join(', ')}. Общая причина будет записана для каждого из них.`
-        : 'Предупреждений нет. Физически недопустимый план отправить нельзя.',
+        ? `Обоснуйте ${warnings.join(', ')}: причина для каждого кода.`
+        : 'Предупреждений нет; физические конфликты блокируют отправку.',
     ),
     field('Причина принятия рисков', risk),
   );
@@ -1657,7 +1697,7 @@ function historySection(report: Report | null): HTMLElement {
   panel.append(
     text(
       !state.demandSent
-        ? 'Для отправки сначала передайте спрос от планировщика.'
+        ? 'Сначала планировщик передаёт спрос.'
         : !state.lockedRequests
           ? 'Для отправки руководитель должен зафиксировать заявки до D 12:00.'
           : !report?.feasible
@@ -1683,7 +1723,7 @@ function historySection(report: Report | null): HTMLElement {
         text('СОБЫТИЕ 01 / D+1 10:00', 'eyebrow'),
         node('h3', '', 'Сбой на GRIND-1'),
         text(
-          'A · ремонт 10:00–13:00, 150 рабочих минут [120,270). Валидация на этом станке не должна пересекать ремонт. Перенесите будущую работу на свободный GRIND-3.',
+          'A · ремонт 10:00–13:00 / [120,270), 150 рабочих минут. Без валидации; будущая работа → GRIND-3.',
         ),
         button(
           'Сбой GRIND-1',
@@ -1699,7 +1739,7 @@ function historySection(report: Report | null): HTMLElement {
         text(
           failureAllowed
             ? 'Доступно руководителю после согласования базовой версии.'
-            : 'Только руководитель, после согласования базового плана; событие применяется один раз.',
+            : 'Руководитель: после согласования базы, однократно.',
         ),
       ),
       node(
@@ -1708,7 +1748,7 @@ function historySection(report: Report | null): HTMLElement {
         text('СОБЫТИЕ 02 / D+1 19:30', 'eyebrow'),
         node('h3', '', 'Два отсутствующих в S2'),
         text(
-          'Фиксированная заявка сохраняется, доступный персонал уменьшается на 2. Сначала согласуйте решение по сбою, затем измените будущие назначения и ночные переналадки.',
+          'Доступно: заявка − 2, без увеличения. Согласуйте сбой; пересмотрите назначения и ночные переналадки.',
         ),
         button(
           'Отсутствие S2',
@@ -1724,7 +1764,7 @@ function historySection(report: Report | null): HTMLElement {
         text(
           absenceAllowed
             ? 'Доступно руководителю после согласования решения по сбою.'
-            : 'Только руководитель, после согласования версии со сбоем; событие применяется один раз.',
+            : 'Руководитель: после согласования сбоя, однократно.',
         ),
       ),
     ),
@@ -1821,17 +1861,12 @@ function historySection(report: Report | null): HTMLElement {
 }
 
 function passportSection(report: Report | null): HTMLElement {
-  const area = section(
-    'passport',
-    '06',
-    'Паспорт сценария',
-    'Тот же текущий отчёт, что и в интерфейсе. Полный журнал и все версии доступны в JSON без округления.',
-  );
+  const area = section('passport', '06', 'Паспорт сценария');
   const passport = region('Паспорт сценария', 'panel passport');
   passport.append(
     node('h3', '', 'Воспроизводимый расчёт'),
     text(
-      'Учебная симуляция, не заводские результаты. Пилот не проводился. Нет оптимизатора, живого MES и серверного хранения. При перезагрузке страницы состояние не сохраняется.',
+      'Учебная симуляция, не заводские результаты. Пилот не проводился. Без оптимизатора, MES, авторизации, сервера. Перезагрузка сбрасывает план, сохраняя тему.',
     ),
   );
   passport.append(
@@ -2027,54 +2062,55 @@ function passportSection(report: Report | null): HTMLElement {
       ),
     );
   }
-  passport.append(
-    details(
-      'Условия расчёта и допущения',
-      node(
-        'ul',
-        'assumptions',
-        ...[
-          `Точность EPSILON = ${EPSILON}. Сравнения и экспорт без промежуточного округления.`,
-          'Для каждого станка скорость = номинал × 0,85 / 1000 тыс./мин. Коэффициент применяется один раз, а не на каждом переходе материала.',
-          'Четыре смены по 630 рабочих минут; перерывы 12:00–12:30 / 16:00–16:30, ночью 00:00–00:30 / 04:00–04:30; передача смены — последние 30 минут.',
-          'Запасы по продуктам находятся перед конкретной операцией. Перемещение непрерывное, без транспортной задержки и минимальной партии. Сырьё не ограничено только на PRESS; B обходит CHROME, C проходит LASER, не PRINT.',
-          'Выпуск ограничен реальной подачей и квотами. При нехватке материала распределение — по числовому суффиксу станка. Готовая продукция распределяется по исходному сроку, приоритету и коду заказа.',
-          'Операторы универсальны. На каждую одновременную переналадку нужен отдельный обычный оператор (TEF/PACK — два). Валидация добавляет отдельного работника. Один человек не может одновременно выполнять несовместимые задачи.',
-          'Сбой: только GRIND-1/A в [120,270); VAL-2 на GRIND-4/5. Ремонт не заменяет ТО. После событий выполненный префикс не изменяется и запасы не перезагружаются.',
-          'Это заданный детерминированный повтор, не поиск оптимального расписания. Пользовательский спрос может оставаться необеспеченным. Заявки S1/S2 закрепляются до D 12:00, S3/S4 — прогноз.',
-          'Источники: исходный кейс ИТМО × P&G, PDF с. 5–10; PUBLIC_SPEC v1.1 и SOURCE_REQUIREMENTS R1–R9. Экспертный архив — только гипотеза; цифры паспорта получены из текущего вычисления.',
-        ].map((item) => node('li', '', item)),
-      ),
-      table(
-        'Начальные запасы',
-        ['Перед операцией', 'A', 'B', 'C'],
-        Object.entries(INITIAL_STOCKS).map(([operation, stock]) => [
-          operation,
-          stock.A,
-          stock.B,
-          stock.C,
-        ]),
-      ),
-      table(
-        'Маршруты',
-        ['Продукт', 'Операции'],
-        Object.entries(ROUTES).map(([product, route]) => [product, route.join(' → ')]),
-      ),
-      table(
-        'Матрица переналадок, рабочие минуты',
-        ['Из продукта', 'В A', 'В B', 'В C'],
-        Object.entries(SETUP_MINUTES).map(([product, times]) => [
-          product,
-          times.A,
-          times.B,
-          times.C,
-        ]),
-      ),
+  const assumptions = details(
+    'Условия расчёта и допущения',
+    node(
+      'ul',
+      'assumptions',
+      ...[
+        `Точность EPSILON = ${EPSILON}. Сравнения и экспорт без промежуточного округления.`,
+        'Для каждого станка скорость = номинал × 0,85 / 1000 тыс./мин. Коэффициент применяется один раз, а не на каждом переходе материала.',
+        'Четыре смены по 630 рабочих минут; перерывы 12:00–12:30 / 16:00–16:30, ночью 00:00–00:30 / 04:00–04:30; передача смены — последние 30 минут.',
+        'Запасы по продуктам находятся перед конкретной операцией. Перемещение непрерывное, без транспортной задержки и минимальной партии. Сырьё не ограничено только на PRESS; B обходит CHROME, C проходит LASER, не PRINT.',
+        'Выпуск ограничен реальной подачей и квотами. При нехватке материала распределение — по числовому суффиксу станка. Готовая продукция распределяется по исходному сроку, приоритету и коду заказа.',
+        'Операторы универсальны. На каждую одновременную переналадку нужен отдельный обычный оператор (TEF/PACK — два). Валидация добавляет отдельного работника. Один человек не может одновременно выполнять несовместимые задачи.',
+        'Сбой: только GRIND-1/A в [120,270); VAL-2 на GRIND-4/5. Ремонт не заменяет ТО. После событий выполненный префикс не изменяется и запасы не перезагружаются.',
+        'Это заданный детерминированный повтор, не поиск оптимального расписания. Пользовательский спрос может оставаться необеспеченным. Заявки S1/S2 закрепляются до D 12:00, S3/S4 — прогноз.',
+        'Источники: исходный кейс ИТМО × P&G, PDF с. 5–10; PUBLIC_SPEC v1.3 и SOURCE_REQUIREMENTS R1–R9. Экспертный архив — только гипотеза; цифры паспорта получены из текущего вычисления.',
+      ].map((item) => node('li', '', item)),
     ),
+    table(
+      'Начальные запасы',
+      ['Перед операцией', 'A', 'B', 'C'],
+      Object.entries(INITIAL_STOCKS).map(([operation, stock]) => [
+        operation,
+        stock.A,
+        stock.B,
+        stock.C,
+      ]),
+    ),
+    table(
+      'Маршруты',
+      ['Продукт', 'Операции'],
+      Object.entries(ROUTES).map(([product, route]) => [product, route.join(' → ')]),
+    ),
+    table(
+      'Матрица переналадок, рабочие минуты',
+      ['Из продукта', 'В A', 'В B', 'В C'],
+      Object.entries(SETUP_MINUTES).map(([product, times]) => [product, times.A, times.B, times.C]),
+    ),
+  );
+  assumptions.classList.add('print-disclosure');
+  passport.append(
+    text(
+      'Границы: только GRIND-1/A [120,270), VAL-2 на GRIND-4/5; прерванная валидация не восстанавливается. Транспортная задержка нулевая, операторы универсальны; склад/вода/энергия не ограничены. Обеспечение пользовательского спроса не гарантируется.',
+      'scope-note',
+    ),
+    assumptions,
   );
   passport.append(
     text(
-      'Предлагаемые метрики, план пилота, риски и контроль — в локальной презентации. PDF можно получить системной печатью; готовый PDF и резервная последовательность скриншотов этой поставкой не создавались. Печатается сводка и открытая страница таблиц; полный журнал — в JSON.',
+      'Метрики/пилот — презентация. Печать: сводка/допущения, страница таблиц, не полный журнал. Все строки — JSON; PDF/резерв проверяются отдельно.',
     ),
   );
   area.append(
@@ -2086,9 +2122,7 @@ function passportSection(report: Report | null): HTMLElement {
         'div',
         '',
         node('h3', '', 'Вернуться к исходным условиям'),
-        text(
-          'Восстановление удалит текущие правки, обещания, события, заявки и историю этого сеанса. Экспортируйте JSON, если их нужно сохранить.',
-        ),
+        text('Удалит правки/обещания, события, заявки, историю сеанса. Сохраните JSON.'),
       ),
       node(
         'div',
@@ -2378,11 +2412,13 @@ function orderDialog(existing?: Order): void {
 
 function render(): void {
   const result = reportFor(current());
+  cleanupNavigation();
   root.replaceChildren(shell(result.ok ? result.value : null));
   if (!result.ok)
     document
       .getElementById('overview')
       ?.append(errorsView(result.errors, 'Расчёт отклонён: данные недостоверны'));
+  mountNavigation();
 }
 
 window.setTimeout(() => {

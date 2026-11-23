@@ -1,0 +1,29 @@
+{
+  "specification": "UI refresh v1",
+  "kind": "historical-initial-ui-check",
+  "baselineCommit": "c7dba63",
+  "baselineObservations": {
+    "visibleMainWords": 1701,
+    "themeSelectionLostAfterReload": true,
+    "sidebarCurrentAttributes": 0,
+    "darkBodyColor": "rgb(20, 36, 33)",
+    "sidebarColor": "rgb(21, 60, 54)"
+  },
+  "firstImplementationRun": {
+    "command": "npm.cmd run test:e2e -- --reporter=list,./tests/reporters/browser.ts",
+    "total": 63,
+    "passed": 60,
+    "failed": 3,
+    "skipped": 0,
+    "retries": 0,
+    "failure": "Copy reduction assertion failed in all three repetitions: 1554 visible main words exceeded unchanged limit 1445. All other cases passed. Print assertions after the failed assertion were not reached."
+  },
+  "correction": {
+    "changedProductionFile": "src/main.ts",
+    "thresholdUnchanged": true,
+    "visibleMainWords": 1435,
+    "targetedUiCases": 11,
+    "targetedPassed": 11,
+    "note": "Targeted run included print assertions. This record is not the final full-suite result."
+  }
+}

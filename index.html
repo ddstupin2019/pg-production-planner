@@ -3,7 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#163f3c" />
+    <meta name="theme-color" content="#f3f4f0" />
+    <style>
+      :root {
+        color-scheme: light;
+        background: #f3f4f0;
+        color: #293442;
+      }
+      :root[data-theme='dark'] {
+        color-scheme: dark;
+        background: #171b22;
+        color: #e7ecf3;
+      }
+    </style>
+    <script>
+      // Apply only an explicit preference before the app stylesheet or first paint.
+      let theme = 'light';
+      try {
+        if (localStorage.getItem('kontur-theme') === 'dark') theme = 'dark';
+      } catch {
+        // Storage may be unavailable; the workspace must still open in light mode.
+      }
+      document.documentElement.dataset.theme = theme;
+      document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute('content', theme === 'dark' ? '#171b22' : '#f3f4f0');
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta
       name="description"

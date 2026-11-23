@@ -1,9 +1,9 @@
 {
-  "sourceCandidateId": "d3f3d9c2c1e9f12c3345b6112327e2998bf8066f5518e2e635233c98171cea3f",
+  "sourceCandidateId": "62c762135fbceec418bc459c9f73ab28a4c42b86042833e7cae1919d36f7b0e1",
   "completed": true,
   "failure": "",
   "command": "node tools/export-deliverables.mjs --run --evidence",
-  "cwd": "C:\\Users\\ddstu\\AppData\\Local\\Temp\\opencode\\pg-hackathon-qa\\",
+  "cwd": "C:\\Users\\ddstu\\Desktop\\hacatons\\p&g\\",
   "node": "v24.19.0",
   "captures": [
     {
@@ -127,79 +127,79 @@
     {
       "path": "artifacts/scenario-lineage.json",
       "bytes": 58409185,
-      "sha256": "8a24b6f62fc1a1548361c0bb3d37e53e10c5f11c4ba77a01c020983ce1711858"
+      "sha256": "ef34a157db46b51e00b96c0ca7cba29ab4297e8155cfb3af13bf48357cc945f3"
     },
     {
       "path": "artifacts/scenario-passport.html",
       "bytes": 94087,
-      "sha256": "98072792a2a089c98e8b6be66564e25092e736b5861d9863555d22e18144005a"
+      "sha256": "bf5c524fa2cabcd8808a677fe108c409501424b27de8c3db1ac01a2e438084a2"
     },
     {
       "path": "artifacts/screenshots/01-planner.png",
-      "bytes": 80265,
-      "sha256": "07d0f60d73c4790e7555934dbc572ef2b94e0abc926c9e10915a31408fbac980"
+      "bytes": 74729,
+      "sha256": "02660aaa89b4fdb425de8ecc77e113c358db0c14ad2cb9f9b70857d6e977bca6"
     },
     {
       "path": "artifacts/screenshots/02-manager.png",
-      "bytes": 82185,
-      "sha256": "6badb8659ebba128e34125a042fc201e3545aaaf1c1d25a0255caad4f7cad2f6"
+      "bytes": 70608,
+      "sha256": "306da7c0e28d2672b10891f34fbb70f98001639dfefadb56a75cc69ff270ace6"
     },
     {
       "path": "artifacts/screenshots/03-baseline-agreed.png",
-      "bytes": 82005,
-      "sha256": "31a3da91a40bf778b1f89749aea4fdebc272ab6d9f43f494edcaebc8fd47989d"
+      "bytes": 75082,
+      "sha256": "60c4ea4f790808598b68ce10f62232550a19942775413df20c9952e0ca97f30d"
     },
     {
       "path": "artifacts/screenshots/04-failure-impact.png",
-      "bytes": 71000,
-      "sha256": "19abefc9f8da4f8e7e1a971151c77fceec30593adfea577e7f0afc427e496bf9"
+      "bytes": 65664,
+      "sha256": "f8a784871e2a5933c457252997f8b3dbbdc099efb52cceff2d6b19da496b42ee"
     },
     {
       "path": "artifacts/screenshots/05-repair-agreed.png",
-      "bytes": 70954,
-      "sha256": "5b62a429d1cb459dd63e0af0d42e63b2c814e68e0270efd979a89f8b467ebdd1"
+      "bytes": 65525,
+      "sha256": "f56702632ec9f2c21d0fa975f56d9a6a281e178c6833b973a1b9e6d7a2b6aaa6"
     },
     {
       "path": "artifacts/screenshots/06-absence-impact.png",
-      "bytes": 65740,
-      "sha256": "5358dac52647ccb9b96125b4c00ea05272ff2029865015040f551d7313793df7"
+      "bytes": 63715,
+      "sha256": "80edd91a44d83c44eee230b6ad26eb1e6ecd2b1dfb71b95a0e59279879d9c22e"
     },
     {
       "path": "artifacts/screenshots/07-final-agreed.png",
-      "bytes": 65922,
-      "sha256": "8a2606296eb45e58d38ac68f3db67823a2b1dc5f6f64ecd7466136b39f3ef178"
+      "bytes": 63853,
+      "sha256": "fdfa83fbbf639ba177e29ba2c7dae313b535fdd29cbda675707d7c075f2a3b05"
     },
     {
       "path": "artifacts/screenshots/08-final-mobile.png",
-      "bytes": 35897,
-      "sha256": "56ff273f5e912a27290056ce1d52cee144fab6f7a29cc45360d1695b5d7c28d6"
+      "bytes": 35291,
+      "sha256": "395a77a1a93a1282248bb83ca34b51a10845cafc1238151986070db063f5ae7f"
     },
     {
       "path": "artifacts/screenshots/index.html",
       "bytes": 3641,
-      "sha256": "94f8c4742ccb81deefeb80e7bf4ecbe9ba82c9590517c8d13263668f1fb494c5"
+      "sha256": "ad5a8f0b339e3f1ff267e1fa423ab62c36c1bdecc6e6f1bd5484acbf0e4b3b05"
     },
     {
       "path": "artifacts/scenario-passport.pdf",
-      "bytes": 1587632,
-      "sha256": "e70460f6acb769142933926b34f4ded4ac2cc50438ea31b89f8502e37be9209b",
+      "bytes": 1587630,
+      "sha256": "9fc5ac4b220c05f9251c5903b3e5dc8f91d2172b3894aa699073d0f849f6b540",
       "pages": 33
     },
     {
       "path": "artifacts/presentation.pdf",
-      "bytes": 128814,
-      "sha256": "b2ab89bfc4455c78cce6672bb0e34425d9684bb66db46769c83396c24b1ffcc4",
+      "bytes": 126832,
+      "sha256": "35c823f2a118ae7a08916b1fffde973d9eba9f4b3aaf7f24a233fc4bd05dfb66",
       "pages": 10
     },
     {
       "path": "artifacts/export-checks.json",
       "bytes": 7273,
-      "sha256": "206676791de8f5150828820ef111b3fb76f93b010b974a879ad9f39898ce3c57"
+      "sha256": "dac9442d079e7b9912db81da917ac8735c60e3f2e26fa1274a55b8096f9c3efb"
     },
     {
       "path": "artifacts/README.md",
       "bytes": 2970,
-      "sha256": "fe021eef87df9419cd381dcdb7280f39d0966e19345d1f6fd6b5989cc5d3e526"
+      "sha256": "bc3b853ee1d9e0b6c114f1f306d9cda328f157e746000ac1a4e771d47206ed99"
     }
   ]
 }
