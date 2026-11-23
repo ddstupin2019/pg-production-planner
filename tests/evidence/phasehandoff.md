@@ -1,6 +1,12 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: second D3 review — browser ID editability is an optional capability
+## Latest: optional editable-ID copy may retain the original visible order
+
+Changed only the accepted editable branch in `tests/e2e/order-origin.test.ts:52–58` and this note. Y must still be accepted with original quantity 10/due 1. X may be absent (replacement) or remain (copy); if present, its quantity/due must still be 10/1. The shared later attempt to create X with changed originals still must reject with an alert and unchanged complete export/state. Readonly/disabled handling and every unconditional domain deletion/rename/reuse case are unchanged. No new UI feature or mutable-original allowance was introduced.
+
+Checks from the sole tester CWD: `npm.cmd run typecheck` **exit 0**; `node node_modules/eslint/bin/eslint.js tests/e2e/order-origin.test.ts --max-warnings=0` **exit 0**, zero errors/warnings; `node node_modules/prettier/bin/prettier.cjs tests/e2e/order-origin.test.ts --check` **exit 0**. No browser/unit rerun; their reports remain untouched historical evidence, not new passes. Case counts are unchanged. Orchestrator owns the actual-UI RED rerun and requested rereview. No Git, implementation reads, source/configuration changes, other worktrees or coder communication.
+
+## Previous: second D3 review — browser ID editability is an optional capability
 
 Corrected only `tests/e2e/order-origin.test.ts`, the permitted clarification in `tests/PUBLIC_UI_CONTRACT.md`, this handoff and regenerated browser evidence, in the same tester worktree. No Git, implementation/source inspection, other worktrees, chat, delegation, coder communication, unit-test edits, source/configuration changes or new UI feature was introduced. All unconditional domain removal/rename/reuse/origin-ledger regressions remain unchanged.
 

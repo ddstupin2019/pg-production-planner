@@ -49,7 +49,10 @@ test('order originals survive supported custom-ID replacement or a readonly exis
     await expect(form).not.toBeVisible();
     retained = await exported(page);
     const orders = current(retained.data.workflow).plan.orders;
-    expect(orders.some((order) => order.id === 'ORIGIN-X')).toBe(false);
+    const retainedX = orders.find((order) => order.id === 'ORIGIN-X');
+    if (retainedX) {
+      expect(retainedX).toMatchObject({ quantity: 10, originalDue: 1 });
+    }
     expect(orders.find((order) => order.id === 'ORIGIN-Y')).toMatchObject({
       quantity: 10,
       originalDue: 1,
