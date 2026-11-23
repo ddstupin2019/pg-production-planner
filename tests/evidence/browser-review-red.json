@@ -1,0 +1,257 @@
+{
+  "runner": "playwright",
+  "status": "passed",
+  "counts": {
+    "total": 30,
+    "passed": 30,
+    "failed": 0,
+    "skipped": 0,
+    "interrupted": 0
+  },
+  "unhandledErrors": 0,
+  "unhandledMessages": [],
+  "unhandledMessagesTruncated": false,
+  "truncated": false,
+  "cases": [
+    {
+      "file": "tests/e2e/order-origin.test.ts",
+      "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/order-table.test.ts",
+      "title": "exact order-table and row scoping tolerate duplicated literal user text in the passport",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 390px light",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 390px dark",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 1440px light",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 1440px dark",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "invalid custom order retains input, safe user text, real edit, reset cancel/confirm by keyboard",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "role gates and a keyboard-operable order form, both actual theme palettes",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader scopes native rows/headers to one named table and keeps clipped cells visible",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 0,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/order-origin.test.ts",
+      "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/order-table.test.ts",
+      "title": "exact order-table and row scoping tolerate duplicated literal user text in the passport",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 390px light",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 390px dark",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 1440px light",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 1440px dark",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "invalid custom order retains input, safe user text, real edit, reset cancel/confirm by keyboard",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "role gates and a keyboard-operable order form, both actual theme palettes",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader scopes native rows/headers to one named table and keeps clipped cells visible",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 1,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/order-origin.test.ts",
+      "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/order-table.test.ts",
+      "title": "exact order-table and row scoping tolerate duplicated literal user text in the passport",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 390px light",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 390px dark",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 1440px light",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "built offline complete lineage; 1440px dark",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "invalid custom order retains input, safe user text, real edit, reset cancel/confirm by keyboard",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/simulation.test.ts",
+      "title": "role gates and a keyboard-operable order form, both actual theme palettes",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader scopes native rows/headers to one named table and keeps clipped cells visible",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/e2e/table-snapshot.test.ts",
+      "title": "snapshot reader handles ARIA tables and rejects hidden cells from real rendered DOM",
+      "repeat": 2,
+      "retry": 0,
+      "status": "passed",
+      "error": ""
+    }
+  ]
+}

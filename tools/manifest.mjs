@@ -21,6 +21,8 @@ const rootFiles = new Set([
   'prettier.config.mjs',
   '.prettierignore',
   '.gitignore',
+  '.gitattributes',
+  'README.md',
   'vite.config.ts',
   'vitest.config.ts',
   'playwright.config.ts',
@@ -38,6 +40,7 @@ const ignoredDirectories = new Set([
   'evidence',
   'logs',
   '.cache',
+  '.playwright-mcp',
   '__pycache__',
 ]);
 /** @type {{ path: string; mode: string; sha256: string }[]} */
@@ -77,6 +80,8 @@ if (kind === 'source') {
     }
   }
   for (const required of rootFiles) {
+    // A narrative README is included as soon as its owner supplies it, not fabricated here.
+    if (required === 'README.md') continue;
     if (!entries.some((entry) => entry.path === required)) {
       throw new Error(`Missing required candidate file: ${required}`);
     }

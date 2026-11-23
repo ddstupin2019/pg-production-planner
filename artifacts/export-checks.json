@@ -1,0 +1,217 @@
+{
+  "sourceCandidateId": "d3f3d9c2c1e9f12c3345b6112327e2998bf8066f5518e2e635233c98171cea3f",
+  "completed": true,
+  "screenshots": [
+    {
+      "path": "screenshots/01-planner.png",
+      "caption": "01 · Планировщик: исходный спрос, до передачи и фиксации заявок",
+      "version": 1,
+      "phase": "baseline",
+      "role": "planner",
+      "width": 1440,
+      "exportSha256": "33a7014146a67d9aa3e26767a2e9cffa8ad288883293dda3a262e84a06579b2e"
+    },
+    {
+      "path": "screenshots/02-manager.png",
+      "caption": "02 · Руководитель: рассчитанный выбор и зафиксированные заявки",
+      "version": 1,
+      "phase": "baseline",
+      "role": "manager",
+      "width": 1440,
+      "exportSha256": "28a072b315b52fd80f7339742bbe4e73ce863e3292d2c0193701289465dc2196"
+    },
+    {
+      "path": "screenshots/03-baseline-agreed.png",
+      "caption": "03 · Базовая версия согласована обеими ролями",
+      "version": 1,
+      "phase": "baseline",
+      "role": "planner",
+      "width": 1440,
+      "exportSha256": "b1f47ceb3e18b8ce5da3ddc4a029b18857caed1b6f11544a60d25bd2568a375d"
+    },
+    {
+      "path": "screenshots/04-failure-impact.png",
+      "caption": "04 · Сбой GRIND-1: последствия до переноса работы",
+      "version": 2,
+      "phase": "failure",
+      "role": "manager",
+      "width": 1440,
+      "exportSha256": "d5ee7955cde433d30f8faa1467ddb37458ae57d7d54ba410bf676d450c44a068"
+    },
+    {
+      "path": "screenshots/05-repair-agreed.png",
+      "caption": "05 · Перенос после ремонта: согласованный преемник",
+      "version": 2,
+      "phase": "failure",
+      "role": "planner",
+      "width": 1440,
+      "exportSha256": "a2bdfe46df8f37d1404781fca2e7fb91a4755eee0c3288a1bf459431f0c56b96"
+    },
+    {
+      "path": "screenshots/06-absence-impact.png",
+      "caption": "06 · Отсутствие двух работников S2: до адаптации, не достигнутый физический результат при ошибках персонала",
+      "version": 3,
+      "phase": "absence",
+      "role": "manager",
+      "width": 1440,
+      "exportSha256": "b3b665ae37eb1ad936fccfd8739cb008156b10feee4c3836b527ed663bde63d8"
+    },
+    {
+      "path": "screenshots/07-final-agreed.png",
+      "caption": "07 · Итоговая адаптация согласована обеими ролями",
+      "version": 3,
+      "phase": "absence",
+      "role": "planner",
+      "width": 1440,
+      "exportSha256": "789ecdb848497ba37338ace38c33b71d31ea3314339a13ac042884994eb69211"
+    },
+    {
+      "path": "screenshots/08-final-mobile.png",
+      "caption": "08 · Мобильный итог 390 px: та же реально согласованная версия",
+      "version": 3,
+      "phase": "absence",
+      "role": "planner",
+      "width": 390,
+      "exportSha256": "789ecdb848497ba37338ace38c33b71d31ea3314339a13ac042884994eb69211"
+    }
+  ],
+  "accessibility": [
+    {
+      "state": "planner",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "manager",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "baseline",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "failure-raw",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "failure",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "absence-raw",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "absence",
+      "seriousCritical": 0,
+      "lower": []
+    },
+    {
+      "state": "absence",
+      "seriousCritical": 0,
+      "lower": []
+    }
+  ],
+  "blocked": [],
+  "runtimeErrors": [],
+  "outputs": [
+    {
+      "path": "artifacts/scenario-lineage.json",
+      "bytes": 58409185,
+      "sha256": "8a24b6f62fc1a1548361c0bb3d37e53e10c5f11c4ba77a01c020983ce1711858"
+    },
+    {
+      "path": "artifacts/scenario-passport.html",
+      "bytes": 94087,
+      "sha256": "98072792a2a089c98e8b6be66564e25092e736b5861d9863555d22e18144005a"
+    },
+    {
+      "path": "artifacts/screenshots/01-planner.png",
+      "bytes": 80265,
+      "sha256": "07d0f60d73c4790e7555934dbc572ef2b94e0abc926c9e10915a31408fbac980"
+    },
+    {
+      "path": "artifacts/screenshots/02-manager.png",
+      "bytes": 82185,
+      "sha256": "6badb8659ebba128e34125a042fc201e3545aaaf1c1d25a0255caad4f7cad2f6"
+    },
+    {
+      "path": "artifacts/screenshots/03-baseline-agreed.png",
+      "bytes": 82005,
+      "sha256": "31a3da91a40bf778b1f89749aea4fdebc272ab6d9f43f494edcaebc8fd47989d"
+    },
+    {
+      "path": "artifacts/screenshots/04-failure-impact.png",
+      "bytes": 71000,
+      "sha256": "19abefc9f8da4f8e7e1a971151c77fceec30593adfea577e7f0afc427e496bf9"
+    },
+    {
+      "path": "artifacts/screenshots/05-repair-agreed.png",
+      "bytes": 70954,
+      "sha256": "5b62a429d1cb459dd63e0af0d42e63b2c814e68e0270efd979a89f8b467ebdd1"
+    },
+    {
+      "path": "artifacts/screenshots/06-absence-impact.png",
+      "bytes": 65740,
+      "sha256": "5358dac52647ccb9b96125b4c00ea05272ff2029865015040f551d7313793df7"
+    },
+    {
+      "path": "artifacts/screenshots/07-final-agreed.png",
+      "bytes": 65922,
+      "sha256": "8a2606296eb45e58d38ac68f3db67823a2b1dc5f6f64ecd7466136b39f3ef178"
+    },
+    {
+      "path": "artifacts/screenshots/08-final-mobile.png",
+      "bytes": 35897,
+      "sha256": "56ff273f5e912a27290056ce1d52cee144fab6f7a29cc45360d1695b5d7c28d6"
+    },
+    {
+      "path": "artifacts/screenshots/index.html",
+      "bytes": 3641,
+      "sha256": "94f8c4742ccb81deefeb80e7bf4ecbe9ba82c9590517c8d13263668f1fb494c5"
+    },
+    {
+      "path": "artifacts/scenario-passport.pdf",
+      "bytes": 1587632,
+      "sha256": "e70460f6acb769142933926b34f4ded4ac2cc50438ea31b89f8502e37be9209b",
+      "pages": 33
+    },
+    {
+      "path": "artifacts/presentation.pdf",
+      "bytes": 128814,
+      "sha256": "b2ab89bfc4455c78cce6672bb0e34425d9684bb66db46769c83396c24b1ffcc4",
+      "pages": 10
+    }
+  ],
+  "memoryBuildId": "6bdefb83fed1c24e611a5b3d0c3009b46eecabfaa86eb8f40771a79d21275ce5",
+  "memoryBuildEntries": [
+    {
+      "path": "/assets/index-B65mo4Lu.css",
+      "sha256": "532f3ffeeeebc76315dc86cd08b4b6f11492360b79290ae69a447aa19a3f1128"
+    },
+    {
+      "path": "/assets/index-CGjDlAu1.js",
+      "sha256": "b42898a746d92cb2ecca2118038550de455c0b8c39fa05a8027573048bd27e3b"
+    },
+    {
+      "path": "/index.html",
+      "sha256": "183e938e34a036392211238fbf4fdf4e316b99f065ae900cdd89fcdfb0a6cc7c"
+    },
+    {
+      "path": "/slides.html",
+      "sha256": "5880374bb9bb708925ab135b989539a5de9043cc22b495036bf29340fba2e5b9"
+    }
+  ],
+  "pdfPageCountMethod": "Chromium /Type /Page dictionaries; independent PDF reader review remains required",
+  "limitations": [
+    "Not product acceptance or factory-pilot evidence",
+    "Lower-impact axe findings recorded for human review",
+    "Print rendering/local fonts may vary; actual generated bytes are hashed",
+    "Static source slides/UI pre-export limitations are historical; this export package inventory is authoritative"
+  ]
+}
