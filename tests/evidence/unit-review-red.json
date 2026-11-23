@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 440,
+    "total": 441,
     "passed": 81,
-    "failed": 359,
+    "failed": 360,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -1102,6 +1102,12 @@
       "title": "execution witness rejects changed availability",
       "state": "passed",
       "error": ""
+    },
+    {
+      "file": "tests/unit/night-event-chain.test.ts",
+      "title": "night template rejects a physically legal operating GRIND-2 failure followed by absence",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
     },
     {
       "file": "tests/unit/recorded-history.test.ts",

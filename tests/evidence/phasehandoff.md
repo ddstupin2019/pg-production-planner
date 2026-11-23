@@ -1,6 +1,33 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: exactly three narrow external-data/history boundary cases
+## Latest: exact two-stage night-template target guard regression
+
+Added only `tests/unit/night-event-chain.test.ts`, this handoff update and generated unit evidence in the preserved tester tree. Existing 440 cases, including the positive GRIND-1 full lineage, remain untouched. No Git, chat, delegation, implementation/source inspection or production/configuration edit was performed. No testcase was sent to the coder and no production patch was made.
+
+One focused public regression (`night-event-chain.test.ts:30`) uses createScenarioPlan with the physical events `[{kind:'failure',machineId:'GRIND-2'},{kind:'absence'}]`. Before invoking the night template, it must independently establish:
+
+- Actual positive GRIND-2 production immediately before and containing t=120 from the baseline evaluation, allowing equivalent interval splits (`:38–46`), rather than trusting a machine name/setting/campaign permission.
+- A real `ok:true` physical evaluation for those exact events, finite evidence and the independent complete ledger, with no malformed-input/unknown-target/illegal-sequence error (`:49–58`). The report may honestly disclose physical effects; no arbitrary all-feasible requirement was added.
+- GRIND-2 repair [120,270) totaling exactly 150 workminutes and zero production in that interval (`:59–68`). Thus the template request cannot be dismissed merely as an unknown/nonoperating physical target.
+
+The template must then return explained `ok:false` with nonempty error issues and **no partial value**, while plan/events and all public source constants remain equal to pre-call snapshots (`:72–84`). No arbitrary individual template error code is mandated. PUBLIC_SPEC v1.2 §4.5 specifies exactly the GRIND-1 failure→absence chain for NIGHT_WRAP_STAGGERED; the broader physical evaluator's support for another operating GRIND target does not authorize that template lineage. No skips, fallback target selection, mocks or private imports were introduced. The new unit case follows the existing scoped 60-second coupled-ledger convention; no existing timeout or quality gate changed.
+
+Checks actually run from `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests` with local dependencies:
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **441 total / 81 passed / 360 failed / 0 other**; zero unhandled/module errors |
+
+Delta is exactly **+1 unit case: 440→441**. Bounded `unit-review-red.json` was regenerated and reread: all **441** records retained, `truncated:false`, within the unchanged 512 bound. The new record is observed RED at **`Not implemented: createScenarioPlan`**, not a missing import or a caught/ignored exception. Its physical prerequisites and target-refusal assertions therefore remain unexecuted against implementation; no real-candidate failure/pass or coverage improvement is claimed. Final unit/type/lint/format were rerun after apply_patch-only formatting. Browser was **not rerun** and browser files/reports/artifacts were untouched.
+
+Instruction-route caveat: the initial-instructions tool returned its manual and reported automatic activation of the main-project path outside the permitted tester tree. No semantic project tools or file inspection were used through that project; all explicit file operations/commands used the tester paths. Possible automatic activation artifacts were not inspected, because other-worktree access is prohibited.
+
+**This new test requires both primary and secondary approval BEFORE any production patch.** Orchestrator owns those gates and any coder communication. Neither approval nor a production correction is claimed here.
+
+## Previous: exactly three narrow external-data/history boundary cases
 
 Only `tests/unit/recorded-history.test.ts` was added, alongside this handoff update and regenerated unit evidence. All existing 437 cases remain untouched. Work stayed in the preserved tester tree; no implementation/source reads, Git commands, other worktrees, QA inspection, delegation, source/configuration changes or browser execution. The supplied 437-case real-candidate GREEN is context, not an execution claimed here. Serena initial instructions timed out once; no alternate discovery was attempted.
 
