@@ -20,6 +20,8 @@ import {
   SETUP_MINUTES,
 } from './model';
 import { issue, record, validateEvents, validatePlan } from './validation';
+import { createScenarioSeed } from './scenario-seed';
+import { assignStaff } from './staffing';
 
 export interface EvaluationInput {
   plan: Plan;
@@ -721,6 +723,30 @@ function replay(plan: Plan, events: Event[]): Report {
     jobs: jobResults,
     quotas,
   };
+}
+
+/** Fresh required-mode plan; only the fixed constructor uses trusted, private replay. */
+export function createScenarioPlan(): Plan {
+  const plan = createScenarioSeed();
+  const allocation = replay(plan, []);
+  // Record the actual numeric-scarcity allocation rather than equal-share quota guesses.
+  plan.campaigns = plan.campaigns.flatMap((campaign) => {
+    const produced = allocation.quotas.find((row) => row.campaignId === campaign.id)!.produced;
+    return produced > EPSILON ? [{ ...campaign, quota: produced }] : [];
+  });
+  const projected = replay(plan, []);
+  const peaks = projected.shifts.map((row) => row.peak);
+  plan.requests = [peaks[0]!, peaks[1]!];
+  plan.forecasts = [peaks[2]!, peaks[3]!];
+  const assigned = assignStaff(plan, projected);
+  const verified = replay(assigned, []);
+  if (!verified.feasible) {
+    const errors = verified.issues.filter((row) => row.severity === 'error');
+    throw new Error(
+      `Scenario physical errors: ${errors.map((row) => `${row.code}:${row.refs.join(',')}`).join('; ')}`,
+    );
+  }
+  return assigned;
 }
 
 /** @internal Checked boundary shared by replay consumers needing its canonical input as well. */
