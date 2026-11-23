@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 350,
+    "total": 437,
     "passed": 81,
-    "failed": 269,
+    "failed": 356,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -1740,6 +1740,72 @@
       "error": ""
     },
     {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "VAL2_STAGGERED corrects external VAL-2 on GRIND-2 to the bounded pair or explains refusal",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "VAL2_STAGGERED corrects external VAL-2 on GRIND-3 to the bounded pair or explains refusal",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "VAL2_PARALLEL corrects external VAL-2 on GRIND-2 to the bounded pair or explains refusal",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "VAL2_PARALLEL corrects external VAL-2 on GRIND-3 to the bounded pair or explains refusal",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "repair transfer handles several distinct small quotas around t=120, crossing quota=0.51",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "repair transfer handles several distinct small quotas around t=120, crossing quota=0.68",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "repair transfer handles several distinct small quotas around t=120, crossing quota=1.02",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "REPAIR_G1_TO_G3 may refuse an exotic external plan but cannot rewrite its frozen state",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "NIGHT_WRAP_STAGGERED may refuse an exotic external plan but cannot rewrite its frozen state",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "VAL2_STAGGERED preserves unrelated later setup/validation assignments, not pooled run allocation",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/template-boundaries.test.ts",
+      "title": "VAL2_PARALLEL preserves unrelated later setup/validation assignments, not pooled run allocation",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
       "file": "tests/unit/work-witness.test.ts",
       "title": "independent job witness checker rejects fabricated success without evaluate mocks > all nine work codes and twelve distinct required jobs have witnessed credit",
       "state": "passed",
@@ -1882,6 +1948,462 @@
       "title": "independent job witness checker rejects fabricated success without evaluate mocks > the absent highest S2 worker cannot witness cross-shift validation",
       "state": "passed",
       "error": ""
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > uncorrupted external draft permits role switching and exports its real physical report",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses null scenarioPlan without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses nonobject scenarioPlan without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses scenarioPlan orders not an array without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses scenarioPlan null campaign without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses null revision without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses numeric revision without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses array revision without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses duplicate revision ID without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses missing parent revision without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses self parent revision without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses text parent ID without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses unknown revision status without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses null approvals without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses duplicate approvals without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses unknown approval role without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses unknown workflow role without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses null acknowledgements without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses nonobject acknowledgement without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses acknowledgement missing reason without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses acknowledgement nontext code without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses null revision events without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses nonobject revision event without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses unknown revision event without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses nontext event target without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses null revision plan without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses revision plan orders not an array without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses revision plan null setup without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > transition refuses revision plan invalid forecast tuple without mutation",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves null scenarioPlan with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves nonobject scenarioPlan with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves scenarioPlan orders not an array with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves scenarioPlan null campaign with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves null revision with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves numeric revision with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves array revision with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves duplicate revision ID with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves missing parent revision with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves self parent revision with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves text parent ID with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves unknown revision status with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves null approvals with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves duplicate approvals with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves unknown approval role with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves unknown workflow role with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves null acknowledgements with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves nonobject acknowledgement with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves acknowledgement missing reason with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves acknowledgement nontext code with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves null revision events with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves nonobject revision event with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves unknown revision event with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves nontext event target with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves null revision plan with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves revision plan orders not an array with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves revision plan null setup with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "finite JSON Workflow malformations are rejected, never repaired or approved > D2 export preserves revision plan invalid forecast tuple with INVALID_INPUT diagnostics",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders missing immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders null immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders 7 immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders {} immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders [null] immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders [{}] immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders duplicate ID immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders unknown product immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > planner refuses edit-orders invalid promise immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan missing immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan null immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan 7 immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan {} immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan campaigns not array immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan null campaign immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan invalid forecasts immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "malformed edit payloads reach the correct role after demand is sent > manager refuses edit-plan null worker list immutably",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "shape-valid external workflows cannot approve an absent physical failure target > fix-requests rejects an idle event target, not a role gate",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/workflow-boundaries.test.ts",
+      "title": "shape-valid external workflows cannot approve an absent physical failure target > submit rejects an idle event target, not a role gate",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
     },
     {
       "file": "tests/unit/workflow.test.ts",

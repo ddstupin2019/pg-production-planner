@@ -1,6 +1,70 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: narrow second-review structural-rejection correction
+## Latest: second-review VAL-2 external-placement oracle correction
+
+Narrow correction only in the same preserved tester worktree: `tests/unit/template-boundaries.test.ts:39–90`, this handoff and generated unit evidence. No implementation/source reads, Git commands, other worktrees, QA inspection, delegation, source/configuration changes or browser changes. Serena initial instructions timed out once; no alternative discovery was attempted.
+
+The four external GRIND-2/3 VAL-2 cases now accept **either an explained immutable refusal or an accepted bounded correction**. The unchanged transform helper checks frozen input plan/events, orders/mode/requests, finite positive quotas and schedule uniqueness on the appropriate paths. Refusals still require error issues, nonempty explanations/codes/refs and no partial value. Acceptance is no longer incorrectly forbidden merely because the original VAL-2 placement is outside GRIND-4/5.
+
+For an accepted Plan, the four cases independently require:
+
+- Exactly two VAL-2 Jobs, on GRIND-4 and GRIND-5 only, at [0,180)/[240,420) for staggered or both [240,420) for parallel (`:52–65`).
+- Unchanged unrelated campaigns/setups outside that pair, non-VAL-2 jobs, forecasts and reserve explanations, plus later unrelated nonpooled assignments (`:66–84`). Contemporaneous/pooled worker allocation is intentionally not frozen by this assertion.
+- A real evaluate report with finite numbers and the complete independent material/setup/work/staff/quota/order ledger (`:85–87`). The witness checks that feasible equals absence of physical errors; **feasible=true is not required for arbitrary external input**.
+
+All other cases, inputs, helper policies, browser tests/reports, timeouts/repeats/retries and quality thresholds remain unchanged. Unit discovery stays 437; no tests were added, removed or skipped.
+
+Checks actually rerun from `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`:
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **437 total / 81 passed / 356 failed / 0 other**; zero unhandled/module errors |
+
+The refreshed `unit-review-red.json` retains all 437 records (`truncated:false`), including all four corrected titles reaching `Not implemented: applyTemplate`; headers and those records were reread. No implementation GREEN or accepted-result-path execution is claimed. Browser was **not rerun** and `browser-review-red.json`/browser artifacts were untouched; the 27-run result below remains earlier evidence, not a new check. Only apply_patch was used for authored edits; final unit/type/lint/format were rerun after local formatting.
+
+**Both independent review gates are required again before transfer.** The accepted correction branch and implementation behavior remain unverified against the throw stubs. No private test material was sent to the coder.
+
+## Previous: public-boundary supplement and exact order-table scoping
+
+Work remained solely in `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`, authored writes only under `tests/**`. No Git commands, implementation/source inspection, QA reports, other worktrees, chat, delegation, installs or configuration changes. Public SPEC/PUBLIC_SPEC v1.2 and existing test conventions were read. The orchestrator's report that the current implementation passes the prior 350 cases is supplied context, **not independently executed evidence here**; the implementation was neither read nor run. Serena initial instructions timed out once. Playwright exact-name semantics were checked through Context7.
+
+### Added public contracts (87 unit cases; original 350 unchanged)
+
+- `tests/unit/template-boundaries.test.ts:39`: four immutable, explained refusals for VAL2_STAGGERED/PARALLEL with VAL-2 placed on GRIND-2/3, outside the expressly bounded GRIND-4/5 pair. No private helper or exact arbitrary template error-code mapping is used.
+- `tests/unit/template-boundaries.test.ts:52`: three independently specified repairs with six distinct small-quota GRIND-1 permissions before/across/after t=120, including exhausted permissions and crossing quotas .51/.68/1.02. Positive pre-cut production is derived as 1.36 + .68 + .68×.5 = 2.38; REWIND provides 20 from its one-time input stock. Any returned Plan must retain finite positive quotas, unique schedules, demand/mode/requests and immutable inputs, pass structural evaluation and the independent ledger, and preserve the full executed prefix with identical events. An explained refusal is also allowed for this external schedule; no optimizer/general recovery success is demanded.
+- `tests/unit/template-boundaries.test.ts:114`: two external repair/night schedules carry nondefault completed setup state, accumulated intermediate material and distinct high-numbered S1 workers. Night also changes WRAP-1 A→B and WRAP-14 B→A before t=630, with positive A/B wrapping. Accepted transformations must preserve complete machine/settings/material/task-worker prefix evidence through the independent sameExecution checker, including equivalent splits; explained unsupported-precondition failure is acceptable. These external schedules deliberately lack mandatory jobs and are **not claimed feasible**. A physically invalid report cannot be relabeled feasible or used as an agreement.
+- `tests/unit/template-boundaries.test.ts:148`: two required-factory VAL-2 checks preserve exact later unrelated nonpooled setup/validation Assignment records, irrespective of collection order. The filter uses separately identified setup/job task IDs outside the affected pair/VAL-2 and starts at or after t=630, after either VAL-2 placement ends. This follows §4.5's explicit unchanged-unrelated-records contract without assuming pooled run-task identities or contemporaneous worker allocations stay fixed. No general pooled-assignment preservation requirement was added.
+- `tests/unit/workflow-boundaries.test.ts:60`, `:231`: 28 finite-JSON corruptions each exercise immutable transition rejection and D2 export preservation/INVALID_INPUT/deterministic formatting: scenarioPlan; nonobject/duplicate revisions; nonexistent/self/nontext parents; status; duplicate/null/unknown-role approvals; workflow role; malformed acknowledgements; events; and nested revision plans. A separate uncorrupted externally constructed **draft** control must allow a legal role switch and export its real infeasible evaluation. No agreed history, evaluator output or private implementation is mocked.
+- `tests/unit/workflow-boundaries.test.ts:272`, `:315`, `:342`: 17 malformed order/plan action payloads are submitted only after real createWorkflow/send-demand and, for plan edits, switch-role. State role/demand/draft/unfixed status is asserted; recognizable plan payloads retain null draft requests so an unapproved-request-smuggling guard cannot mask malformed fields. Rejections must be explained with relevant input/source/workflow issues and leave both state and action unchanged.
+- `tests/unit/workflow-boundaries.test.ts:359`: two shape-valid externally supplied failure drafts have an idle GRIND-1 target. The evaluator must expose EVENT_TARGET; otherwise correctly authorized fixation/submission cannot succeed, mutate the draft or manufacture approvals. Submission uses fixed counts and explicit risk acknowledgements. This is a negative external-data contract, not a fabricated accepted event lineage.
+
+### Browser correction and executed baseline evidence
+
+`tests/e2e/simulation.test.ts:237`: the custom-order/XSS display, no-image check and edit-row lookup are now confined to the exact `Заказы` table. The row key accepts exact cell/rowheader semantics and must match one row. A sweep of all intentional named-table queries in `tests/e2e/**` confirmed `exact:true`; valid duplicate passport text is no longer an ambiguity. Literal XSS text/no-img assertions and modal cancellation/keyboard/reset checks remain. `tests/e2e/order-table.test.ts:5` adds one real-DOM helper regression with duplicate literal user text and identically named edit buttons in both `Заказы` and `Паспорт: заказы`; the intended primary-table button remains uniquely operable. It uses a synthetic helper page, not application state or force-clicking.
+
+All commands below ran in the sole tester CWD with local existing dependencies:
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **437 total / 81 passed / 356 failed / 0 other**; zero unhandled/module errors |
+| `npm.cmd run test:e2e -- --reporter=./tests/reporters/browser.ts --output=tests/evidence/browser-boundaries-results` | Exit **1**; **27 runs / 9 helper passes / 18 product boot failures / 0 skipped / 0 interrupted**; zero global errors; three repetitions, zero retries |
+| Scoped reread/content search of changed tests and evidence | Original unit files untouched; all named E2E tables exact; generated report headers and new-case records reread |
+
+Unit discovery is **350 + 87 = 437** (76 workflow/control/action cases and 11 template cases). Existing 81 source/witness passes remain; all 87 new domain cases are RED on public throw stubs, with no missing imports or discovery failures. Browser discovery is nine cases × three repetitions = **27**. All three new duplicate-table helper repetitions pass, alongside six earlier helper runs; the 18 product repetitions still fail at the placeholder's missing planner role control. Timeout **90s**, repeats **3**, retries **0**, all physical assertions, modal checks and quality gates are unchanged.
+
+Bounded `unit-review-red.json` and `browser-review-red.json` were refreshed without reporter changes: all **437/27** records retained, `truncated:false`, within the existing 512/64 bounds. Failure traces/context/screenshots for this baseline run are in `browser-boundaries-results/`; older directories remain. Existing ignored-evidence policy is unchanged, so explicitly retain the new handoff/artifacts during orchestrator integration.
+
+Initial typecheck passed; typed lint found one inferred-label stringification issue, corrected by explicitly typing the test table rather than suppressing a rule. Formatting initially identified one file, then passed after apply_patch-only correction; final unit/type/lint/format were rerun. The browser run used the final browser test code before subsequent whitespace-only unit formatting.
+
+**Both independent reviews remain required before transfer.** Real-implementation execution/coverage, accepted external-template branches, new malformed-input behavior and downstream full-product custom-order/lineage performance remain unverified. No heavy real-implementation browser run was performed; only the preserved built-stub baseline plus synthetic DOM helpers ran here. The supplied single-repeat diagnostic GREEN and prior 350 implementation passes are not claimed as this session's results. No private new test material was sent to the coder.
+
+## Previous: narrow second-review structural-rejection correction
 
 This section supersedes the earlier two setup cases' structural-result restrictions below. All work stayed in the same tester worktree. No Git commands, QA/new implementation, source files, other worktrees, chat or delegation were accessed; no browser/helper/configuration changes were made. Serena's instructions route timed out once during this correction; no alternate discovery was attempted.
 

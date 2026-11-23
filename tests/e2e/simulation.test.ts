@@ -234,13 +234,17 @@ test('invalid custom order retains input, safe user text, real edit, reset cance
   expect(current(custom.data.workflow).plan.mode).toBe('custom');
   expect(current(custom.data.workflow).plan.orders).toHaveLength(7);
   await expect(page.getByText('Пользовательский сценарий', { exact: false }).first()).toBeVisible();
+  const ordersTable = page.getByRole('table', { name: 'Заказы', exact: true });
   await expect(
-    page
-      .getByRole('table', { name: 'Заказы' })
-      .getByText('<img src=x onerror=alert(1)>', { exact: true }),
+    ordersTable.getByText('<img src=x onerror=alert(1)>', { exact: true }),
   ).toBeVisible();
-  expect(await page.getByRole('table', { name: 'Заказы' }).getByRole('img').count()).toBe(0);
-  const customRow = page.getByRole('row').filter({ hasText: '<img src=x onerror=alert(1)>' });
+  expect(await ordersTable.getByRole('img').count()).toBe(0);
+  const customRow = ordersTable.getByRole('row').filter({
+    has: page
+      .getByRole('cell', { name: '<img src=x onerror=alert(1)>', exact: true })
+      .or(page.getByRole('rowheader', { name: '<img src=x onerror=alert(1)>', exact: true })),
+  });
+  await expect(customRow).toHaveCount(1);
   await customRow.getByRole('button', { name: 'Изменить заказ', exact: true }).click();
   const edit = page.getByRole('form', { name: 'Заказ' });
   await expect(edit.getByLabel('Объём', { exact: true })).toHaveValue('2.5');
