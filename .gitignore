@@ -7,5 +7,7 @@ artifacts/
 evidence/
 logs/
 .cache/
+.playwright-mcp/
 *.log
 *.tsbuildinfo
+/.serena/

@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "kind": "verification-evidence-inventory",
+  "purpose": "Frozen-candidate observations and report pins only; contains no reviewer verdict or approval.",
+  "specification": {
+    "version": "1.3",
+    "path": "docs/PUBLIC_SPEC.md",
+    "sha256": "dba0fb0f17977da2b2b2a485d9fc58fbaf978dbd30bef7bb92f195df73916df9"
+  },
+  "workspace": {
+    "cwd": "C:\\Users\\ddstu\\AppData\\Local\\Temp\\opencode\\pg-hackathon-qa",
+    "reportedBranch": "pipeline/hackathon/qa",
+    "lineageProvenance": "Revision prefixes supplied by the orchestrator; no Git command was executed during sealing. Prefixes are not expanded or substituted for the actual-byte candidate ID.",
+    "reportedRevisionPrefixes": {
+      "qaBaseline": "2cd2fbd",
+      "sourceBeforeRegression": "2ebb37c",
+      "testsBeforeRegression": "2f740b7",
+      "sourceNightFix": "bac3012",
+      "testsNightFix": "734cb60",
+      "documentationBeforeD3": "063f171",
+      "source": "2d6f9ce",
+      "tests": "804e613",
+      "documentation": "b2ec5b4"
+    },
+    "composition": "SPEC v1.3/D3 domain correction 2d6f9ce, independent tests through 804e613, root documentation b2ec5b4, existing shared tooling, and the recorded six-file byte-only LF normalization plus /.serena/ ignore rule. Russian guides now record 495 tests. Historical night fix bac3012/test 734cb60 are retained as provenance, not current code identities. Worktree HEAD alone is not the combined candidate identity.",
+    "originalInputs": "The initial repository was PDF-only according to the orchestration record; no initial user changes were overwritten, and the original source PDF was preserved.",
+    "isolation": "Scoped owner prompts and worktrees are coordination measures, not a security sandbox or proof of containment against malicious code."
+  },
+  "identities": {
+    "algorithm": "sha256",
+    "sourceCandidateId": "d3f3d9c2c1e9f12c3345b6112327e2998bf8066f5518e2e635233c98171cea3f",
+    "sourceEntries": 76,
+    "productionBuildId": "d7394d72d7c1f81e2444aa9414d0e14fab1a541063eb756679c73561a8187124",
+    "productionBuildEntries": 6,
+    "deliveryId": "377e2da31aeb03e01a241951a26d73f4a53147aed290afc766cf114107bfda67",
+    "deliveryEntries": 15,
+    "exporterMemoryBuildId": "6bdefb83fed1c24e611a5b3d0c3009b46eecabfaa86eb8f40771a79d21275ce5",
+    "canonicalization": "Existing tools/manifest.mjs: actual-byte hashes; entries {path,mode,sha256}; forward-slash relative paths; fixed UTF-16 code-unit ordinal path order; JSON.stringify(entries,null,2) plus LF, UTF-8 without BOM; SHA-256 of those canonical array bytes.",
+    "evidenceIdentityPolicy": "Compute tools/manifest.mjs evidence after these files are finalized. Its final ID is returned separately, never inserted into a file it hashes. The pre-refresh evidence ID f9040e2780d3e19cca08d7cebd3fd570477e1e9284069e501b5ae515fb5f29f3 and all prior v1.2 seal IDs are historical, not this v1.3 seal.",
+    "sourceExclusions": "Derived evidence/artifacts/coverage/browser reports/logs/caches are excluded by the existing source policy. No source/tool/config exclusion or quality threshold changed during sealing.",
+    "reviewStoragePolicy": "Later review verdicts belong under repository-root reviews/**, outside the existing source/build/delivery/evidence manifest input roots; none is included or created here."
+  },
+  "environment": {
+    "observedDuringSealing": {
+      "platform": "win32",
+      "arch": "x64",
+      "osRelease": "10.0.26200",
+      "node": "24.19.0",
+      "npm": "11.17.0"
+    },
+    "installedDevelopmentPackages": {
+      "@eslint/js": "10.0.1",
+      "@playwright/test": "1.65.1",
+      "@types/node": "24.10.1",
+      "@vitest/coverage-v8": "5.1.1",
+      "axe-core": "4.14.1",
+      "eslint": "10.15.0",
+      "eslint-config-prettier": "10.1.8",
+      "prettier": "3.10.1",
+      "typescript": "6.0.3",
+      "typescript-eslint": "8.73.0",
+      "vite": "8.3.8",
+      "vitest": "5.1.1"
+    },
+    "browser": {
+      "engine": "Chromium",
+      "revision": "1255",
+      "version": "159.0.8154.6",
+      "provenance": "Installed playwright-core/browsers.json and earlier observed cached launch; no browser was launched during sealing."
+    },
+    "runtimeDependencies": [],
+    "lockfile": {
+      "path": "package-lock.json",
+      "bytes": 94335,
+      "sha256": "ffd39ee46e97717eeecd363286cf38b75caec47c0de9e40ff2fa62ff33f19949"
+    }
+  },
+  "foregroundCommands": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "provenance": "Orchestrator's completed foreground run; not rerun during sealing."
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "provenance": "Orchestrator's completed foreground run; zero-warning policy unchanged; not rerun during sealing."
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "provenance": "Orchestrator's completed foreground run; not rerun during sealing."
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "provenance": "Orchestrator's completed foreground run. Existing dist bytes independently rehashed during sealing; no rebuild."
+    },
+    {
+      "command": "npm audit --include=dev --audit-level=high",
+      "exitCode": 0,
+      "vulnerabilities": 0,
+      "includesDevelopmentDependencies": true,
+      "provenance": "Zero vulnerabilities reported by the orchestrator's completed foreground audit. No separate raw audit report is available in this worktree; audit was not rerun during sealing."
+    },
+    {
+      "command": "node node_modules/vitest/vitest.mjs run --coverage --reporter=json --outputFile=evidence/unit-green.json",
+      "exitCode": 0,
+      "provenance": "Orchestrator's completed foreground run; existing JSON and coverage reports inspected and hashed during sealing."
+    },
+    {
+      "command": "npm run test:e2e -- --reporter=list,./tests/reporters/browser.ts",
+      "exitCode": 0,
+      "reportedApproximateElapsedMinutes": 15.3,
+      "configuredProject": "chromium",
+      "configuredWorkers": 1,
+      "repeatEach": 3,
+      "retries": 0,
+      "provenance": "Orchestrator's completed foreground run; existing reporter JSON independently confirms all cases passed with repeat indices 0/1/2 and retry 0. Duration is foreground-reported, not inferred from JSON."
+    },
+    {
+      "command": "node tools/export-deliverables.mjs --run --evidence",
+      "exitCode": 0,
+      "provenance": "Orchestrator's completed final foreground rerun. Current completed reports and all 15 output hashes verified during sealing; export not rerun and PDF bytes not changed."
+    }
+  ],
+  "commandContext": {
+    "cwdForAllForegroundCommands": "C:\\Users\\ddstu\\AppData\\Local\\Temp\\opencode\\pg-hackathon-qa",
+    "sealingOperations": "Read-only report/hash validation, existing manifest invocations, and refresh/validation of the two evidence files only. Source/build/delivery identities checked before and after refresh; regression RED bytes preserved. No test/build/audit/export rerun, Git, delegation, archive access or other-worktree access."
+  },
+  "results": {
+    "unit": {
+      "success": true,
+      "total": 495,
+      "passed": 495,
+      "failed": 0,
+      "pending": 0,
+      "todo": 0,
+      "reportSuites": 40,
+      "reportFiles": 18,
+      "unsuccessfulReportFiles": 0,
+      "unhandledErrors": 0,
+      "unhandledErrorsProvenance": "Foreground observation supplied by orchestrator; Vitest JSON has no top-level unhandled-error field."
+    },
+    "browser": {
+      "status": "passed",
+      "total": 30,
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0,
+      "unhandledErrors": 0,
+      "logicalCases": 10,
+      "repeatIndices": [0, 1, 2],
+      "retryIndices": [0],
+      "truncated": false,
+      "legacyFilenameWarning": "tests/evidence/browser-review-red.json contains the CURRENT GREEN report. Its filename is not evidence of a current failure and must not be confused with preserved historical RED on another branch.",
+      "coverageOfPresentationConditions": "Reported cases include 390/1440 CSS px, light/dark themes, actual lineage, forms, keyboard, exact table/row scoping and the new order-origin UI regression. The current raw reporter is GREEN, not a preserved UI RED."
+    },
+    "coverage": {
+      "provider": "v8",
+      "global": {
+        "lines": {"covered": 843, "total": 843, "percent": 100},
+        "statements": {"covered": 968, "total": 968, "percent": 100},
+        "functions": {"covered": 212, "total": 212, "percent": 100},
+        "branches": {"covered": 844, "total": 847, "percent": 99.64}
+      },
+      "thresholdsUnchanged": {
+        "global": {"lines": 90, "statements": 90, "functions": 90, "branches": 85},
+        "domainPerFile": {"lines": 100, "statements": 100, "functions": 100, "branches": 95},
+        "include": "src/**/*.ts, including otherwise unexecuted eligible files"
+      },
+      "perFile": [
+        {"path": "src/domain/calendar.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100},
+        {"path": "src/domain/engine.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 99.31},
+        {"path": "src/domain/numeric-invariant.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100},
+        {"path": "src/domain/prefix.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 96.42},
+        {"path": "src/domain/scenario-seed.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100},
+        {"path": "src/domain/scenario.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100},
+        {"path": "src/domain/staffing.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100},
+        {"path": "src/domain/validation.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100},
+        {"path": "src/domain/workflow.ts", "lines": 100, "statements": 100, "functions": 100, "branches": 100}
+      ],
+      "exceptions": [
+        {"path": "src/domain/model.ts", "reason": "Public types and frozen source fixtures/constants, not domain behavior."},
+        {"path": "src/main.ts", "reason": "Imperative DOM UI; exercised through browser interactions, not claimed as unit-instrumented coverage."},
+        {"path": "src/**/*.d.ts", "reason": "Type declarations have no executable runtime statements."}
+      ]
+    },
+    "export": {
+      "completed": true,
+      "files": 15,
+      "realScreenshots": 8,
+      "screenshotWidths": [1440, 1440, 1440, 1440, 1440, 1440, 1440, 390],
+      "backupTheme": "light",
+      "publicApiVersusUiJsonMatches": 8,
+      "agreedVersions": 3,
+      "reportedPdfPages": {"passport": 33, "presentation": 10},
+      "remoteHttpAttempts": 0,
+      "webSocketAttempts": 0,
+      "runtimeErrors": 0,
+      "axeAuditedStates": 8,
+      "axeSeriousCriticalViolations": 0,
+      "axeLowerImpactViolations": 0,
+      "allOutputByteHashesIndependentlyMatched": 15,
+      "runtimeMethod": "Own strict loopback port 4183, one in-memory UI build, public domain transitions and public UI JSON downloads; no claim that the exporter used the distinct dist build bytes."
+    }
+  },
+  "rawReportPins": [
+    {"path": "evidence/unit-green.json", "bytes": 460736, "sha256": "83cd6dd33d9f04b5be65fb2f7f9b0e07c088a8133dd4a7efcb10bf9c0c82eace", "role": "Current v1.3/D3 unit GREEN raw report, 495 passed; already within evidence hash inputs."},
+    {"path": "evidence/night-target-red.json", "bytes": 2205, "sha256": "5c85a0fb53b4dc54b6afd0116e714f08f6f6899e4f665a87419a1bb12ac267f5", "role": "Preserved meaningful pre-fix regression RED: one assertion failure, expected true to be false; not rewritten by this refresh."},
+    {"path": "evidence/d3-regressions-red.json", "bytes": 79568, "sha256": "a77a79dd64ce38d19e54ec624fa8faa5871441fe3ae4e4fbe065b2a6a09c4b39", "role": "Preserved pre-fix D3 targeted behavioral RED: 53 total, 5 passed, 48 failed; separate from the older night-target RED."},
+    {"path": "evidence/repair-left-protection.json", "bytes": 1051, "sha256": "c7aa701c48088f22d13257598da908c8835d3faedc8133a868d218dc2a3f73ca", "role": "Eprotect protective test: one passed, zero failed. Justified RED-requirement exception, not a fabricated failing bug."},
+    {"path": "tests/evidence/browser-review-red.json", "bytes": 7163, "sha256": "8cf55c40a6d9d14eb46e3f41330c136da13458104696e914d925541e2522945f", "role": "Current 30-pass browser GREEN despite legacy filename; prior UI RED report was overwritten and is not claimed retained."},
+    {"path": "coverage/coverage-summary.json", "bytes": 3347, "sha256": "89fe6725cc6f91cbb5c9f55bdba64bdf5b1484c3a939afec23e56c7fa4839c0d", "role": "Current v1.3 V8 total/per-file percentages and denominators; referenced in place."},
+    {"path": "coverage/coverage-final.json", "bytes": 271945, "sha256": "3efce629003d3e51d81a4e5752f10d990af7cb1c136b068715bce29d1ee5fb86", "role": "Current v1.3 detailed coverage map; referenced in place."},
+    {"path": "evidence/export-checks.json", "bytes": 6684, "sha256": "d9cfcc3f6968737300d463b9920fad06c29f16398605649b764df8bef99ec50e", "role": "Current same-candidate foreground export completion, screenshot/API identity, axe/network/errors and all output hashes."},
+    {"path": "artifacts/export-checks.json", "bytes": 7273, "sha256": "206676791de8f5150828820ef111b3fb76f93b010b974a879ad9f39898ce3c57", "role": "Current delivery-side export checks, in-memory build and PDF counts; covered by delivery identity."},
+    {"path": "evidence/tooling-notes.md", "bytes": 31937, "sha256": "32932a738ed3b780a1b118e798e2f6515bd82423f02fe8450c903e13e7fc001f", "role": "Preserved tooling history and exact six-file CRLF-to-LF proof, including superseded staging results/identities; not rewritten by sealing."}
+  ],
+  "originalPdf": {
+    "path": "КЕЙС_ИТМОxP&G.pdf",
+    "sha256": "910e80970cc6b68d1f956801fd00fe2bed3e51f44578ea88007b98f9d960c858",
+    "historicalGitBlob": "e738d22c3c8e75c0ddd7cf9067f1c86632fccc40",
+    "provenance": "Actual-byte SHA-256 independently matches the frozen source manifest and previously recorded original. Git blob is historical documentation, not recomputed during sealing."
+  },
+  "currentPdfPins": [
+    {"path": "artifacts/scenario-passport.pdf", "bytes": 1587632, "sha256": "e70460f6acb769142933926b34f4ded4ac2cc50438ea31b89f8502e37be9209b", "exporterReportedPages": 33, "independentReaderForTheseExactBytes": "pending"},
+    {"path": "artifacts/presentation.pdf", "bytes": 128814, "sha256": "b2ab89bfc4455c78cce6672bb0e34425d9684bb66db46769c83396c24b1ffcc4", "exporterReportedPages": 10, "independentReaderForTheseExactBytes": "pending"}
+  ],
+  "historicalRed": {
+    "provenance": "Orchestrator reports RED established against the behavior-absent bootstrap, not against this final product. No historical bootstrap branch/worktree/raw RED was opened or rerun during sealing; the distinct locally preserved night-target regression RED is independently inspected below.",
+    "bootstrapBaselinePrefix": "2cd2fbd",
+    "extension": "D2 scenario.ts public API throwing stubs, preserving behavioral failures instead of missing imports",
+    "testBranchPrefix": "2f740b7",
+    "historicalFrozenSuiteMarker": "Etest10",
+    "historicalOutputSourceCandidatePrefix": "0457fd",
+    "identityCaution": "0457fd is only the supplied abbreviated historical reference, not a complete SHA-256 or the final product candidate. Full raw historical IDs/counts are not asserted here. The current browser-report legacy filename is not that preserved RED history."
+  },
+  "confirmedNightChainRegression": {
+    "defect": "The public NIGHT_WRAP_STAGGERED template accepted a physically legal GRIND-2 failure followed by absence instead of requiring the exact supported GRIND-1 event chain.",
+    "preservedRed": {
+      "path": "evidence/night-target-red.json",
+      "gitBlobSha1": "20c9b73d777cb1ee6bf8daaf077aa08962304409",
+      "blobValidation": "Independently recomputed SHA-1 over blob header plus actual bytes, without invoking Git.",
+      "total": 1,
+      "passed": 0,
+      "failed": 1,
+      "pending": 0,
+      "success": false,
+      "assertion": "AssertionError: expected true to be false // Object.is equality",
+      "interpretation": "Behavioral RED against the pre-fix guard, not a missing module/import or infrastructure failure. Raw bytes preserved unchanged."
+    },
+    "independentTest": {
+      "path": "tests/unit/night-event-chain.test.ts",
+      "lines": 85,
+      "bytes": 3129,
+      "sha256": "39c935f58bc5f05dca83e8aaf088bb187c628f6ed8569dac6e6aa5a4031cb8c6",
+      "reportedCommitPrefix": "734cb60",
+      "reviewProvenance": "Orchestrator reports two independent test reviews approved Ereg1 before the minimal production fix. Review verdict files are not copied into this evidence package and this is not a final product approval."
+    },
+    "minimalProductionFix": {
+      "path": "src/domain/scenario.ts",
+      "historicalBytes": 4568,
+      "historicalSha256": "a47f8563465775d8ad1f482fe5259643a8dc7e0ecf4221a2801b0fa941eaa136",
+      "reportedCommitPrefix": "bac3012",
+      "scope": "Historical v1.2 fix: require exact GRIND-1 failure-plus-absence at the night-template boundary. The historical size/hash identifies that revision only; the current D3 source file has a separate pin below."
+    },
+    "deliveryGuide": {
+      "path": "docs/DELIVERY.md",
+      "bytes": 22023,
+      "sha256": "d0cfe450d31f2e164a433e2b7bbeea8b8588fe63ac3acdd709cb4f354d55878d",
+      "unitCount": 495
+    },
+    "historicalPostFixEvidence": "The earlier v1.2 night fix had 441 unit passes and 27 browser passes. Those counts are historical, not the current 495/30 v1.3 result.",
+    "reviewContext": "An initial primary rejection concerned this resolved night-target defect. Orchestrator reports a later primary approval under SPEC v1.2; that approval is now stale. Both final reviews are required for v1.3, and no current approval or verdict file is created here."
+  },
+  "d3ContractCorrections": {
+    "reportedDomainCommitPrefix": "2d6f9ce",
+    "reportedTestsThroughPrefix": "804e613",
+    "reportedRootDocumentationPrefix": "b2ec5b4",
+    "semantics": [
+      "Workflow.orderOrigins retains the first accepted quantity/originalDue for each committed normalized order ID in the lineage, including removed or renamed-away IDs. Accepted edits alone append origins in first-acceptance order; rejected edits append nothing. Restore initializes the original six again. Origins are audit identity, not extra demand.",
+      "All four public templates retain the complete D1 preflight: actual supported GRIND-1/A pre-event production and no positive-length overlapping validation on that machine in the repair span. Baseline and post-event left-prefix checks use the appropriate phase boundary; no retry subsystem, invented transfer, past rewrite or global physical-rule restriction is introduced.",
+      "These clarify/enforce existing immutable originals and bounded template eligibility. Original PDF rates/routes/orders/stocks/work/windows/staff/event rules and existing function signatures/schemaVersion=1 are unchanged."
+    ],
+    "preservedTargetedRed": {
+      "path": "evidence/d3-regressions-red.json",
+      "total": 53,
+      "passed": 5,
+      "failed": 48,
+      "pending": 0,
+      "success": false,
+      "scope": "Three pre-fix targeted unit files: original-ID retention, public origin-ledger contract and complete D1 template preflight. These are behavioral failures, including missing registry/assertion mismatches, not an infrastructure failure.",
+      "currentMatchingGreenCases": 53,
+      "separateFromNightTargetRed": true
+    },
+    "protectiveException": {
+      "marker": "Eprotect",
+      "path": "evidence/repair-left-protection.json",
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "success": true,
+      "reason": "Protective repair-left-boundary check already passed: preserve an ended A production-permission boundary or explain refusal without inventing transfer. This is a justified RED-requirement exception, not evidence of a failing bug and not converted into a fabricated RED."
+    },
+    "uiRegression": {
+      "path": "tests/e2e/order-origin.test.ts",
+      "historicalObservation": "Orchestrator transcript records one actual UI RED for the missing alert before correction.",
+      "rawUiRedRetention": "The reporter output was subsequently overwritten by the full GREEN run. No separate raw UI RED or trace is claimed still retained; test-results traces may also have been overwritten. Transcript provenance is not a raw report byte pin.",
+      "currentEvidence": "The current 30-pass full browser report includes the order-originals case in all three repeat indices, retry 0. The current test source is pinned below."
+    },
+    "currentSourcePins": [
+      {"path": "src/domain/scenario.ts", "bytes": 5906, "sha256": "fa8e35ca69ac8c1f1817f670be2a76537fc2dcef9a54150b0ad5c8706a8fcf48"},
+      {"path": "src/domain/workflow.ts", "bytes": 18536, "sha256": "953449a2faaa8d87395b6d1f886442729a38cc5076c7d7285322a65fe68f1c80"},
+      {"path": "src/main.ts", "bytes": 97371, "sha256": "b8ff831425c3433c16bb5b398f54090842f9b493cf14f8fdf376c2ca98e10a77"}
+    ],
+    "currentTestPins": [
+      {"path": "tests/unit/order-origin-regression.test.ts", "bytes": 4359, "sha256": "b787a298759b6694ca6dbb24dd785f5075498d476eef59d940f6694396ff1fa4"},
+      {"path": "tests/unit/order-origins-contract.test.ts", "bytes": 18528, "sha256": "85f3829ec4817efae88fd2f057d8ce61e9552225c4207ada69629bed370e5a3e"},
+      {"path": "tests/unit/template-d1-regression.test.ts", "bytes": 7138, "sha256": "fa2c07c25c14319a9082ee6d5ea976e9f1a133349f03609e62f97cfff8027d09"},
+      {"path": "tests/unit/repair-left-boundary.test.ts", "bytes": 4780, "sha256": "8f39d958e6fd9a520ee184d77b96ea355bfce182dafc148d6863bb2618235474"},
+      {"path": "tests/e2e/order-origin.test.ts", "bytes": 5135, "sha256": "cd470811f78fcdeec4c6b625ac2431932e4ce45cffda550cbf87327e4a24c071"}
+    ],
+    "reviewBoundary": "The earlier SPEC v1.2 primary approval cannot be reused for v1.3/D3 or its byte identity. Both v1.3 final reviews and exact-current-PDF reader inspection remain pending; verdict files and approvals are not part of this evidence package."
+  },
+  "byteOnlyHousekeeping": {
+    "sourceBefore": "27f00ccde0fc8b3e194d90b8e90c6e9bc6e8faac37564143e67d7e5726314287",
+    "sourceAfter": "d3f3d9c2c1e9f12c3345b6112327e2998bf8066f5518e2e635233c98171cea3f",
+    "normalizedPaths": [".gitignore", ".prettierignore", "docs/EXPERT_PLAN.md", "docs/QUALITY.md", "docs/SOURCE_REQUIREMENTS.md", "package-lock.json"],
+    "removedCrlfPairs": 3200,
+    "additionalAuthorizedRule": "/.serena/",
+    "proof": "Exact before/after hashes and before.replace(CRLF,LF)==after proofs are recorded in the unchanged, pinned evidence/tooling-notes.md. Ignore rule addition is accounted for separately; no executable/test/spec/lock content semantics were changed.",
+    "protectedNontargetEntries": 70,
+    "byteIdenticalTestEntries": 34,
+    "currentLfOnlySourceTextFiles": 75,
+    "originalRootMetadata": "Original workspace metadata was not read/edited/removed; no Git action was performed. The rule only prevents future metadata staging."
+  },
+  "limitationsAndAdvisories": [
+    "External competition regulations are unavailable: no known submission deadline, slide limit, team-size limit or defense-time requirement is asserted. Ten actual slides is an output count, not an imposed limit.",
+    "Independent final-reader review of the current regenerated PDF byte hashes remains pending. The orchestrator reports the primary reviewer read the preceding 33/10-page PDFs and verified key numbers; tooling also inspected earlier PDFs. The new export regenerated metadata/byte hashes, so those prior inspections are not relabeled as review of these exact current files. Numerical outputs are reported unchanged.",
+    "No separate raw log/report for the foreground type/lint/format/build/audit exits is present; those exits and audit zero-count are attributed to the orchestrator. Tests/coverage/export raw report values and byte identities were independently inspected during sealing.",
+    "Historical RED details are provenance from the orchestrator and remain distinct from current GREEN. No inaccessible historical report is invented or claimed independently checked during sealing.",
+    "Cosmetic v1.1/D1 labels remain in UI/static narrative while PUBLIC_SPEC v1.3/D3 governs the actual origin registry and template preflight. This disclosed advisory does not waive the current contract or tests.",
+    "The eight backup screenshots are all light theme. Dark theme and both viewport widths are covered by the completed browser suite, not by a fabricated dark backup sequence.",
+    "This is a deterministic training simulation, not a production backend, optimizer, live MES integration or authentication/security system. No factory pilot, observed improvement, performance benchmark or production-readiness claim is made.",
+    "Automated tests and axe checks are bounded evidence, not universal correctness or full accessibility proof. Numerical replay outputs are simulated, not real factory observations.",
+    "Raw report files referenced outside evidence are hash-pinned in place; no optional copies were created. Include those referenced files when transporting the evidence outside this worktree.",
+    "The prior primary approval under SPEC v1.2 is stale for v1.3/D3. Both final reviews are now required. No current approval, final verdict file or placeholder approval is created by this package; later reviews/** files remain outside the current hash inputs."
+  ]
+}

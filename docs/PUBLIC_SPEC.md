@@ -1,14 +1,18 @@
-# Public product specification — v1.1
+# Public product specification — v1.3
 
 ## 1. Scope and authority
 
 Build a Russian-language interactive **deterministic training simulation**, not an optimizer, live MES connection or production-ready planning system. Use TypeScript, Vite and vanilla DOM with **zero runtime dependencies**. No backend, accounts, remote services, telemetry, CDN assets or generic manufacturing claims. Role switching demonstrates workflow, not authentication or security. All runtime resources must work offline when the production build is served over loopback HTTP; do not promise `file://` support.
 
-[SOURCE_REQUIREMENTS.md](SOURCE_REQUIREMENTS.md), R1–R9, is part of this v1.1 contract: preserve every route, constant, order, stock, setup, work window and event from PDF pp. 5–10. In a discrepancy the original PDF wins; record and resolve the discrepancy rather than silently changing a contract. No complete deadline-feasibility result has yet been computed. An honest infeasible replay is preferable to fabricated success.
+[SOURCE_REQUIREMENTS.md](SOURCE_REQUIREMENTS.md), R1–R9, is part of this v1.3 contract: preserve every route, constant, order, stock, setup, work window and event from PDF pp. 5–10. In a discrepancy the original PDF wins; record and resolve the discrepancy rather than silently changing a contract. No complete deadline-feasibility result has yet been computed. An honest infeasible replay is preferable to fabricated success.
 
 Implement a bounded common scenario with explicit handcrafted campaigns. Deterministically evaluate their physical ledger; no generic scheduling search is needed. Prioritize the common four-shift scenario and exact numerical evidence over extensibility. The source PDF must remain unchanged.
 
 **v1.1 scope correction D1:** the shipped demonstration fails **GRIND-1 while it produces A at t=120**, with no validation on GRIND-1 overlapping its repair interval [120,270). Shipped VAL-2 assignments remain on **GRIND-4 and GRIND-5**, producing B. These machine choices define supported demo interactions, not new PDF constraints or changes to the fixed dataset. The physical evaluator may assess other inputs; the interactive workflow does not promise recovery for every hypothetical equipment event or an interrupted validation. Do not implement a generic validation retry/restart subsystem.
+
+**v1.2 clarification D2:** expose the scenario factory and the four existing template choices through `src/domain/scenario.ts` (§4.5). Specify immutable, phase-guarded, idempotent transformations and safe failure export for malformed JSON-compatible workflow data. Source conditions, UI requirements, D1 limits, existing signatures and schemaVersion=1 remain unchanged; only the two scenario exports are added. These contracts do not assert that implementation or numerical verification has been completed.
+
+**v1.3 clarification D3:** make the existing immutable order-ID originals requirement explicit in public Workflow state through `orderOrigins`, so replacing a draft cannot forget an accepted ID. Clarify that every supported template retains all D1 event-eligibility conditions, not just the machine ID. This is an additive local-prototype state clarification, not extra demand, a new history screen, a production API migration or a validation retry subsystem. Function signatures, source conditions, UI requirements, scenario alternatives, staffing/event rules and schemaVersion=1 remain unchanged.
 
 ## 2. Required interaction and artifacts
 
@@ -25,7 +29,7 @@ Use a responsive industrial dashboard with dark/light themes, legible numbers, t
 
 ### Supported manager choices and visible limits
 
-The following named templates are the supported equipment/work edits. Their intervals are candidate placements to encode and **physically prevalidate before shipping**, not a claim that feasibility has already been verified. Existing Plan/Job/Campaign/Assignment shapes carry the changes; no template API or schema extension is required.
+The following named templates are the supported equipment/work edits. Their intervals are candidate placements to encode and **physically prevalidate before shipping**, not a claim that feasibility has already been verified. Existing Plan/Job/Campaign/Assignment shapes carry the changes through the public scenario API in §4.5; no data-schema extension is required.
 
 | Choice | Bounded change |
 | --- | --- |
@@ -52,7 +56,7 @@ The Russian UI must state that the demo supports the prescribed GRIND-1/A failur
 
 ## 4. Public TypeScript modules
 
-These are **required interfaces to implement**, not claims that behavior is implemented. Export the following named types/functions directly from the four modules. Use JSON-compatible plain data; no Date, Map, class instance, random IDs, clock reads, DOM or I/O in domain functions. Types below use mutable array syntax for brevity; functions treat all inputs as immutable, return fresh state, and never mutate prior reports or versions. Shared types live in `src/domain/model.ts`. Additional private helpers are allowed; do not change these public signatures without an amendment. D1 changes supported workflow semantics, not the v1 signatures or schemaVersion.
+These are **required interfaces to implement**, not claims that behavior is implemented. Export the following named types/functions directly from the five modules. Use JSON-compatible plain data; no Date, Map, class instance, random IDs, clock reads, DOM or I/O in domain functions. Types below use mutable array syntax for brevity; functions treat all inputs as immutable, return fresh state, and never mutate prior reports or versions. Shared types live in `src/domain/model.ts`. Additional private helpers are allowed; do not change these public signatures without an amendment. D1 changes supported workflow semantics; D2 adds scenario.ts; D3 adds orderOrigins to Workflow. Existing function signatures and schemaVersion remain unchanged.
 
 ### 4.1 `src/domain/model.ts`
 
@@ -186,6 +190,8 @@ export function compare(left: EvaluationInput, right: EvaluationInput): Result<C
 
 Invalid data returns `ok:false`, not a partially trusted report: unknown IDs/enums, duplicate IDs, nonfinite/negative quantities, invalid ranges, overlapping campaigns on one machine, illegal event sequence/target, or required-mode source changes. Legal event arrays are [], [failure], [failure,absence]; a failure target must be GRIND with positive production immediately before t=120 in the preserved prefix. Other physical violations return an evaluated `ok:true` report with `feasible:false`: wrong/missing setup, incompatible work overlap/window/duration/coverage, worker shortage/double booking, impossible validation, etc. `feasible` means **no error issues**, not that all original deadlines are met. Deadline shortfalls and quota starvation are warnings; they never create material. With a staffing error, computed production is a counterfactual machine/material-capacity projection, not a physically achieved result; label the report invalid and block agreement rather than silently inventing or adding workers. Unknown exceptions are defects, not success.
 
+A physically wrong route or setup using otherwise recognizable records may instead be rejected structurally with an explained `ok:false` input/engine issue. Either representation is acceptable: structural rejection, or `ok:true` with `feasible:false` and the applicable physical issues. Neither may produce forbidden-route output, output without the required completed setup, or a successful feasibility claim. Do not require one arbitrary error-code mapping for every malformed combination. Actions rejecting such plans may propagate relevant input/engine codes (for example INVALID_INPUT or SETUP_REQUIRED); not every rejection must be WORKFLOW_GUARD. The explicitly specified D1 workflow guards still apply to their supported-event cases.
+
 The preceding target rule belongs to the general **physical evaluator**, not the supported demo workflow. evaluate/compare may inspect arbitrary structurally valid physical plans, including another operating GRIND target or a stopped validation, without choosing a recovery. An interrupted validation remains incomplete with its physical issues; do not combine disconnected validation fragments into a successful retry. D1's GRIND-1/A and no-overlapping-validation requirements are additional transition guards below, not changes to REQUIRED_WORK or to general physical input validity.
 
 Stable issue codes: `INVALID_INPUT`, `SOURCE_CHANGED`, `EVENT_ORDER`, `EVENT_TARGET`, `SETUP_REQUIRED`, `MACHINE_CONFLICT`, `WORK_WINDOW`, `WORK_DURATION`, `WORK_MISSING`, `VALIDATION_OUTPUT`, `STAFF_SHORTAGE`, `STAFF_ASSIGNMENT`, `ORDER_SHORTFALL`, `QUOTA_SHORTFALL`. Use refs and intervals for explanations. Multiple applicable issues may be reported; do not fabricate production on an invalidly configured machine. Missing job codes yield WORK_MISSING even though there is no JobResult row to reference.
@@ -197,6 +203,8 @@ Staff rows split at every task/count/availability/assignment change. `peak` is m
 ### 4.4 `src/domain/workflow.ts`
 
 ```ts
+import type { Event, Order, Plan, Result, Role, Shift } from './model';
+
 export interface Revision {
   id: number; parentId: number | null; plan: Plan; events: Event[];
   status: 'draft' | 'pending' | 'agreed'; approvals: Role[];
@@ -207,6 +215,7 @@ export interface Workflow {
   phase: 'baseline' | 'failure' | 'absence';
   planningMinute: number; lockedRequests: null | [number, number];
   versions: Revision[]; currentId: number; scenarioPlan: Plan;
+  orderOrigins: { id: string; quantity: number; originalDue: Shift }[];
 }
 export type Action =
   | { type: 'switch-role'; role: Role }
@@ -225,9 +234,19 @@ export function transition(state: Workflow, action: Action): Result<Workflow>;
 export function exportWorkflow(state: Workflow): string;
 ```
 
-`createWorkflow` accepts a structurally valid required-mode plan even if physically incomplete; copy it with null requests and original orders with null promises into immutable scenarioPlan and revision 1 (parentId=null). Set planner, minute=660 (D 11:00 relative to D 00:00), baseline, unsent, unlocked, draft, no approvals/acknowledgements. Workflow planningMinute uses **D calendar minutes [660,720]**, separate from production coordinates. `set-planning-minute` is monotone; at 720 fixation is too late. No real clock is used.
+`createWorkflow` accepts a structurally valid required-mode plan even if physically incomplete; copy it with null requests and original orders with null promises into immutable scenarioPlan and revision 1 (parentId=null). Initialize orderOrigins with independent records for the six REQUIRED_ORDERS, in ORD-1…ORD-6 order; do not alias source constants, scenarioPlan.orders or revision orders. Set planner, minute=660 (D 11:00 relative to D 00:00), baseline, unsent, unlocked, draft, no approvals/acknowledgements. Workflow planningMinute uses **D calendar minutes [660,720]**, separate from production coordinates. `set-planning-minute` is monotone; at 720 fixation is too late. No real clock is used.
 
 Planner alone edits orders/sends demand; manager alone edits production plan/fixes requests/applies events. Editing orders after send marks demand unsent; manager must not overwrite planner orders with edit-plan. Fix once at minute<720 after demand sent; counts are integers ≥2, source requests are immutable afterward. All fixed plans must use locked counts. Forecasts remain editable. During draft before fixation they are not represented as approved requests. Require nonempty reserve explanations whenever available headcount exceeds computed demand.
+
+**D3 order-origin ledger:** orderOrigins is the authoritative audit identity for each accepted order ID in the current workflow lineage. The first six entries always retain the source quantities/originalDue values, even in custom mode when those IDs are no longer visible. On an **accepted planner edit-orders action only**, append each previously unknown ID with its submitted quantity/originalDue, in first-acceptance order; if several are new in one action, use their order in the accepted orders array. Validate the entire action before appending anything. A failed or unauthorized edit appends nothing. Use the same committed ID normalization as order entry; never register transient form text.
+
+Never delete, rewrite, deduplicate by replacement or rebuild origins from the current orders or surviving versions. Retain entries across draft replacement, renaming (removal of one ID and acceptance of another), removal, successors, role changes, demand sending, events and approvals. A known ID's quantity and originalDue are exactly immutable, even if the ID is absent from current orders and **all** stored versions. Reintroducing that ID must use its original ledger values; promises remain the existing way to negotiate commitments. A new renamed ID does not release the old identity. The six baseline origins remain protected independently of visible orders and cannot be redefined through a custom edit. Reject conflicting proposed originals with an explained failed Result, without changing origins, orders, approvals or any other state.
+
+Validate the ledger as part of Workflow validity, not only on edits: reject a missing/non-array ledger, malformed entries, empty/invalid IDs, duplicate IDs, nonfinite/nonpositive quantities, originalDue outside the integer Shift range, missing/changed baseline origins, or disagreement between a ledger entry and any currently stored order originals (in scenarioPlan or any revision). Every stored order ID must have an origin entry; do not invent a missing custom origin while validating an existing state. Return explanatory INVALID_INPUT issues for invalid state without mutation. Other existing state/role/action checks, including rejection of unknown roles, remain unchanged. An invalid ledger is also malformed Workflow data for D2's failure-export contract.
+
+The ledger is **not additional demand**: evaluate and allocate only the supplied/current Plan.orders as before. Removed or renamed-away IDs in orderOrigins do not create phantom orders, extra deficits or double allocations. Historical reports retain their existing revision semantics. No new order-history UI is required. Normal deterministic JSON export includes orderOrigins in the complete workflow, preserving first-acceptance array order. Restore/reset from a valid state starts a new lineage through createWorkflow(state.scenarioPlan): discard custom origins and reinitialize only the original six, without changing the immutable original required scenarioPlan.
+
+schemaVersion stays 1 for this additive local-prototype field. Import/reload persistence and compatibility with previously exported workflow shapes are not required; this is not a production API compatibility promise or permission to silently migrate an invalid missing ledger.
 
 Submit requires demand sent, requests fixed, physically feasible evaluation, and nonempty reasons acknowledging every warning code present. Set pending with empty approvals. Either role can approve once; only two distinct approvals on the same revision produce agreed. Invalid actions return `ok:false` with Issue code `WORKFLOW_GUARD` or the relevant engine/input issues, and leave input untouched. No role switch implies approval.
 
@@ -235,11 +254,71 @@ Editing a draft replaces its data with approvals cleared; editing pending/agreed
 
 Apply-failure requires the manager role, agreed baseline and the **supported GRIND-1/A target**, subject to the D1 guards below; apply-absence requires agreed failure successor. Each accepted event creates a new draft and advances phase, carrying all existing events and locked staffing; absence has no worker-count parameter. Retain planned work until the manager applies a supported plan change. No event automatically retries validation. Phase-specific available actions must be visibly gated. Restore returns createWorkflow(state.scenarioPlan), restoring original orders and clearing promises/events/approvals/locks/history; it is allowed from either role. Reset uses this action after UI confirmation. Export is JSON text with exact top-level shape `{ schemaVersion: 1, workflow: Workflow, evaluation: Result<Report> }`, using the current revision's plan/events, two-space indentation and a final newline; downloads encode it as UTF-8. Preserve documented field order and deterministically ordered arrays; no wall-clock metadata or private data. Equal state produces identical bytes. Export is not a claim of signed provenance. Import/reload persistence is not required.
 
+**D2 malformed-data export:** keep `exportWorkflow(state: Workflow): string`; runtime callers may nevertheless supply malformed data through a JSON boundary or an unsafe type assertion. If the supplied JSON-compatible value is not a valid Workflow, return deterministic JSON with the same wrapper keys, `schemaVersion:1`, `workflow` containing the **original supplied JSON value**, and `evaluation:{ ok:false, errors:[...] }`. Include at least one explanatory error Issue with code `INVALID_INPUT`; never invent a current revision, substitute an empty/default workflow, mark the evaluation successful or mutate the input. This fallback serializes the original data for diagnosis, not a repaired workflow. Use the same two-space indentation, final newline and UTF-8 download encoding; repeated identical input yields identical text. For a proper Workflow, preserve the existing export behavior, including the real current evaluation and honest physical errors/shortfall warnings. A shape-valid but physically infeasible plan is not automatically malformed workflow data.
+
+Here JSON-compatible data means plain finite JSON values/arrays/objects. Cycles, non-JSON objects and values that cannot be represented faithfully as JSON are outside this public data contract. D2 explains the bounded export safety behavior; it does not require a general malicious-object, accessor or serialization platform.
+
 **D1 failure guards:** retain the `{ type: 'apply-failure'; machineId: string }` signature, but accept only `machineId === 'GRIND-1'` in the workflow. Return `ok:false` with an error Issue code `UNSUPPORTED_FAILURE_TARGET` for any other target, explaining the supported demo target. If any validation Job on GRIND-1 has a positive-length intersection with [120,270), reject with code `UNSUPPORTED_FAILURE_VALIDATION`, refs containing GRIND-1 and the conflicting job IDs, start=120 and end=270. Explain that interrupted-validation recovery is outside this replay and that the user must review work or restore the scenario. A job ending at120 or starting at270 does not intersect; use the existing EPSILON convention. Do not reject validations on GRIND-4/5 merely because their times overlap the repair on another machine.
 
 For a manager's baseline-phase request, check those two unsupported-input guards before the generic draft/pending approval guard, so a conflicting **draft** gets the specific explanation rather than an implied recoverable event. All usual role, phase and duplicate-event guards still apply. Once eligible to apply, evaluate the unchanged pre-failure baseline and require a positive-rate `produce` interval for GRIND-1/A immediately before **and containing t=120** (half-open interval semantics); being configured for A or merely having a campaign is insufficient. If production is absent, starved, already stopped or of another product, return `EVENT_TARGET` with an explanation. Every rejected action leaves state, phase, versions, events and approvals unchanged; do not create a successor. Subsequent edit-plan actions in the failure/absence lineage must also reject a validation newly placed on GRIND-1 across [120,270) with `UNSUPPORTED_FAILURE_VALIDATION`, without relaxing the frozen-prefix or other physical checks. This bounded support policy is not an assertion that every custom-order plan can proceed through both events.
 
 Form/domain validation rejects empty/duplicate IDs, unknown products/priorities, nonfinite/zero/negative quantities, due shifts outside 1–4, empty promise reasons, promise quantities outside (0,original quantity], and malformed custom records. Trim textual IDs/reasons on submission; surface field errors without losing entered values. Numeric text may accept comma or dot decimals in the UI, but the domain receives finite numbers. Engine APIs return Issue records, not localized HTML; the UI maps codes to Russian descriptions and renders user text safely.
+
+### 4.5 `src/domain/scenario.ts` — D2
+
+```ts
+import type { Event, Plan, Result } from './model';
+
+export function createScenarioPlan(): Plan;
+export function applyTemplate(
+  plan: Plan,
+  events: Event[],
+  template: 'VAL2_STAGGERED' | 'VAL2_PARALLEL'
+    | 'REPAIR_G1_TO_G3' | 'NIGHT_WRAP_STAGGERED',
+): Result<Plan>;
+```
+
+`createScenarioPlan` returns a fresh, deterministic, required-mode baseline with the original six orders and null promises, actual planned campaigns/setups/mandatory Jobs, complete operator assignments, and **computed standalone** `requests:[S1,S2]` and `forecasts:[S3,S4]`. Include reserve explanations where needed. Calls with no arguments return equal data but share no mutable arrays/records with each other or the source constants. Use calculated interval demand and an explained reserve policy, not the provisional expert counts as a numerical oracle. The returned requests are standalone planning numbers, not an already fixed workflow agreement. `createWorkflow(createScenarioPlan())` still clears requests/locks, demand-sent state and approvals as §4.4 requires; users must send demand and fix requests before agreement.
+
+`applyTemplate` is a bounded deterministic transformation of the existing schedule, not a new optimizer or an event/approval transition. It must preserve the input Plan and events, all source constants, the exact order originals/promises/priority/order-set, mode, and requests (including null). A nonnull request tuple must never be increased, replaced or silently recalculated by a template; actual availability still follows events. Keep unrelated plan records unchanged; only edit the records needed for the named choice. Return an independently evaluate-able Plan, not cached metrics or an asserted report. The caller passes an accepted result to the existing edit-plan transition; workflow role, approval and locked-request checks remain authoritative.
+
+| Template | Accepted event list | Transformation boundary |
+| --- | --- | --- |
+| `VAL2_STAGGERED`, `VAL2_PARALLEL` | `[]` only | Baseline VAL-2 work/associated staffing on GRIND-4/5, as the named choices above specify |
+| `REPAIR_G1_TO_G3` | `[{kind:'failure',machineId:'GRIND-1'}]` only | Future affected A work/operator transfer; preserve the entire executed prefix before t=120 |
+| `NIGHT_WRAP_STAGGERED` | `[{kind:'failure',machineId:'GRIND-1'},{kind:'absence'}]` only | Night WRAP setup/production/operator changes; preserve the entire executed prefix before t=630, including the prior failure response |
+
+Reject unsupported template names at the runtime boundary, wrong/duplicate/out-of-order events, other failure targets, malformed input or unsupported schedule preconditions with an explained `ok:false` Result. Use relevant input/engine/WORKFLOW_GUARD issues; no exhaustive arbitrary mapping of these template failures to individual codes is imposed. Retain D1's actual GRIND-1/A production and no-overlapping-validation prerequisites. On either result path do not mutate the original plan/events or source constants. A rejected request must not silently select another template or restore the scenario.
+
+**D3 complete D1 preflight:** all four templates must retain D1 eligibility at their supported phase. Checking only that an event names GRIND-1 is insufficient: require the supported GRIND-1 **actually producing A at the pre-event boundary**, and no validation on GRIND-1 with a positive-length overlap of [120,270), using the existing EPSILON/half-open convention. Shipped VAL-2 placements remain exactly on GRIND-4/5; a validation on another machine is not forbidden merely because it is concurrent with repair. For baseline VAL-2 choices, check the unchanged pre-event baseline production immediately before and at t=120. For repair/night correction and their reapplication, use actual A production in the preserved prefix up to t=120 (the left-hand pre-event boundary); GRIND-1 is stopped during repair, so do not demand production in the already applied repair interval or recreate a removed post-cut campaign merely to pass the check. The initial apply-failure guard still checks the unmodified baseline immediately before and at t=120 as specified in §4.4.
+
+Reject wrong-product, inactive/starved target or overlapping-validation inputs before transforming them; do not delete/move a conflicting validation, change past product/output, discard fixed requests or substitute another target to make an unsupported input pass. These checks apply to REPAIR_G1_TO_G3 and NIGHT_WRAP_STAGGERED as well as the baseline variants, on first application and reapplication. The general physical evaluator remains broader in targets/products; D1 is the bounded workflow/template policy, not a new global physical restriction. No validation retry/restart mechanism is added.
+
+A pending disruption may make the input plan physically infeasible before its designated corrective template is applied; conflicts other than the explicit unsupported D1 conditions above do not by themselves constitute an unsupported-input guard. Apply the bounded correction where its preconditions hold, without repairing the past or discarding locks, then evaluate the result. Conversely, `ok:true` from applyTemplate means a Plan transformation was accepted, not that its physical report is feasible. The existing physical idempotence requirement below remains mandatory for accepted templates under the full D1 preflight.
+
+Frozen-prefix preservation covers the actual machine/work/operator intervals, produced quantities, settings and material stocks, not merely matching total output. Equivalent interval splits at the cut are permitted; no change before the cut and no second injection of initial stocks is allowed. Compare input and output with the **same supplied events** when checking the preserved prefix. No template call records an event, grants approval, fixes staffing or adds validation retries.
+
+Reapplying the same template in its valid phase must be **idempotent in physical schedule and evaluated output**, including jobs, stocks, staffing and order fulfillment. Plan.id may remain unchanged; generating a new ID is not required. Reuse/replace the relevant records rather than appending duplicate jobs, campaigns, setups or assignments. Determinism and idempotence must not depend on invocation count, time, randomness or previous calls. Switching between the two baseline VAL-2 choices replaces that placement, not accumulates it.
+
+The factory baseline, both admissible VAL-2 alternatives and the full required-scenario lineage (baseline → prescribed failure/transfer → absence/night staggering) must be independently checked as physically feasible coupled schedules before shipping, including all mandatory work and assigned staff under unchanged fixed requests. Deadline warnings remain honest original-commitment findings; physical feasibility is not a promise that every deadline is met. No successful transformation or template name alone certifies feasibility: evaluate its result. Reevaluate custom-order plans and expose their quantity/deadline warnings; do not reuse a required-scenario success label or silently change custom orders. Unsupported preconditions may produce an explained failure rather than a generic recovery.
+
+Minimal public contract example (illustrative, not executed here; inspect both Result values rather than assuming success):
+
+```ts
+import { evaluate } from './engine';
+import { applyTemplate, createScenarioPlan } from './scenario';
+
+const baseline = createScenarioPlan();
+const alternative = applyTemplate(baseline, [], 'VAL2_PARALLEL');
+if (alternative.ok) {
+  const evaluation = evaluate({ plan: alternative.value, events: [] });
+  console.log(evaluation); // Inspect issues and feasibility; baseline is unchanged.
+} else {
+  console.error(alternative.errors);
+}
+```
+
+This example contains only the public common scenario. It supplies no measured outputs, reference checksums or claim of executed feasibility verification.
 
 ## 5. Pilot content contract
 
