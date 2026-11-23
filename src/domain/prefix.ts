@@ -2,26 +2,18 @@ import { EPSILON } from './model';
 import type { Event, Plan } from './model';
 import { evaluate } from './engine';
 
+type EvidenceValue = string | number | null | EvidenceValue[];
+
 interface Evidence {
   start: number;
   end: number;
-  data: unknown;
+  data: EvidenceValue;
 }
 
-function equal(a: unknown, b: unknown): boolean {
+function equal(a: EvidenceValue, b: EvidenceValue): boolean {
   if (typeof a === 'number' && typeof b === 'number') return Math.abs(a - b) <= EPSILON;
   if (Array.isArray(a) && Array.isArray(b))
-    return a.length === b.length && a.every((item, index) => equal(item, b[index]));
-  if (a !== null && b !== null && typeof a === 'object' && typeof b === 'object') {
-    const left = Object.entries(a);
-    const right = Object.entries(b);
-    return (
-      left.length === right.length &&
-      left.every(
-        ([key, value], index) => right[index]?.[0] === key && equal(value, right[index]?.[1]),
-      )
-    );
-  }
+    return a.length === b.length && a.every((item, index) => equal(item, b[index]!));
   return a === b;
 }
 

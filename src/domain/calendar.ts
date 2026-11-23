@@ -31,15 +31,13 @@ export function toCalendarMinute(workMinute: number, edge: 'start' | 'end'): num
   bounded(workMinute, 2520);
   if (edge !== 'start' && edge !== 'end') throw new RangeError('Unknown edge');
   if (workMinute === 2520) return 2850;
-  let elapsed = 0;
-  for (const span of ([1, 2, 3, 4] as const).flatMap(workSpans)) {
-    const next = elapsed + span.end - span.start;
-    if (workMinute < next || (workMinute === next && edge === 'end')) {
-      return span.start + workMinute - elapsed;
-    }
-    elapsed = next;
-  }
-  return 2850;
+  const previousShiftEnd = edge === 'end' && workMinute > 0 && workMinute % 630 === 0;
+  const shiftIndex = Math.floor(workMinute / 630) - (previousShiftEnd ? 1 : 0);
+  const local = workMinute - shiftIndex * 630;
+  const offset = shiftIndex * 720;
+  if (local < 240 || (local === 240 && edge === 'end')) return offset + local;
+  if (local < 450 || (local === 450 && edge === 'end')) return offset + local + 30;
+  return offset + local + 60;
 }
 
 export function workSpans(shift: Shift): Span[] {

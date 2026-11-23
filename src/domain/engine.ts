@@ -723,11 +723,14 @@ function replay(plan: Plan, events: Event[]): Report {
   };
 }
 
-export function evaluate(input: EvaluationInput): Result<Report> {
+/** @internal Checked boundary shared by replay consumers needing its canonical input as well. */
+export function prepareEvaluation(
+  input: unknown,
+): Result<{ plan: Plan; events: Event[]; report: Report }> {
   if (!record(input))
     return { ok: false, errors: [issue('INVALID_INPUT', 'Evaluation input must be an object')] };
-  const plan = validatePlan(input.plan);
-  const events = validateEvents(input.events);
+  const plan = validatePlan(input['plan']);
+  const events = validateEvents(input['events']);
   if (!plan.ok) return plan;
   if (!events.ok) return events;
   const failure = events.value[0];
@@ -757,7 +760,15 @@ export function evaluate(input: EvaluationInput): Result<Report> {
       };
     }
   }
-  return { ok: true, value: replay(plan.value, events.value) };
+  return {
+    ok: true,
+    value: { plan: plan.value, events: events.value, report: replay(plan.value, events.value) },
+  };
+}
+
+export function evaluate(input: EvaluationInput): Result<Report> {
+  const prepared = prepareEvaluation(input);
+  return prepared.ok ? { ok: true, value: prepared.value.report } : prepared;
 }
 
 export function compare(left: EvaluationInput, right: EvaluationInput): Result<Comparison> {

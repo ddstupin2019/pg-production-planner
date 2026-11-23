@@ -1,22 +1,20 @@
-import { evaluate } from './engine';
+import { evaluate, prepareEvaluation } from './engine';
 import type { Report } from './engine';
 import { EPSILON, MACHINES, REQUIRED_ORDERS } from './model';
 import type { Event, JobCode, Operation, Plan, Product, Result } from './model';
-import { issue, validateEvents, validatePlan } from './validation';
+import { issue, validateEvents } from './validation';
 import { preservesPrefix } from './prefix';
 
 export type Template =
   'VAL2_STAGGERED' | 'VAL2_PARALLEL' | 'REPAIR_G1_TO_G3' | 'NIGHT_WRAP_STAGGERED';
 
 /** Identity allocation is derived from actual machine/material tasks, not the expert headcounts. */
-function staff(plan: Plan, events: Event[], cut = 0): Result<Plan> {
-  const projection = evaluate({ plan, events });
-  if (!projection.ok) return projection;
+function staff(plan: Plan, projection: Report, cut = 0): Plan {
   const next = structuredClone(plan);
   next.assignments = next.assignments
     .filter((row) => row.start < cut)
     .map((row) => ({ ...row, end: Math.min(row.end, cut) }));
-  for (const row of projection.value.staffIntervals) {
+  for (const row of projection.staffIntervals) {
     if (row.end <= cut) continue;
     let number = 1;
     const shift = Math.floor(row.start / 630) + 1;
@@ -32,7 +30,7 @@ function staff(plan: Plan, events: Event[], cut = 0): Result<Plan> {
       });
     }
   }
-  return { ok: true, value: next };
+  return next;
 }
 
 function checked(plan: Plan, events: Event[]): Result<Plan> {
@@ -226,7 +224,7 @@ function proposal(): Plan {
   return plan;
 }
 
-/** A bounded candidate, with real quotas and worker identities; never an optimizer promise. */
+/** Fresh required-mode candidate with fixed source data, derived quotas and checked identities. */
 export function createScenarioPlan(): Plan {
   const plan = proposal();
   const allocation = evaluate({ plan, events: [] });
@@ -245,9 +243,8 @@ export function createScenarioPlan(): Plan {
   // Both VAL-2 choices fit this actual S1 peak. S2 is the separate setup peak.
   plan.requests = [peaks[0]!, peaks[1]!];
   plan.forecasts = [peaks[2]!, peaks[3]!];
-  const assigned = staff(plan, []);
-  if (!assigned.ok) throw new Error('Cannot assign scenario');
-  const verified = checked(assigned.value, []);
+  const assigned = staff(plan, projected.value);
+  const verified = checked(assigned, []);
   if (!verified.ok)
     throw new Error(
       `Scenario physical errors: ${verified.errors.map((row) => `${row.code}:${row.refs.join(',')}`).join('; ')}`,
@@ -255,12 +252,16 @@ export function createScenarioPlan(): Plan {
   return verified.value;
 }
 
+/**
+ * Phase-guarded edits: reapplication preserves the physical schedule, not the plan ID.
+ * Custom demand is reevaluated; fixed source data and the executed event prefix are retained.
+ */
 export function applyTemplate(plan: Plan, events: Event[], template: Template): Result<Plan> {
-  const valid = validatePlan(plan);
+  const valid = prepareEvaluation({ plan, events: [] });
   const validEvents = validateEvents(events);
   if (!valid.ok) return valid;
   if (!validEvents.ok) return validEvents;
-  const next = valid.value;
+  const next = valid.value.plan;
   const cut = events.length === 2 ? 630 : events.length ? 120 : 0;
   if (template === 'VAL2_STAGGERED' || template === 'VAL2_PARALLEL') {
     if (events.length)
@@ -281,9 +282,7 @@ export function applyTemplate(plan: Plan, events: Event[], template: Template): 
         errors: [issue('WORKFLOW_GUARD', 'Transfer requires prescribed GRIND-1 failure')],
       };
     if (!next.campaigns.some((row) => row.id === 'repair-transfer-GRIND-3')) {
-      const before = evaluate({ plan: next, events: [] });
-      if (!before.ok) return before;
-      const affected = before.value.machineIntervals.filter(
+      const affected = valid.value.report.machineIntervals.filter(
         (row) =>
           row.machineId === 'GRIND-1' &&
           row.product === 'A' &&
@@ -333,14 +332,15 @@ export function applyTemplate(plan: Plan, events: Event[], template: Template): 
     }
   } else return { ok: false, errors: [issue('INVALID_INPUT', 'Unknown template')] };
   next.id = `${plan.id}:${template}`;
-  const assigned = staff(next, events, cut);
-  if (!assigned.ok) return assigned;
-  if (cut && !preservesPrefix(plan, assigned.value, events, cut))
+  const projection = evaluate({ plan: next, events });
+  if (!projection.ok) return projection;
+  const assigned = staff(next, projection.value, cut);
+  if (cut && !preservesPrefix(plan, assigned, events, cut))
     return {
       ok: false,
       errors: [issue('WORKFLOW_GUARD', 'Template would rewrite executed evidence')],
     };
-  return checked(assigned.value, events);
+  return checked(assigned, events);
 }
 
 /** Public summary consumers can use Report directly; this alias carries no hidden evidence. */

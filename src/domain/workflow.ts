@@ -1,6 +1,7 @@
 import type { Event, Order, Plan, Result, Role } from './model';
 import { EPSILON } from './model';
-import { evaluate } from './engine';
+import { evaluate, prepareEvaluation } from './engine';
+import type { Report } from './engine';
 import { preservesPrefix } from './prefix';
 import {
   count,
@@ -92,7 +93,11 @@ function validationGuard(plan: Plan): Result<never> | null {
     : null;
 }
 
-function validState(value: unknown): value is Workflow {
+/** Validate and copy contract fields once; optionally retain the checked baseline evidence. */
+function readState(
+  value: unknown,
+  baselineRequested = false,
+): { state: Workflow; baseline: Report | null } | null {
   if (
     !record(value) ||
     value['schemaVersion'] !== 1 ||
@@ -107,11 +112,14 @@ function validState(value: unknown): value is Workflow {
     !(value['lockedRequests'] === null || counts(value['lockedRequests'])) ||
     !count(value['currentId']) ||
     !Array.isArray(value['versions']) ||
-    !value['versions'].length ||
-    !validatePlan(value['scenarioPlan']).ok
+    !value['versions'].length
   )
-    return false;
+    return null;
+  const scenarioPlan = validatePlan(value['scenarioPlan']);
+  if (!scenarioPlan.ok) return null;
   const ids = new Set<number>();
+  const versions: Revision[] = [];
+  let baseline: Report | null = null;
   for (const revision of value['versions']) {
     if (
       !record(revision) ||
@@ -128,52 +136,55 @@ function validState(value: unknown): value is Workflow {
       !Array.isArray(revision['approvals']) ||
       !revision['approvals'].every(role) ||
       new Set(revision['approvals']).size !== revision['approvals'].length ||
-      !acknowledgements(revision['acknowledgements']) ||
-      !validatePlan(revision['plan']).ok ||
-      !validateEvents(revision['events']).ok
+      !acknowledgements(revision['acknowledgements'])
     )
-      return false;
+      return null;
+    const events = validateEvents(revision['events']);
+    if (!events.ok) return null;
+    let plan: Plan;
+    if (baselineRequested && revision['id'] === value['currentId']) {
+      const prepared = prepareEvaluation({ plan: revision['plan'], events: [] });
+      if (!prepared.ok) return null;
+      plan = prepared.value.plan;
+      baseline = prepared.value.report;
+    } else {
+      const validated = validatePlan(revision['plan']);
+      if (!validated.ok) return null;
+      plan = validated.value;
+    }
+    versions.push({
+      id: revision['id'],
+      parentId: revision['parentId'],
+      plan,
+      events: events.value,
+      status: revision['status'],
+      approvals: [...revision['approvals']],
+      acknowledgements: revision['acknowledgements'].map((row) => ({
+        code: row.code,
+        reason: row.reason,
+      })),
+    });
     ids.add(revision['id']);
   }
-  return ids.has(value['currentId']);
+  if (!ids.has(value['currentId'])) return null;
+  return {
+    state: {
+      schemaVersion: 1,
+      role: value['role'],
+      demandSent: value['demandSent'],
+      phase: value['phase'],
+      planningMinute: value['planningMinute'],
+      lockedRequests: value['lockedRequests'] === null ? null : [...value['lockedRequests']],
+      versions,
+      currentId: value['currentId'],
+      scenarioPlan: scenarioPlan.value,
+    },
+    baseline,
+  };
 }
 
 function current(state: Workflow): Revision {
   return state.versions.find((revision) => revision.id === state.currentId)!;
-}
-
-function copyState(state: Workflow): Workflow {
-  const copyPlan = (plan: Plan): Plan => {
-    const validated = validatePlan(plan);
-    if (!validated.ok) throw new Error('Previously validated workflow plan became invalid');
-    return validated.value;
-  };
-  return {
-    schemaVersion: 1,
-    role: state.role,
-    demandSent: state.demandSent,
-    phase: state.phase,
-    planningMinute: state.planningMinute,
-    lockedRequests: state.lockedRequests === null ? null : [...state.lockedRequests],
-    versions: state.versions.map((revision) => ({
-      id: revision.id,
-      parentId: revision.parentId,
-      plan: copyPlan(revision.plan),
-      events: revision.events.map((event) =>
-        event.kind === 'failure'
-          ? { kind: 'failure', machineId: event.machineId }
-          : { kind: 'absence' },
-      ),
-      status: revision.status,
-      approvals: [...revision.approvals],
-      acknowledgements: revision.acknowledgements.map((row) => ({
-        code: row.code,
-        reason: row.reason,
-      })),
-    })),
-    currentId: state.currentId,
-    scenarioPlan: copyPlan(state.scenarioPlan),
-  };
 }
 
 function draft(state: Workflow, forceSuccessor = false): Revision {
@@ -233,10 +244,12 @@ export function createWorkflow(plan: Plan): Result<Workflow> {
 }
 
 export function transition(state: Workflow, action: Action): Result<Workflow> {
-  if (!validState(state) || !record(action) || !text(action.type))
+  if (!record(action) || !text(action.type))
     return guard('Malformed workflow or action', 'INVALID_INPUT');
+  const checked = readState(state, action.type === 'apply-failure');
+  if (!checked) return guard('Malformed workflow or action', 'INVALID_INPUT');
   // Work on a fresh complete tree: no rejected action or successor can alter its predecessor.
-  const next = copyState(state);
+  const next = checked.state;
   const revision = current(next);
   const manager = next.role === 'manager';
   switch (action.type) {
@@ -400,10 +413,10 @@ export function transition(state: Workflow, action: Action): Result<Workflow> {
       const unsupported = validationGuard(revision.plan);
       if (unsupported) return unsupported;
       if (revision.status !== 'agreed') return guard('Agree the baseline before applying failure');
-      const before = evaluate({ plan: revision.plan, events: [] });
-      if (!before.ok) return before;
+      // readState checked this current plan and retained its baseline for apply-failure.
+      const before = checked.baseline!;
       const produces = (side: 'before' | 'at') =>
-        before.value.machineIntervals.some(
+        before.machineIntervals.some(
           (row) =>
             row.machineId === 'GRIND-1' &&
             row.kind === 'produce' &&
@@ -443,7 +456,8 @@ export function transition(state: Workflow, action: Action): Result<Workflow> {
 }
 
 export function exportWorkflow(state: Workflow): string {
-  if (!validState(state))
+  const checked = readState(state);
+  if (!checked)
     return (
       JSON.stringify(
         {
@@ -455,7 +469,7 @@ export function exportWorkflow(state: Workflow): string {
         2,
       ) + '\n'
     );
-  const revision = current(state);
+  const revision = current(checked.state);
   return (
     JSON.stringify(
       {
