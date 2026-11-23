@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 437,
+    "total": 440,
     "passed": 81,
-    "failed": 356,
+    "failed": 359,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -1102,6 +1102,24 @@
       "title": "execution witness rejects changed availability",
       "state": "passed",
       "error": ""
+    },
+    {
+      "file": "tests/unit/recorded-history.test.ts",
+      "title": "apply-failure rejects null current campaigns without mutating the intact scenario or creating a successor",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/recorded-history.test.ts",
+      "title": "external baseline draft with a legal failure array but no actual target production cannot lock requests",
+      "state": "failed",
+      "error": "Not implemented: transition"
+    },
+    {
+      "file": "tests/unit/recorded-history.test.ts",
+      "title": "night template preserves an already recorded whitespace-bearing historical campaign identity or explains refusal",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
     },
     {
       "file": "tests/unit/scenario.test.ts",

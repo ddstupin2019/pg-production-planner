@@ -1,6 +1,29 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: second-review VAL-2 external-placement oracle correction
+## Latest: exactly three narrow external-data/history boundary cases
+
+Only `tests/unit/recorded-history.test.ts` was added, alongside this handoff update and regenerated unit evidence. All existing 437 cases remain untouched. Work stayed in the preserved tester tree; no implementation/source reads, Git commands, other worktrees, QA inspection, delegation, source/configuration changes or browser execution. The supplied 437-case real-candidate GREEN is context, not an execution claimed here. Serena initial instructions timed out once; no alternate discovery was attempted.
+
+The three added cases are:
+
+1. `tests/unit/recorded-history.test.ts:52`: a plain finite-JSON manager baseline draft has an independently cloned, intact scenarioPlan; **only** its current revision's plan.campaigns becomes null. apply-failure must return explained input/workflow rejection with no value, no state/action mutation and no successor. It does not corrupt scenarioPlan to shortcut the current-plan boundary.
+2. `tests/unit/recorded-history.test.ts:66`: an externally constructed manager baseline/sent/draft at D 11:00 is unlocked, has a structurally valid empty physical Plan and legal `[failure GRIND-1]` event array, but no actual GRIND-1 production. Valid counts/reasons cannot lock requests; EVENT_TARGET or a relevant explained input/event/workflow rejection is accepted. The complete state/action must remain unchanged, with null locks/requests and no approvals. No claim is made that this externally supplied combination is reachable through the normal UI.
+3. `tests/unit/recorded-history.test.ts:87`: obtain the public factory and repair template result, then construct the external absence Plan by surrounding **one actually produced pre-cut campaign ID** with whitespace. The record is selected using public campaign fields and evaluated pre-cut production, preferring start=0/PRESS-1 and otherwise any actual pre-cut campaign; no private ID is hard-coded. The night template may refuse with an explained known public input/engine/workflow error and immutable input. On acceptance, the original whitespace-bearing historical ID, machine/product/start and pre-cut permission extent must survive; real evaluation and the independent ledger/full machine/settings/material/work/operator prefix must match the repaired reference under identical absence events. The only difference in that reference input is the record's spelling; no report is fabricated. This is already recorded external history, **not** a ban on trimming ordinary form submissions. No single error code or arbitrary external-plan feasibility is mandated.
+
+Checks actually run from `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests` using local existing dependencies:
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | Final exit **1**; **440 total / 81 passed / 359 failed / 0 other**; zero unhandled/module errors |
+
+Discovery is exactly **437 + 3 = 440**. The three new cases are meaningful RED against public throw stubs: the first two reach transition and the third reaches createScenarioPlan; no new cases pass by catching stub exceptions. `unit-review-red.json` was regenerated and its header/new records reread; all **440** records remain retained, `truncated:false`, within the unchanged 512 bound. Existing helper policies, original tests, browser reports, timeouts/repeats/retries and quality gates are untouched. Browser was **not rerun**; its earlier evidence below is historical, not a new pass. Final unit/type/lint/format were rerun after apply_patch-only formatting of the new file.
+
+**Final small primary and secondary reviews are both required before freeze/transfer.** The new boundaries and historical-ID accepted/refused paths remain unverified against implementation; no new real-candidate GREEN or coverage is claimed. No private test material was supplied to the coder.
+
+## Previous: second-review VAL-2 external-placement oracle correction
 
 Narrow correction only in the same preserved tester worktree: `tests/unit/template-boundaries.test.ts:39–90`, this handoff and generated unit evidence. No implementation/source reads, Git commands, other worktrees, QA inspection, delegation, source/configuration changes or browser changes. Serena initial instructions timed out once; no alternative discovery was attempted.
 
