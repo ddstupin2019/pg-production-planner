@@ -14,7 +14,7 @@ async function newOrder(page: Page, id: string, quantity: string, due: string) {
   return form;
 }
 
-test('renaming a draft custom order cannot permit changed originals through ID reuse in the form', async ({
+test('order originals survive supported custom-ID replacement or a readonly existing-ID field', async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 900 });
@@ -37,19 +37,42 @@ test('renaming a draft custom order cannot permit changed originals through ID r
   });
   await expect(row).toHaveCount(1);
   await row.getByRole('button', { name: 'Изменить заказ', exact: true }).click();
-  await form.getByRole('textbox', { name: 'Код заказа', exact: true }).fill('ORIGIN-Y');
-  await form.getByRole('button', { name: 'Сохранить заказ', exact: true }).click();
-  await expect(form).not.toBeVisible();
-  const renamed = await exported(page);
-  const orders = current(renamed.data.workflow).plan.orders;
-  expect(orders.some((order) => order.id === 'ORIGIN-X')).toBe(false);
-  expect(orders.find((order) => order.id === 'ORIGIN-Y')).toMatchObject({
-    quantity: 10,
-    originalDue: 1,
-  });
+  const idField = form.getByRole('textbox', { name: 'Код заказа', exact: true });
+  await expect(idField).toBeVisible();
+  await expect(idField).toHaveValue('ORIGIN-X');
+  let retained: Awaited<ReturnType<typeof exported>>;
+  if (await idField.isEditable()) {
+    // Optional custom-copy/replacement capability: a new ID never rewrites the old origin.
+    await expect(idField).toBeEditable();
+    await idField.fill('ORIGIN-Y');
+    await form.getByRole('button', { name: 'Сохранить заказ', exact: true }).click();
+    await expect(form).not.toBeVisible();
+    retained = await exported(page);
+    const orders = current(retained.data.workflow).plan.orders;
+    expect(orders.some((order) => order.id === 'ORIGIN-X')).toBe(false);
+    expect(orders.find((order) => order.id === 'ORIGIN-Y')).toMatchObject({
+      quantity: 10,
+      originalDue: 1,
+    });
+  } else {
+    // A readonly/disabled existing ID is permitted; no browser rename feature is required.
+    await expect(idField).not.toBeEditable();
+    await expect(idField).toHaveValue('ORIGIN-X');
+    const editDialog = page.getByRole('dialog').filter({ has: form });
+    await expect(editDialog).toHaveCount(1);
+    await editDialog.getByRole('button', { name: 'Отмена', exact: true }).click();
+    await expect(form).not.toBeVisible();
+    retained = await exported(page);
+    expect(retained.text).toBe(created.text);
+    expect(retained.data.workflow).toEqual(created.data.workflow);
+    expect(
+      current(retained.data.workflow).plan.orders.find((order) => order.id === 'ORIGIN-X'),
+    ).toMatchObject({ quantity: 10, originalDue: 1 });
+  }
 
-  await newOrder(page, 'ORIGIN-X', '1', '4');
+  // Capture before entering the invalid order, so both live and submit-time validation work.
   const alertsBefore = await page.getByRole('alert').allTextContents();
+  await newOrder(page, 'ORIGIN-X', '1', '4');
   await form.getByRole('button', { name: 'Сохранить заказ', exact: true }).click();
   await expect.poll(() => page.getByRole('alert').allTextContents()).not.toEqual(alertsBefore);
   const alert = page.getByRole('alert').last();
@@ -67,6 +90,6 @@ test('renaming a draft custom order cannot permit changed originals through ID r
   await dialog.getByRole('button', { name: 'Отмена', exact: true }).click();
   await expect(form).not.toBeVisible();
   const rejected = await exported(page);
-  expect(rejected.text).toBe(renamed.text);
-  expect(rejected.data.workflow).toEqual(renamed.data.workflow);
+  expect(rejected.text).toBe(retained.text);
+  expect(rejected.data.workflow).toEqual(retained.data.workflow);
 });

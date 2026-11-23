@@ -1,6 +1,46 @@
 # Phase handoff: independent tester correction and DOM snapshot optimization
 
-## Latest: primary D3 test-review corrections — mutable corruption copies and all-four-template preflight
+## Latest: second D3 review — browser ID editability is an optional capability
+
+Corrected only `tests/e2e/order-origin.test.ts`, the permitted clarification in `tests/PUBLIC_UI_CONTRACT.md`, this handoff and regenerated browser evidence, in the same tester worktree. No Git, implementation/source inspection, other worktrees, chat, delegation, coder communication, unit-test edits, source/configuration changes or new UI feature was introduced. All unconditional domain removal/rename/reuse/origin-ledger regressions remain unchanged.
+
+`order-origin.test.ts:40–71` now reads the actual semantic textbox's DOM editability through `isEditable()` after checking that its visible value is the original custom ID:
+
+- **Editable branch (`:44`)**: assert editability and exercise the optional new-custom-ID replacement, saving Y while preserving its copied original quantity/due. The accepted export becomes the comparison snapshot for the attempted reuse of X with changed originals. This is a new custom identity, not rewriting the old identity's ledger.
+- **Readonly/disabled branch (`:57`)**: assert noneditability and unchanged original ID, cancel via the normal enclosing modal button, and compare complete export bytes/workflow with the original accepted snapshot. Confirm X still has quantity 10/originalDue 1. No fill, force-click, attribute rewrite or application-state bypass is attempted on the protected control.
+- **Shared mandatory rejection (`:73–94`)**: attempt creation of X with changed originals. The editable branch tests historical-ID reuse; the protected-ID branch tests an existing-ID conflict. Both require a changed semantic alert snapshot, a visible nonempty alert, retained entered values and unchanged complete exported state after normal modal cancellation. Capture alerts before opening/filling this invalid form so live validation is not incorrectly required to wait for submit. Neither branch skips the test or omits rejection/state assertions.
+
+`PUBLIC_UI_CONTRACT.md:3/:17` now identifies v1.3 and explicitly permits readonly/disabled existing IDs. Optional editable-code custom-copy/replacement does not release or overwrite the prior identity's originals; no UI rename/removal/history feature is required. Existing semantic names and all mandatory domain constraints remain unchanged. The clarification contains no private case values/paths or new coder feature request.
+
+### Checks actually run
+
+All commands used `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests` and existing local dependencies.
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | Final exit 0 |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | Final exit 0; zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | Final exit 0; all matched files formatted |
+| `npm.cmd run test:e2e -- --reporter=./tests/reporters/browser.ts --output=tests/evidence/browser-origin-capability-results` | Exit **1**; **30 total / 9 helper passes / 21 product placeholder failures / 0 skipped / 0 interrupted**; zero global errors; three repetitions, zero retries |
+| Read-only SHA-256 on the two edited code/public-contract paths | Exit 0; current-byte identities below |
+| Browser report header/new title and scoped browser-code reread | All 30 records retained, `truncated:false`; revised case still fails at the placeholder's absent planner control |
+
+**Delta: zero new/removed cases.** Browser discovery remains 10 cases × three repetitions = 30. Both runtime editability branches are authored/typechecked but **unreached in stub RED**, because boot fails before opening the order form. No corrected real-product browser GREEN or executed branch coverage is claimed. Existing 90-second timeout, repeat=3, retry=0 and runtime guards were not changed.
+
+Unit tests/report were **not rerun or edited** for this UI-only correction. Their last recorded result remains the prior **494 total / 81 passed / 413 failed** stub run, not a new unit check. The previous eight unconditional unit regressions, four added baseline D1 cases, registry tests and all positive alternatives remain mandatory regardless of browser ID editability. Old browser artifact directories were preserved; this run's failures are under `browser-origin-capability-results/`.
+
+Initial typed lint detected an unused initial snapshot assignment; it was replaced with an explicit exported-result type and definite assignment in both branches, without disabling a rule. Final type/lint/format and the full baseline browser run then passed their tooling checks / retained the expected product RED. The attempted Context7 lookup was unavailable due to quota; no alternate network fetch, install or credential change was made. Installed Playwright types accepted the DOM capability API; actual product branch selection remains unverified as stated above.
+
+### Current actual-byte SHA-256
+
+| Path | SHA-256 |
+| --- | --- |
+| `tests/e2e/order-origin.test.ts` | `67207726a8dc090e82f85ee2eec71fd8f101ac4d28a72e1e352088335254f52c` |
+| `tests/PUBLIC_UI_CONTRACT.md` | `8ec9aae36483316f2812dfa4b20d8733755076bd151fa5f16c62e1a098d5eb2d` |
+
+The revised browser case/public clarification require the requested rereview before transfer/freeze. No new coder input or production patch was supplied. The source v1.3 contract and unconditional domain behavior have not been narrowed.
+
+## Previous: primary D3 test-review corrections — mutable corruption copies and all-four-template preflight
 
 Narrow corrections only in the preserved tester worktree: `tests/unit/order-origins-contract.test.ts`, `tests/unit/template-d1-regression.test.ts`, this handoff and regenerated unit evidence. No implementation/source inspection, Git commands, other worktrees, chat, delegation, source/configuration edits or browser run. Existing positive baseline alternatives, common lineages, earlier regression cases and all quality thresholds remain unchanged.
 

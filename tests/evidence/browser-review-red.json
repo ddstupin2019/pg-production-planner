@@ -15,7 +15,7 @@
   "cases": [
     {
       "file": "tests/e2e/order-origin.test.ts",
-      "title": "renaming a draft custom order cannot permit changed originals through ID reuse in the form",
+      "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
       "repeat": 0,
       "retry": 0,
       "status": "failed",
@@ -95,7 +95,7 @@
     },
     {
       "file": "tests/e2e/order-origin.test.ts",
-      "title": "renaming a draft custom order cannot permit changed originals through ID reuse in the form",
+      "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
       "repeat": 1,
       "retry": 0,
       "status": "failed",
@@ -175,7 +175,7 @@
     },
     {
       "file": "tests/e2e/order-origin.test.ts",
-      "title": "renaming a draft custom order cannot permit changed originals through ID reuse in the form",
+      "title": "order originals survive supported custom-ID replacement or a readonly existing-ID field",
       "repeat": 2,
       "retry": 0,
       "status": "failed",

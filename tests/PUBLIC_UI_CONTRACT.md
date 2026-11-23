@@ -1,6 +1,6 @@
 # Proposed public semantic UI contract — review before coder handoff
 
-This artifact proposes accessible names for the interactions already required by PUBLIC_SPEC v1.2. It contains no private scenario data, expected numerical outputs or test paths. Acceptance by the orchestrator is required before these names become a coder obligation. Russian labels may include visible units, with the accessible name retaining the name below. Native controls are preferred; equivalent correctly implemented ARIA roles are acceptable. Status remains textual, never color alone.
+This artifact proposes accessible names for the interactions already required by PUBLIC_SPEC v1.3. It contains no private scenario data, expected numerical outputs or test paths. Acceptance by the orchestrator is required before these names become a coder obligation. Russian labels may include visible units, with the accessible name retaining the name below. Native controls are preferred; equivalent correctly implemented ARIA roles are acceptable. Status remains textual, never color alone.
 
 ## Navigation and state
 
@@ -14,6 +14,7 @@ This artifact proposes accessible names for the interactions already required by
 ## Orders and staffing
 
 - Button `Добавить заказ` opens form `Заказ`. Controls: text `Код заказа`, select `Продукт` with A/B/C values, text/number `Объём` in thousand blades, select `Срок (смена)` with 1–4 values, select `Приоритет` with high/medium/low values. Button `Сохранить заказ`. Row action `Изменить заказ` opens the same form; original identities/quantities/deadlines stay immutable, renegotiation uses `Обещанный объём`, select `Обещанная смена` (1–4), textbox `Причина обещания` and button `Сохранить обещание`.
+- The existing order's `Код заказа` may be readonly or disabled; a UI rename/removal feature is not required. If an optional editable-code custom-copy/replacement interaction is provided, a new code denotes a new custom identity, not a rewrite of the old identity. The previous ID's original quantity/due remain protected within the lineage. Creating an existing or previously accepted ID with changed originals must be rejected accessibly without changing the accepted workflow; domain removal/rename/reuse rules remain mandatory regardless of UI editability.
 - Form errors use `role=alert`, identify the invalid field and keep entered values. User content is text, not HTML. Custom copies are explicitly labelled `Пользовательский сценарий`.
 - The order form is modal while open. Its normal `Отмена` button closes it without committing invalid input; background actions must not bypass the modal. Reopening permits a new submission without requiring cancelled field values to persist.
 - Button `Передать спрос` sends the displayed valid demand.
