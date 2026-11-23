@@ -16,10 +16,21 @@ function step(state: Workflow, action: Action): Workflow {
   expect(state).toEqual(snapshot);
   return next;
 }
-function denied(state: Workflow, action: Action, code = 'WORKFLOW_GUARD'): void {
+function denied(
+  state: Workflow,
+  action: Action,
+  code: string | readonly string[] = 'WORKFLOW_GUARD',
+): void {
   const snapshot = structuredClone(state);
   deepFreeze(state);
-  reject(transition(state, action), code);
+  const result = transition(state, action);
+  const allowed = typeof code === 'string' ? [code] : code;
+  const error = !result.ok
+    ? result.errors.find((issue) => allowed.includes(issue.code))
+    : undefined;
+  expect(error, `expected one of ${allowed.join(', ')}`).toBeDefined();
+  reject(result, error!.code);
+  expect(result).not.toHaveProperty('value');
   expect(state).toEqual(snapshot);
 }
 function badField(state: Workflow, action: Action): void {
@@ -163,8 +174,11 @@ describe('initialization, roles, fixed requests and revision approvals', () => {
   });
   test('warnings need reasons; missing maintenance cannot be acknowledged into feasibility', () => {
     const s = fixed();
-    denied(s, { type: 'submit', acknowledgements: [] });
-    denied(s, { type: 'submit', acknowledgements: [{ code: 'ORDER_SHORTFALL', reason: ' ' }] });
+    denied(s, { type: 'submit', acknowledgements: [] }, ['WORKFLOW_GUARD', 'INVALID_INPUT']);
+    denied(s, { type: 'submit', acknowledgements: [{ code: 'ORDER_SHORTFALL', reason: ' ' }] }, [
+      'WORKFLOW_GUARD',
+      'INVALID_INPUT',
+    ]);
     const p = structuredClone(current(s).plan);
     p.jobs = p.jobs.filter((j) => j.id !== 'to1');
     const invalid = step(s, { type: 'edit-plan', plan: p });
@@ -308,13 +322,19 @@ describe('selected GRIND-1 repair followed by absence, never mocked evaluation',
     const p = structuredClone(current(absence).plan);
     const assignment = p.assignments.find((a) => a.taskId === 'setup:s-press-c')!;
     assignment.workerIds = ['S2-40'];
-    const result = transition(absence, { type: 'edit-plan', plan: p });
+    const snapshot = structuredClone(absence);
+    const result = transition(deepFreeze(absence), { type: 'edit-plan', plan: p });
+    expect(absence).toEqual(snapshot);
     if (result.ok) {
       const r = unwrap(
         evaluate({ plan: current(result.value).plan, events: current(result.value).events }),
       );
       expect(r.feasible).toBe(false);
-      denied(result.value, { type: 'submit', acknowledgements: [] });
+      denied(result.value, { type: 'submit', acknowledgements: [] }, [
+        'WORKFLOW_GUARD',
+        'STAFF_ASSIGNMENT',
+        'STAFF_SHORTAGE',
+      ]);
     } else
       expect(
         result.errors.some((e) => ['STAFF_ASSIGNMENT', 'WORKFLOW_GUARD'].includes(e.code)),
@@ -409,7 +429,7 @@ describe('custom copies, promises, restore and exact deterministic export', () =
     expect(current(s).plan.mode).toBe('required');
     const changed = structuredClone(orders);
     changed[0]!.quantity = 100;
-    denied(s, { type: 'edit-orders', orders: changed });
+    denied(s, { type: 'edit-orders', orders: changed }, ['WORKFLOW_GUARD', 'SOURCE_CHANGED']);
   });
   test('custom order new identity persists original submission; manager cannot replace demand', () => {
     let s = unwrap(createWorkflow(feasiblePlan()));
@@ -427,7 +447,7 @@ describe('custom copies, promises, restore and exact deterministic export', () =
     s = step(s, { type: 'send-demand' });
     const changed = structuredClone(current(s).plan.orders);
     changed.at(-1)!.quantity = 3;
-    denied(s, { type: 'edit-orders', orders: changed });
+    denied(s, { type: 'edit-orders', orders: changed }, ['WORKFLOW_GUARD', 'SOURCE_CHANGED']);
     s = step(s, { type: 'switch-role', role: 'manager' });
     const plan = structuredClone(current(s).plan);
     plan.orders.pop();

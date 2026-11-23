@@ -582,13 +582,6 @@ describe('untrusted malformed input returns errors, never throws or a partial re
       'INVALID_INPUT',
     ],
     [
-      'illegal route',
-      (p) => {
-        run(p, 'PRINT-1', 'C', 0, 1);
-      },
-      'INVALID_INPUT',
-    ],
-    [
       'zero quota',
       (p) => {
         run(p, 'PRESS-1', 'A', 0, 1, 0);
@@ -653,18 +646,40 @@ describe('untrusted malformed input returns errors, never throws or a partial re
       },
       'INVALID_INPUT',
     ],
-    [
-      'same product setup',
-      (p) => {
-        p.setups.push({ id: 's', machineId: 'PRESS-1', from: 'A', to: 'A', start: 0, end: 1 });
-      },
-      'INVALID_INPUT',
-    ],
   ];
   test.each(bad)('%s', (_name, change, code) => {
     const p = emptyPlan();
     change(p);
     reject(evaluate({ plan: p, events: [] }), code);
+  });
+  // PUBLIC_SPEC 4.3 permits physical wrong-route/setup violations to be evaluated,
+  // not only rejected structurally. Neither path may fabricate forbidden production.
+  test.each(['illegal route', 'same product setup'])('%s stays physically invalid', (kind) => {
+    const p = emptyPlan();
+    const machineId = kind === 'illegal route' ? 'PRINT-1' : 'PRESS-1';
+    if (kind === 'illegal route') run(p, machineId, 'C', 0, 1);
+    else p.setups.push({ id: 's', machineId, from: 'A', to: 'A', start: 0, end: 1 });
+    const before = structuredClone(p);
+    const result = evaluate({ plan: deepFreeze(p), events: [] });
+    expect(p).toEqual(before);
+    if (!result.ok) {
+      reject(result, 'INVALID_INPUT');
+      expect(result).not.toHaveProperty('value');
+    } else {
+      expect(result.value.feasible).toBe(false);
+      const physicalCodes = ['MACHINE_CONFLICT', 'SETUP_REQUIRED'];
+      const physicalError = result.value.issues.some(
+        (issue) => issue.severity === 'error' && physicalCodes.includes(issue.code),
+      );
+      expect(physicalError).toBe(true);
+      near(quantity(result.value, machineId), 0);
+      near(
+        result.value.machineIntervals
+          .filter((row) => row.machineId === machineId)
+          .reduce((sum, row) => sum + row.quantity, 0),
+        0,
+      );
+    }
   });
   test.each([0, -1, NaN, Infinity])('bad custom quantity %s', (quantity) => {
     const p = emptyPlan();
@@ -688,14 +703,26 @@ describe('untrusted malformed input returns errors, never throws or a partial re
     Object.assign(p.orders[0]!, change);
     reject(evaluate({ plan: p, events: [] }), 'INVALID_INPUT');
   });
-  test.each([
-    null,
-    {},
-    { plan: null, events: [] },
-    { plan: {}, events: [] },
-    { plan: emptyPlan(), events: null },
-  ])('malformed shape %#', (input) => {
-    reject(evaluate(input as Parameters<typeof evaluate>[0]), 'INVALID_INPUT');
+  test.each([null, {}, { plan: null, events: [] }, { plan: {}, events: [] }])(
+    'malformed shape %#',
+    (input) => {
+      reject(evaluate(input as Parameters<typeof evaluate>[0]), 'INVALID_INPUT');
+    },
+  );
+  test('null event collection is rejected without a partial report', () => {
+    const input = { plan: emptyPlan(), events: null };
+    const before = structuredClone(input);
+    const result = evaluate(deepFreeze(input) as unknown as Parameters<typeof evaluate>[0]);
+    expect(input).toEqual(before);
+    expect(result.ok).toBe(false);
+    expect(result).not.toHaveProperty('value');
+    if (!result.ok) {
+      const error = result.errors.find((issue) =>
+        ['INVALID_INPUT', 'EVENT_ORDER'].includes(issue.code),
+      );
+      expect(error).toBeDefined();
+      reject(result, error!.code);
+    }
   });
   test.each(
     [

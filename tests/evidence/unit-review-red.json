@@ -493,12 +493,6 @@
     },
     {
       "file": "tests/unit/engine.test.ts",
-      "title": "untrusted malformed input returns errors, never throws or a partial report > illegal route",
-      "state": "failed",
-      "error": "Not implemented: evaluate"
-    },
-    {
-      "file": "tests/unit/engine.test.ts",
       "title": "untrusted malformed input returns errors, never throws or a partial report > zero quota",
       "state": "failed",
       "error": "Not implemented: evaluate"
@@ -553,7 +547,13 @@
     },
     {
       "file": "tests/unit/engine.test.ts",
-      "title": "untrusted malformed input returns errors, never throws or a partial report > same product setup",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > illegal route stays physically invalid",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/engine.test.ts",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > same product setup stays physically invalid",
       "state": "failed",
       "error": "Not implemented: evaluate"
     },
@@ -661,7 +661,7 @@
     },
     {
       "file": "tests/unit/engine.test.ts",
-      "title": "untrusted malformed input returns errors, never throws or a partial report > malformed shape 4",
+      "title": "untrusted malformed input returns errors, never throws or a partial report > null event collection is rejected without a partial report",
       "state": "failed",
       "error": "Not implemented: evaluate"
     },

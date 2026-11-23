@@ -1,6 +1,34 @@
 # Independent acceptance suite: observed RED evidence
 
-## Review correction — latest evidence (supersedes initial counts below)
+## Targeted error-code correction — latest evidence for two rereviews
+
+Assignment boundary: preserved tester tree only, `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`. No new implementation or QA material, other worktree/ref, source/config/lockfile or environment file was read or edited. **No Git commands** were run in this correction. The branch/HEAD identity recorded in older sections below is historical, not a new Git verification. The orchestrator's combined **174 passed / 7 failed** report is supplied context, not an execution or GREEN result claimed here.
+
+### Precise assertion changes
+
+- `unit/engine.test.ts`: only the illegal-route and positive-duration same-product-setup cases now accept either structural `ok:false` with `INVALID_INPUT` and no partial report, or evaluated `ok:true` with `feasible:false` and a specific error `MACHINE_CONFLICT`/`SETUP_REQUIRED`. Evaluated cases require zero affected-machine production by both rate integration and reported quantities, and the input plan must remain unchanged. Other structural mappings remain strict.
+- The null-events case alone accepts `INVALID_INPUT` or `EVENT_ORDER`. It still requires rejection, error severity and normal issue shape, no `value`/partial report and unchanged input. All other malformed-shape cases retain their exact `INVALID_INPUT` requirement.
+- `unit/workflow.test.ts`: `denied` supports explicit per-call code lists, but its default remains **only `WORKFLOW_GUARD`**. In the four targeted scenarios, empty/blank acknowledgements additionally allow `INVALID_INPUT`; submitting unavailable absent-worker assignments additionally allows `STAFF_ASSIGNMENT`/`STAFF_SHORTAGE`; overwriting immutable original and custom quantities additionally allows `SOURCE_CHANGED`. These are named call-site lists, never global any-error acceptance. Rejection severity/shape, no partial state, frozen input and state-unchanged assertions remain. The direct absence edit additionally compares its full input state after rejection/return.
+- No physical, material, work, staff-identity, original-commitment, agreement, immutable-prefix, comparison or passport safety assertion was removed. No evaluator mocks, skips, todos, retry/config changes or new acceptance cases were added. Total unit discovery remains **181**. UI precision/disclosed rounding was not changed.
+- `reporters/browser.ts`: `onError(TestError)` now records ANSI-stripped message/value diagnostics, bounded to **16 messages × 400 characters**, while retaining the full global-error count and disclosing message-list truncation. Diagnostics appear in both bounded JSON and aggregate output. The list reporter was run alongside the custom reporter as requested.
+
+### Checks actually run after corrections
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | **Exit 0** |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | **Exit 0**, zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | **Exit 0**, all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | **Exit 1**; **181 total, 29 passed, 152 failed, 0 other**; zero unhandled/module errors |
+| `npm.cmd run test:e2e -- --reporter=list,./tests/reporters/browser.ts --output=tests/evidence/browser-review-results` | **Exit 1**; **18 total, 0 passed, 18 failed, 0 skipped/interrupted**; three repetitions, zero retries; zero global errors |
+
+Before report generation, `Test-Path -LiteralPath` confirmed the existing `tests/evidence` parent. The final runner invocations explicitly printed `EXIT_CODE=1`. Bounded raw `unit-review-red.json` and `browser-review-red.json` were refreshed and directly reread: all 181/18 case records retained (`truncated:false`); browser global diagnostics correctly show count 0, an empty message list and no truncation. Existing evidence ignore rules are unchanged. Full list output was observed through the terminal tool; the saved bounded JSON and browser traces/context/screenshots are the retained local evidence.
+
+The preserved baseline still yields meaningful RED: unit behavior cases reach explicit not-implemented throws; browser cases load the built local placeholder and fail at the absent planner role control. The 29 passes comprise five source tests and 24 independent work-witness checker tests. These runs do **not** establish that the seven combined-run failures are fixed against implementation; that requires the orchestrator's two rereviews/reintegration run without exposing implementation to this author. No startup/global failure occurred, so nonempty `onError` diagnostics are implemented/typechecked but were not runtime-exercised by this RED run. No downstream browser/axe/coverage GREEN is claimed.
+
+Tooling history: initial formatting checks flagged the two edited unit files; their local formatting was corrected via `apply_patch`, then the final checks above passed. Serena's instructions route timed out twice; no project activation or implementation discovery was attempted through it. Only the three targeted code files and this summary were authored/edited for this correction; runner-generated evidence remains under `tests/evidence/`.
+
+## Previous job/display review correction evidence
 
 The two rejected gaps were corrected only under `tests/**`, in the same isolated worktree and unchanged branch/HEAD recorded below. No implementation, other worktree/ref, Git mutation, shared config, source, lockfile or candidate-hash operation was accessed/performed for this correction.
 

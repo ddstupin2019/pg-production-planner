@@ -1,7 +1,13 @@
 import { writeFileSync } from 'node:fs';
 import { relative } from 'node:path';
 import { stripVTControlCharacters } from 'node:util';
-import type { FullResult, Reporter, TestCase, TestResult } from '@playwright/test/reporter';
+import type {
+  FullResult,
+  Reporter,
+  TestCase,
+  TestError,
+  TestResult,
+} from '@playwright/test/reporter';
 
 export default class BoundedBrowserReporter implements Reporter {
   private cases: {
@@ -13,9 +19,18 @@ export default class BoundedBrowserReporter implements Reporter {
     error: string;
   }[] = [];
   private unhandledErrors = 0;
+  private unhandledMessages: string[] = [];
 
-  onError(): void {
+  onError(error: TestError): void {
     this.unhandledErrors++;
+    if (this.unhandledMessages.length < 16) {
+      this.unhandledMessages.push(
+        stripVTControlCharacters(error.message ?? error.value ?? 'Unspecified global error').slice(
+          0,
+          400,
+        ),
+      );
+    }
   }
 
   onTestEnd(test: TestCase, result: TestResult): void {
@@ -43,6 +58,8 @@ export default class BoundedBrowserReporter implements Reporter {
       status: result.status,
       counts,
       unhandledErrors: this.unhandledErrors,
+      unhandledMessages: this.unhandledMessages,
+      unhandledMessagesTruncated: this.unhandledErrors > this.unhandledMessages.length,
       truncated: this.cases.length > 64,
       cases: this.cases.slice(0, 64),
     };
@@ -56,6 +73,8 @@ export default class BoundedBrowserReporter implements Reporter {
         status: report.status,
         counts,
         unhandledErrors: report.unhandledErrors,
+        unhandledMessages: report.unhandledMessages,
+        unhandledMessagesTruncated: report.unhandledMessagesTruncated,
         truncated: report.truncated,
       }),
     );

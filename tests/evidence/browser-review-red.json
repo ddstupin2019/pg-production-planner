@@ -9,6 +9,8 @@
     "interrupted": 0
   },
   "unhandledErrors": 0,
+  "unhandledMessages": [],
+  "unhandledMessagesTruncated": false,
   "truncated": false,
   "cases": [
     {
