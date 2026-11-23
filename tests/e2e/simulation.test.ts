@@ -49,10 +49,13 @@ async function visibleNumbers(page: Page, report: Awaited<ReturnType<typeof expo
   const table = page.getByRole('table', { name: 'Смены', exact: true });
   const headers = await table.getByRole('columnheader').allTextContents();
   for (const shift of report.shifts) {
-    const row = table
-      .getByRole('row')
-      .filter({ has: page.getByRole('cell', { name: `S${String(shift.shift)}`, exact: true }) });
-    const cells = await row.getByRole('cell').allTextContents();
+    const key = `S${String(shift.shift)}`;
+    const identifier = page
+      .getByRole('cell', { name: key, exact: true })
+      .or(page.getByRole('rowheader', { name: key, exact: true }));
+    const row = table.getByRole('row').filter({ has: identifier });
+    await expect(row).toHaveCount(1);
+    const cells = await row.getByRole('cell').or(row.getByRole('rowheader')).allTextContents();
     for (const [heading, value] of [
       ['Выпуск A', shift.packed.A],
       ['Выпуск B', shift.packed.B],
@@ -65,7 +68,7 @@ async function visibleNumbers(page: Page, report: Awaited<ReturnType<typeof expo
       expect(index).toBeGreaterThanOrEqual(0);
       const numeric = Number(cells[index]!.replace(/[\s\u00a0\u202f]/g, '').replace(',', '.'));
       expect(Number.isFinite(numeric)).toBe(true);
-      expect(Math.abs(numeric - value)).toBeLessThanOrEqual(0.51);
+      expect(Math.abs(numeric - value)).toBeLessThanOrEqual(0.000501);
     }
   }
 }
@@ -236,7 +239,19 @@ test('invalid custom order retains input, safe user text, real edit, reset cance
   await form.getByRole('button', { name: 'Сохранить заказ', exact: true }).click();
   await expect(page.getByRole('alert').first()).toBeVisible();
   await expect(volume).toHaveValue('-1');
+  await expect(form.getByRole('textbox', { name: 'Код заказа', exact: true })).toHaveValue(
+    'CUSTOM-X',
+  );
+  await expect(form.getByRole('combobox', { name: 'Срок (смена)', exact: true })).toHaveValue('2');
+  const orderDialog = page.getByRole('dialog').filter({ has: form });
+  await expect(orderDialog).toHaveCount(1);
+  await orderDialog.getByRole('button', { name: 'Отмена', exact: true }).click();
+  await expect(form).not.toBeVisible();
   expect((await exported(page)).text).toBe(mandatory.text);
+  await page.getByRole('button', { name: 'Добавить заказ', exact: true }).click();
+  await form.getByRole('combobox', { name: 'Продукт', exact: true }).selectOption('A');
+  await form.getByRole('combobox', { name: 'Срок (смена)', exact: true }).selectOption('2');
+  await form.getByRole('combobox', { name: 'Приоритет', exact: true }).selectOption('low');
   await volume.fill('2.5');
   await form
     .getByRole('textbox', { name: 'Код заказа', exact: true })

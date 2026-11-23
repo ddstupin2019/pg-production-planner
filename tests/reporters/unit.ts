@@ -30,8 +30,8 @@ export default class BoundedUnitReporter implements Reporter {
       counts,
       unhandledErrors: errors.length,
       moduleErrors: modules.reduce((n, module) => n + module.errors().length, 0),
-      truncated: cases.length > 256,
-      cases: cases.slice(0, 256),
+      truncated: cases.length > 512,
+      cases: cases.slice(0, 512),
     };
     writeFileSync(
       new URL('../evidence/unit-review-red.json', import.meta.url),

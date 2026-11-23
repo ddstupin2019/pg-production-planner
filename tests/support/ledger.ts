@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import type { MachineInterval, Report } from '../../src/domain/engine';
 import type { Plan, Product, Operation, Event } from '../../src/domain/model';
 import { checkJobs } from './work-witness';
+import { checkSetups } from './setup-witness';
 
 // Independent physical witness checker. It does not calculate a candidate schedule.
 const routes: Record<Product, Operation[]> = {
@@ -100,6 +101,7 @@ export function prefix(report: Report, cut: number): unknown {
 
 export function checkLedger(report: Report, plan: Plan, events: Event[] = []): void {
   assert.equal(report.planId, plan.id);
+  checkSetups(report, plan, events);
   checkJobs(report, plan, events);
   assert.equal(report.feasible, !report.issues.some((i) => i.severity === 'error'));
   assert.equal(report.shifts.length, 4);

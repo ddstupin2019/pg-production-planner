@@ -1,6 +1,6 @@
 # Proposed public semantic UI contract — review before coder handoff
 
-This artifact proposes accessible names for the interactions already required by PUBLIC_SPEC v1.1. It contains no private scenario data, expected numerical outputs or test paths. Acceptance by the orchestrator is required before these names become a coder obligation. Russian labels may include visible units, with the accessible name retaining the name below. Native controls are preferred; equivalent correctly implemented ARIA roles are acceptable. Status remains textual, never color alone.
+This artifact proposes accessible names for the interactions already required by PUBLIC_SPEC v1.2. It contains no private scenario data, expected numerical outputs or test paths. Acceptance by the orchestrator is required before these names become a coder obligation. Russian labels may include visible units, with the accessible name retaining the name below. Native controls are preferred; equivalent correctly implemented ARIA roles are acceptable. Status remains textual, never color alone.
 
 ## Navigation and state
 
@@ -8,12 +8,14 @@ This artifact proposes accessible names for the interactions already required by
 - Toggle button `Тёмная тема`, with `aria-pressed` reflecting the actual theme; disclosure `Учебная симуляция` remains visible in both themes.
 - Named region `Состояние плана` exposes role, revision, draft/pending/agreed status and baseline/failure/absence phase in Russian, and fixed versus forecast staffing.
 - Named tables `Заказы`, `Смены`, `Работы`, `Материалы`, `Оборудование`, `Персонал`, `Версии`. Local scrolling containers have accessible names and are keyboard reachable. Table `Смены` has one row per S1–S4 with column headings `Смена`, `Выпуск A`, `Выпуск B`, `Выпуск C`, `Пик`, `Труд, мин`, `Резерв, мин`. Numbers use display rounding only.
+- Numeric quantity/time/labor/reserve columns round to three decimal places (trailing zeros may be omitted); integer counts and identifiers remain integers. Export retains full precision. Row identifiers may use native rowheader or cell semantics. Comparison `Вариант` identifiers include the public code as a separate token alongside their Russian label; other plan/order/job/shift identifiers remain exact.
 - Persistent Russian explanation of bounded GRIND-1/A failure, VAL-2 on GRIND-4/5, named choices and custom demand limits; no arbitrary failure target input.
 
 ## Orders and staffing
 
 - Button `Добавить заказ` opens form `Заказ`. Controls: text `Код заказа`, select `Продукт` with A/B/C values, text/number `Объём` in thousand blades, select `Срок (смена)` with 1–4 values, select `Приоритет` with high/medium/low values. Button `Сохранить заказ`. Row action `Изменить заказ` opens the same form; original identities/quantities/deadlines stay immutable, renegotiation uses `Обещанный объём`, select `Обещанная смена` (1–4), textbox `Причина обещания` and button `Сохранить обещание`.
 - Form errors use `role=alert`, identify the invalid field and keep entered values. User content is text, not HTML. Custom copies are explicitly labelled `Пользовательский сценарий`.
+- The order form is modal while open. Its normal `Отмена` button closes it without committing invalid input; background actions must not bypass the modal. Reopening permits a new submission without requiring cancelled field values to persist.
 - Button `Передать спрос` sends the displayed valid demand.
 - Form `Заявка на персонал`: spinbuttons `S1`, `S2`, `Прогноз S3`, `Прогноз S4`; textboxes `Резерв S1`, `Резерв S2`. Button `Зафиксировать заявки` fixes the two requests before noon, not the forecasts.
 

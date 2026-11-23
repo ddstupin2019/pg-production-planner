@@ -10,27 +10,51 @@ function numeric(text: string): number {
   return Number(text.replace(/[\s\u00a0\u202f]/g, '').replace(',', '.'));
 }
 
-async function cell(page: Page, table: Locator, key: string, heading: string): Promise<Locator> {
+async function cell(
+  page: Page,
+  table: Locator,
+  key: string,
+  heading: string,
+  comparisonKey = false,
+): Promise<Locator> {
   const headings = (await table.getByRole('columnheader').allTextContents()).map((s) => s.trim());
   expect(headings.filter((s) => s === heading)).toHaveLength(1);
   const keyCell = page
     .getByRole('cell', { name: key, exact: true })
     .or(page.getByRole('rowheader', { name: key, exact: true }));
-  const row = table.getByRole('row').filter({ has: keyCell });
+  let row = table.getByRole('row').filter({ has: keyCell });
+  if (comparisonKey) {
+    const index = headings.indexOf('Вариант');
+    expect(index).toBeGreaterThanOrEqual(0);
+    const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const token = new RegExp(`(?:^|[^\\p{L}\\p{N}_-])${escaped}(?=$|[^\\p{L}\\p{N}_-])`, 'u');
+    const variant = page
+      .getByRole('cell')
+      .or(page.getByRole('rowheader'))
+      .nth(index)
+      .filter({ hasText: token });
+    row = table.getByRole('row').filter({ has: variant });
+  }
   await expect(row).toHaveCount(1);
   return row.getByRole('cell').or(row.getByRole('rowheader')).nth(headings.indexOf(heading));
 }
 
-async function values(page: Page, table: Locator, key: string, expected: Fields): Promise<void> {
+async function values(
+  page: Page,
+  table: Locator,
+  key: string,
+  expected: Fields,
+  comparisonKey = false,
+): Promise<void> {
   for (const [heading, value] of Object.entries(expected)) {
-    const target = await cell(page, table, key, heading);
+    const target = await cell(page, table, key, heading, comparisonKey);
     await expect(target).toBeVisible();
     const text = (await target.innerText()).trim();
     if (typeof value === 'number') {
       expect(text.length, `${key}/${heading}: missing number`).toBeGreaterThan(0);
       const actual = numeric(text);
       expect(Number.isFinite(actual), `${key}/${heading}: ${text}`).toBe(true);
-      const tolerance = Number.isInteger(value) ? 1e-6 : 0.500001;
+      const tolerance = Number.isInteger(value) ? 1e-6 : 0.000501;
       expect(Math.abs(actual - value), `${key}/${heading}`).toBeLessThanOrEqual(tolerance);
     } else if (value === null) {
       expect(text.length, `${key}/${heading}: missing null disclosure`).toBeGreaterThan(0);
@@ -50,8 +74,9 @@ async function booleanCell(
   key: string,
   heading: string,
   value: boolean,
+  comparisonKey = false,
 ): Promise<void> {
-  await expect(await cell(page, table, key, heading)).toHaveText(
+  await expect(await cell(page, table, key, heading, comparisonKey)).toHaveText(
     value
       ? /^(?:Да|Допустим|Выполнена|Завершена)$/i
       : /^(?:Нет|Недопустим|Не выполнена|Не завершена)$/i,
@@ -69,20 +94,26 @@ export async function comparisonValues(
     const { report, data } = snapshot;
     const revision = current(data.workflow);
     const coverage = checkJobs(report, revision.plan, revision.events);
-    await booleanCell(page, table, choice, 'Физически допустим', report.feasible);
-    await values(page, table, choice, {
-      'Выпуск A': report.shifts.reduce((n, s) => n + s.packed.A, 0),
-      'Выпуск B': report.shifts.reduce((n, s) => n + s.packed.B, 0),
-      'Выпуск C': report.shifts.reduce((n, s) => n + s.packed.C, 0),
-      'Исходный дефицит': report.orders.reduce((n, order) => n + order.originalDeficit, 0),
-      'Пик S1': report.shifts[0]!.peak,
-      'Пик S2': report.shifts[1]!.peak,
-      'Пик S3': report.shifts[2]!.peak,
-      'Пик S4': report.shifts[3]!.peak,
-      'Труд, мин': report.shifts.reduce((n, shift) => n + shift.laborMinutes, 0),
-      'Работы выполнено': coverage.reduce((n, row) => n + row.complete, 0),
-      'Работы требуется': coverage.reduce((n, row) => n + row.required, 0),
-    });
+    await booleanCell(page, table, choice, 'Физически допустим', report.feasible, true);
+    await values(
+      page,
+      table,
+      choice,
+      {
+        'Выпуск A': report.shifts.reduce((n, s) => n + s.packed.A, 0),
+        'Выпуск B': report.shifts.reduce((n, s) => n + s.packed.B, 0),
+        'Выпуск C': report.shifts.reduce((n, s) => n + s.packed.C, 0),
+        'Исходный дефицит': report.orders.reduce((n, order) => n + order.originalDeficit, 0),
+        'Пик S1': report.shifts[0]!.peak,
+        'Пик S2': report.shifts[1]!.peak,
+        'Пик S3': report.shifts[2]!.peak,
+        'Пик S4': report.shifts[3]!.peak,
+        'Труд, мин': report.shifts.reduce((n, shift) => n + shift.laborMinutes, 0),
+        'Работы выполнено': coverage.reduce((n, row) => n + row.complete, 0),
+        'Работы требуется': coverage.reduce((n, row) => n + row.required, 0),
+      },
+      true,
+    );
   }
 }
 

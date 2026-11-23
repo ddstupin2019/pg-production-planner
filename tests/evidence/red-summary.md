@@ -1,5 +1,73 @@
 # Independent acceptance suite: observed RED evidence
 
+## Etest4 setup/configuration correction — latest evidence
+
+Scope remained the preserved tester tree `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`, authored changes only in `tests/**`. No implementation source, other worktree/ref or Git command was accessed in this correction. No source/test contract, scenario input, prior assertion, UI requirement, shared configuration, retry or quality threshold was changed.
+
+### Sole material delta
+
+- Added `support/setup-witness.ts` with an **independent R6 initial-setting and R4 setup-matrix transcription**; it imports only public types, never production MACHINES/SETUP_MINUTES values or implementation helpers. Numeric machine suffixes determine A/B/C initial groups.
+- `support/ledger.ts` calls `checkSetups(report, plan, events)` unconditionally before its existing job/material/staff/allocation checks. Thus every factory/alternative/successor passed through common checkLedger receives configuration verification, not just campaign/report product agreement.
+- The witness chronologically orders setups without mutating input, checks `from` against the independently reconstructed current setting, exact matrix duration within EPS, completed setup-clock evidence, and setup/maintenance/repair conflicts. Only a valid completed setup commits a target product at its end. Every reported interval retains the independently current product; setup intervals retain the prior/from product through completion. Production during setup attempts or of an unconfigured product fails even when a campaign and report agree with each other.
+- Wrong, overlapping, maintenance/repair-stopped or unwitnessed setup attempts do not commit a target setting. Explicit invalid reports may expose these attempts with feasible=false and relevant machine/setup-referenced physical errors while retaining their old configuration. An unrelated WORK_MISSING issue or merely setting feasible=false cannot excuse fabricated configuration/output. An honestly staff-invalid capacity projection can still contain correctly witnessed machine changeovers; no invalid fixture is required to become feasible.
+- Added **19 hand-built setup-only self-tests** in `unit/setup-witness.test.ts`: independent source group boundaries, unordered valid setup/interval records, fractional/exact completion edges, matching campaign/report forgery with missing changeover under both feasibility flags, wrong from/duration/same-product attempts, premature target labels/production, stale old-product labels, idle clock gaps, overlapping attempts, maintenance/repair-stopped attempts, legitimate later recovery from the unchanged setting and staff-invalid projections. These tests never call/mock evaluate or fabricate a workflow agreement. Their limited setup-only scope is explicit.
+
+### Checks actually run
+
+All commands ran from the preserved tester CWD above.
+
+| Command | Observed result |
+| --- | --- |
+| `node node_modules/vitest/vitest.mjs run tests/unit/setup-witness.test.ts --reporter=dot` | **Exit 0; 19 passed** |
+| `npm.cmd run typecheck` | **Exit 0** |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | **Exit 0; zero errors/warnings** |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | **Exit 0; all matched files formatted** |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | **Exit 1; 322 total, 54 passed, 268 failed, 0 other; zero unhandled/module errors** |
+| `npm.cmd run test:e2e -- --reporter=./tests/reporters/browser.ts --output=tests/evidence/browser-review-results` | **Exit 1; 18 total, 0 passed, 18 failed, 0 skipped/interrupted; zero global errors; three repetitions, zero retries** |
+
+Bounded `unit-review-red.json` and `browser-review-red.json` were refreshed and reread. All **322 / 18** case records remain retained (`truncated:false`), within the unchanged 512/64 record bounds. Browser context/screenshots/traces remain under the existing browser-review-results path; existing evidence ignore rules remain unchanged. The 54 passes comprise the previous 35 passing source/checker cases plus the 19 setup-witness cases. The 268 product-behavior failures still reach preserved stub throws; browser failures still reach the absent planner role control on the built local placeholder, not missing dependencies/imports. These are baseline RED results, not a combined-implementation acceptance or a successful factory replay. Full selected-scene runtime/coverage/a11y and rereview acceptance remain unverified here.
+
+Tooling history: strict typecheck and lint passed on the initial new code; the first format check flagged the two new files, then apply_patch-only formatting and the final check passed. Serena's instructions route timed out once. A content search aimed at PUBLIC_SPEC unexpectedly returned broader documentation excerpts; no implementation was returned/read, and no expert schedule values or QA verdicts were used as an oracle. All new numerical expectations come from the independently transcribed initial settings/matrix and hand-built witnesses. No Git or installation operation was performed.
+
+## Previous D2 supplement evidence
+
+## v1.2 / D2 supplement — latest evidence, both reviews required again
+
+All work remained in `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`. Only `tests/**` was authored/edited. PUBLIC_SPEC/SPEC v1.2 were read as the accepted contract. The bootstrap-owned `src/domain/scenario.ts` was found and read **only to confirm its two behavior-free public throw stubs**, before typecheck or test execution; it was not edited. No new implementation/QA/other-worktree/other-ref material was read, no private implementation helper imported, and no Git command or mutation was performed. Historical branch/HEAD records below are not a new identity verification.
+
+### New independent coverage
+
+- `unit/scenario.test.ts` exercises only the public createScenarioPlan/applyTemplate exports: deterministic fresh nonshared records, source immutability, original six orders/null promises, actual complete physical reports, both VAL-2 choices, standalone requests/forecasts justified against independently checked peaks and reserve integrals, and workflow clearing of standalone requests.
+- All four templates are checked for phase/target/sequence guards, explained immutable refusals, deterministic repeated application, physical idempotence, unchanged unrelated records/orders/promises/mode/requests (including null), no duplicate IDs/physical jobs/campaigns/setups/assignments, replacement when toggling VAL-2, and custom-demand reevaluation with honest original shortfall warnings. No expert staffing totals, output checksum, universal deadline success or optimizer behavior is asserted.
+- The shipped workflow test uses real evaluate/submit/two-role approvals through baseline → failure/GRIND-3 transfer → absence/night staggering. It checks all mandatory work/validation/identities via checkLedger/checkJobs, cumulative stocks, identical fixed requests, immutable predecessors, actual GRIND-1/A target production and repair loss, and frozen prefixes with identical supplied events. A changed quota that alters executed S1 output after absence is rejected even though permission times stay unchanged.
+- `support/execution.ts` compares physical evidence over the union of partitions, tolerating equivalent splits and public EPS residuals. It checks machine rates/quantities/configuration/stops/work, every queue's linear opening/closing/flows and task-specific worker identities/availability, not just totals. Six independent helper tests cover fractional partition equivalence, EPS versus real differences, nonfinite data and corrupted stock/rate/operator/availability witnesses. These isolated witnesses do not mock evaluate or stand in for an agreed workflow.
+- `unit/contract-edges.test.ts` adds sequential unsorted setups/exact boundaries; setup overlap with maintenance/repair/validation; fractional PACK quota/buffer/shift-boundary integration (including tiny positive quotas); wrong-operation work; invalid left/right/both compare inputs; malformed collections/entries/assignments/products/job codes/events; invalid/custom workflow initialization; unknown actions/roles; pre-fix request smuggling; removed reserve rationale; post-failure quota rewrites with unchanged times; and exact D2 malformed finite-JSON export preservation/INVALID_INPUT/no-default/deterministic wrapper/format behavior. Proper physically infeasible workflow export must retain the real evaluation, not be mistaken for malformed data.
+
+### Approved browser corrections and public precision alignment
+
+- Comparison lookup alone now matches a token-boundary public template code **inside the `Вариант` column**, permitting the Russian label alongside it. The row must still be unique; every numeric/feasibility/work comparison remains checked. All other IDs remain exact.
+- After invalid order values are checked as retained, the test closes the enclosing modal via its normal `Отмена`, verifies unchanged exported state, reopens and fills the next submission. No force-click or background interaction bypass was added.
+- Shift identifiers and ordered row cells accept native rowheader as well as cell semantics. Later comparison/passport checks remain intact.
+- PUBLIC_UI_CONTRACT now states the three-decimal quantity/time/labor/reserve display rule (trailing zeros optional, integer counts allowed) **before** display tolerance was tightened to .000501. Domain/ledger comparisons still use EPS=1e-6 and exports retain full precision. The updated public artifact and suite require both reviews before freezing.
+
+### Final executed checks
+
+| Command | Observed result |
+| --- | --- |
+| `npm.cmd run typecheck` | **Exit 0** |
+| `node node_modules/eslint/bin/eslint.js tests --max-warnings=0` | **Exit 0**, zero errors/warnings |
+| `node node_modules/prettier/bin/prettier.cjs tests --check` | **Exit 0**, all matched files formatted |
+| `npm.cmd run test:unit -- --reporter=./tests/reporters/unit.ts` | **Exit 1**; **303 total, 35 passed, 268 failed, 0 other**, zero unhandled/module errors |
+| `npm.cmd run test:e2e -- --reporter=./tests/reporters/browser.ts --output=tests/evidence/browser-review-results` | **Exit 1**; **18 total, 0 passed, 18 failed, 0 skipped/interrupted**, zero global errors; three repetitions, zero retries unchanged |
+
+The 35 passes are five source tests, 24 job-witness checker tests and six execution-witness tests. The supplement adds 122 unit cases to the previous 181. Bounded raw `unit-review-red.json` and `browser-review-red.json` were refreshed and reread: all **303 / 18** records retained (`truncated:false`). The unit diagnostic record bound was raised from 256 to **512** solely to retain the expanded suite; message/title limits and runner failure statuses remain unchanged. No shared config, test discovery, assertion, retry or quality threshold was weakened. Existing ignored evidence policy remains unchanged; the orchestrator must deliberately retain the desired evidence during integration.
+
+**Meaningful RED, no missing module:** raw unit evidence explicitly contains both `Not implemented: createScenarioPlan` and `Not implemented: applyTemplate`, alongside the existing evaluator/calendar/workflow throws. `moduleErrors:0` and the successful typecheck confirm the new public module/signatures were resolved, not skipped or failed during import. Browser evidence again records the missing planner role control on the built local placeholder. No passing shipped replay, template, corrected downstream browser path, axe scan or implementation coverage is claimed. Performance of the full coupled replay remains unmeasured while factory/evaluator stubs throw; scenario checks have scoped 60/90-second bounds for the real ledger work, not a global gate/config change.
+
+Early supplement checks found one unsafe-boundary cast diagnostic and two test-only lint findings; those were repaired in owned files. The initial partial suite ran 294 cases (35 pass/259 fail) before the final nine public negative cases were added. Final counts above supersede that run. Formatting was corrected through apply_patch only. Serena's instructions route timed out once; no project activation was attempted. No installs or new external runtime resources were needed.
+
+## Previous targeted correction evidence
+
 ## Targeted error-code correction — latest evidence for two rereviews
 
 Assignment boundary: preserved tester tree only, `C:\Users\ddstu\AppData\Local\Temp\opencode\pg-hackathon-tests`. No new implementation or QA material, other worktree/ref, source/config/lockfile or environment file was read or edited. **No Git commands** were run in this correction. The branch/HEAD identity recorded in older sections below is historical, not a new Git verification. The orchestrator's combined **174 passed / 7 failed** report is supplied context, not an execution or GREEN result claimed here.

@@ -2,9 +2,9 @@
   "runner": "vitest",
   "reason": "failed",
   "counts": {
-    "total": 181,
-    "passed": 29,
-    "failed": 152,
+    "total": 322,
+    "passed": 54,
+    "failed": 268,
     "other": 0
   },
   "unhandledErrors": 0,
@@ -202,6 +202,372 @@
       "title": "four shifts, half-open exclusions and collapsed edges > rejects reversed spans, invalid shifts and edge enums",
       "state": "failed",
       "error": "expected error to be instance of RangeError"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > unsorted sequential setups finish before exact-boundary production successors",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > overlapping setup and maintenance never manufacture during either stop",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > setups inside repair exclude a union, not another twenty minutes",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > validation cannot be completed across two setup interruptions",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > fractional PACK quota 3e-7 creates no material or rounding spill",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > fractional PACK quota 0.070000123 creates no material or rounding spill",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public setup ordering, conflicts and fractional integration > fractional PACK quota 0.1211249 creates no material or rounding spill",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > null order is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > null campaign is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > nonobject setup is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > empty job is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > null assignment is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > nonarray orders is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > nonarray campaigns is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > nonarray jobs is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > invalid forecasts tuple is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > invalid requests tuple is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > unknown campaign product is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > unknown setup product is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > unknown job code is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > null workers is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > nonstring worker is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > nonstring task is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > infinite assignment is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > duplicate job ID is refused without mutation or partial data",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > malformed event entry null",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > malformed event entry {}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > malformed event entry {\"kind\":\"holiday\"}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > malformed event entry {\"kind\":\"failure\"}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > malformed event entry {\"kind\":\"failure\",\"machineId\":7}",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > work on the wrong operation cannot claim mandatory credit",
+      "state": "failed",
+      "error": "Not implemented: evaluate"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > compare refuses invalid left input",
+      "state": "failed",
+      "error": "Not implemented: compare"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > compare refuses invalid right input",
+      "state": "failed",
+      "error": "Not implemented: compare"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "public malformed collections and operations, not implementation branch matching > compare refuses invalid both input",
+      "state": "failed",
+      "error": "Not implemented: compare"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > createWorkflow refuses custom initial data",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > createWorkflow refuses invalid initial data",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > unknown action or role null",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > unknown action or role {}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > unknown action or role {\"type\":\"do-everything\"}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > unknown action or role {\"type\":\"switch-role\",\"role\":\"observer\"}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > unknown action or role {\"type\":\"switch-role\",\"role\":7}",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > production editing before fixation cannot smuggle in approved requests",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > removing a reserve explanation cannot pass submit even with all warnings acknowledged",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > a changed quota that rewrites past output is rejected despite identical permission times",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 0 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 1 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 2 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 3 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 4 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 5 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 6 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 7 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 8 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 9 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 10 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > malformed finite JSON export 11 preserves original diagnostic data",
+      "state": "failed",
+      "error": "Not implemented: exportWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > proper but physically incomplete workflow exports the real infeasible evaluation",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > otherwise complete workflow with invalid currentId exports original data, not defaults",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > otherwise complete workflow with invalid role exports original data, not defaults",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > otherwise complete workflow with invalid phase exports original data, not defaults",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
+    },
+    {
+      "file": "tests/unit/contract-edges.test.ts",
+      "title": "workflow public safety edges and D2 JSON export > otherwise complete workflow with invalid planningMinute exports original data, not defaults",
+      "state": "failed",
+      "error": "Not implemented: createWorkflow"
     },
     {
       "file": "tests/unit/engine.test.ts",
@@ -694,6 +1060,486 @@
       "title": "untrusted malformed input returns errors, never throws or a partial report > compare propagates an invalid side rather than inventing a delta",
       "state": "failed",
       "error": "Not implemented: compare"
+    },
+    {
+      "file": "tests/unit/execution-witness.test.ts",
+      "title": "full precision witness comparisons normalize EPS residuals, not real differences",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/execution-witness.test.ts",
+      "title": "execution witness accepts equivalent fractional partitions at the cut",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/execution-witness.test.ts",
+      "title": "execution witness rejects changed stock",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/execution-witness.test.ts",
+      "title": "execution witness rejects changed rate",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/execution-witness.test.ts",
+      "title": "execution witness rejects changed operator",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/execution-witness.test.ts",
+      "title": "execution witness rejects changed availability",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > factory is deterministic, fresh at every record and source-independent",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > factory budgets are justified by actual interval peaks, never expert counts",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > coupled alternative VAL2_STAGGERED is actually feasible",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > coupled alternative VAL2_PARALLEL is actually feasible",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > VAL2_STAGGERED is physically idempotent and does not accumulate records",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > VAL2_PARALLEL is physically idempotent and does not accumulate records",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > REPAIR_G1_TO_G3 is physically idempotent and does not accumulate records",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > NIGHT_WRAP_STAGGERED is physically idempotent and does not accumulate records",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > switching VAL-2 placements replaces, rather than adds, work",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives VAL2_STAGGERED, null requests=true",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives VAL2_STAGGERED, null requests=false",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives VAL2_PARALLEL, null requests=true",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives VAL2_PARALLEL, null requests=false",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives REPAIR_G1_TO_G3, null requests=true",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives REPAIR_G1_TO_G3, null requests=false",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives NIGHT_WRAP_STAGGERED, null requests=true",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > custom demand survives NIGHT_WRAP_STAGGERED, null requests=false",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 shipped factory and public template physical contracts > factory lineage uses real approvals, fixed budgets and preserved execution",
+      "state": "failed",
+      "error": "Not implemented: createScenarioPlan"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 0",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 1",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 2",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 3",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 4",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 5",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_STAGGERED refuses unsupported event sequence 6",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 7",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 8",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 9",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 10",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 11",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 12",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > VAL2_PARALLEL refuses unsupported event sequence 13",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 14",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 15",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 16",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 17",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 18",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 19",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > REPAIR_G1_TO_G3 refuses unsupported event sequence 20",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 21",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 22",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 23",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 24",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 25",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 26",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > NIGHT_WRAP_STAGGERED refuses unsupported event sequence 27",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > unsupported template name \"\"",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > unsupported template name \"AUTO_OPTIMIZE\"",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > unsupported template name \"VAL2\"",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > unsupported template name null",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > unsupported template name 42",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > malformed template plan null",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > malformed template plan {}",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > malformed template plan {\"campaigns\":[]}",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/scenario.test.ts",
+      "title": "D2 public template refusals are immutable and explained > supported failure response needs actual GRIND-1/A work, not just its initial setting",
+      "state": "failed",
+      "error": "Not implemented: applyTemplate"
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > independent source boundary settings cover every operation and all product groups",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > valid sequential changeovers and their rows may arrive in nonchronological order",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > fractional start and exact completion boundary retain from until completion",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > missing changeover cannot be hidden by matching campaign/report, feasible=true",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > missing changeover cannot be hidden by matching campaign/report, feasible=false",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > wrong from attempt cannot commit a target setting",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > wrong duration attempt cannot commit a target setting",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > wrong same product attempt cannot commit a target setting",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > invalid setup cannot be labelled feasible just because production is idle",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > an unrelated missing-work issue does not explain an invalid setup",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > setup label cannot invent a completed setting",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > premature production cannot invent a completed setting",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > late old-product label cannot invent a completed setting",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > declared setup time that was actually idle does not complete a changeover",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > overlapping setup attempts do not chain from either uncompleted target",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > maintenance-stopped setup cannot change configuration after the stop",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > repair-stopped setup cannot change configuration at repair completion",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > a genuine later A-to-C changeover may follow an invalid attempt that left A unchanged",
+      "state": "passed",
+      "error": ""
+    },
+    {
+      "file": "tests/unit/setup-witness.test.ts",
+      "title": "independent setup/configuration witness, not campaign agreement > an honestly staff-invalid capacity projection may still have valid machine changeovers",
+      "state": "passed",
+      "error": ""
     },
     {
       "file": "tests/unit/source.test.ts",
